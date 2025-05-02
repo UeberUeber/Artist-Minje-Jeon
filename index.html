@@ -165,6 +165,9 @@
                 /* 다른 요소 뒤로 보내기 */
                 filter: brightness(0.5);
                 /* 밝기 조절 */
+                /* Added background color for when src is empty and no error text shows */
+                background-color: #000;
+                /* Or a slightly lighter dark color like #111 */
             }
 
             .header-content {
@@ -662,47 +665,40 @@
                 font-family: 'Inter', sans-serif;
             }
 
-            .cv-content p,
-            .cv-content div[class^="cv-list-"] p {
-                /* Styling for CV text and list items (using p now) */
+            /* --- CV List Item Styling START --- */
+            /* General paragraph styling within CV */
+            .cv-content p {
                 font-size: 1.05rem;
-                margin-bottom: 0.5rem;
-                /* Reduced margin for list items */
+                margin-bottom: 1.5rem;
+                /* Default margin for paragraphs */
                 font-family: 'Inter', sans-serif;
                 color: #e0e0e0;
-                /* Slightly lighter text color */
                 position: relative;
-                /* Needed for pseudo-element positioning */
-                padding-left: 1.5em;
-                /* Space for the bullet */
-            }
-
-            /* Specific paragraphs that shouldn't have bullets */
-            .cv-content>p:first-of-type,
-            /* Summary paragraph */
-            .cv-work-item>p:first-of-type,
-            /* Role description */
-            .cv-content .cv-skills p,
-            /* Skills paragraphs */
-            .cv-content h4+p
-
-            /* Education paragraph */
-                {
+                /* Needed for potential pseudo-elements */
                 padding-left: 0;
-                margin-bottom: 1.5rem;
-                /* Restore default margin for non-list paragraphs */
+                /* Default: no padding */
             }
 
-            .cv-content>p:first-of-type::before,
-            .cv-work-item>p:first-of-type::before,
-            .cv-content .cv-skills p::before,
-            .cv-content h4+p::before {
-                content: none;
-                /* Remove bullet */
+            /* Styling for paragraphs that ACT AS list items (Work Experience details, Artistic Practice lists) */
+            .cv-content div[class^="cv-list-"] p,
+            /* Work experience bullets */
+            .cv-content .cv-list-art p
+
+            /* Artistic practice bullets */
+                {
+                margin-bottom: 0.5rem;
+                /* Reduced margin for list items */
+                padding-left: 1.5em;
+                /* Add padding ONLY for list items */
+                color: #d0d0d0;
+                /* Slightly lighter for list details */
+                font-size: 1rem;
+                /* Slightly smaller font for details */
             }
 
-            .cv-content div[class^="cv-list-"] p::before {
-                /* Add bullet point only to list items */
+            /* Add bullet point to list items */
+            .cv-content div[class^="cv-list-"] p::before,
+            .cv-content .cv-list-art p::before {
                 content: "•";
                 color: #ff4081;
                 /* Bullet color */
@@ -715,6 +711,38 @@
                 left: 0.5em;
                 /* Adjust horizontal position */
             }
+
+            /* Override padding and bullet for specific non-list paragraphs */
+            .cv-content>p:first-of-type,
+            /* Summary paragraph */
+            .cv-work-item>p:first-of-type,
+            /* Role description */
+            .cv-content .cv-skills p,
+            /* Skills paragraphs */
+            .cv-content h4+p
+
+            /* Education paragraph */
+                {
+                padding-left: 0;
+                /* Ensure no padding */
+                margin-bottom: 1.5rem;
+                /* Restore default margin */
+                font-size: 1.05rem;
+                /* Restore default font size */
+                color: #e0e0e0;
+                /* Restore default color */
+            }
+
+            .cv-content>p:first-of-type::before,
+            .cv-work-item>p:first-of-type::before,
+            .cv-content .cv-skills p::before,
+            .cv-content h4+p::before {
+                content: none;
+                /* Ensure no bullet */
+            }
+
+            /* --- CV List Item Styling END --- */
+
 
             .cv-content .cv-skills strong {
                 /* Style skill categories */
@@ -762,15 +790,7 @@
                 margin-top: 0.5rem;
             }
 
-            .cv-work-item div[class^="cv-list-"] p {
-                /* Style for bulleted responsibilities */
-                color: #d0d0d0;
-                /* Slightly lighter than default p */
-                font-size: 1rem;
-                /* Slightly smaller font for details */
-                margin-bottom: 0.4rem;
-                /* Tighter spacing for list items */
-            }
+            /* .cv-work-item div[class^="cv-list-"] p styles are handled above */
 
 
             .social-links {
@@ -954,29 +974,50 @@
                     /* 모바일 CV 2차 부제목 크기 조정 */
                 }
 
-                .cv-content p,
-                .cv-content div[class^="cv-list-"] p {
+                /* --- Mobile CV List Item Styling START --- */
+                .cv-content p {
+                    /* General mobile paragraph */
                     font-size: 0.95rem;
-                    /* 모바일 CV 텍스트 크기 조정 */
-                    padding-left: 1.2em;
-                    /* 모바일 불렛 간격 조정 */
                 }
 
-                .cv-content div[class^="cv-list-"] p::before {
+                .cv-content div[class^="cv-list-"] p,
+                /* Work experience bullets */
+                .cv-content .cv-list-art p
+
+                /* Artistic practice bullets */
+                    {
+                    font-size: 0.9rem;
+                    /* Slightly smaller for list items */
+                    padding-left: 1.2em;
+                    /* Adjust mobile bullet padding */
+                }
+
+                .cv-content div[class^="cv-list-"] p::before,
+                .cv-content .cv-list-art p::before {
                     margin-left: -1.2em;
-                    /* 모바일 불렛 위치 조정 */
+                    /* Adjust mobile bullet position */
                     left: 0.4em;
                 }
+
+                /* Override for specific non-list paragraphs */
+                .cv-content>p:first-of-type,
+                .cv-work-item>p:first-of-type,
+                .cv-content .cv-skills p,
+                .cv-content h4+p {
+                    font-size: 0.95rem;
+                    /* Restore default mobile font size */
+                    padding-left: 0;
+                    /* Ensure no padding */
+                }
+
+                /* --- Mobile CV List Item Styling END --- */
 
                 .cv-work-item strong {
                     font-size: 1.1rem;
                     /* 모바일 직책/회사명 크기 조정 */
                 }
 
-                .cv-work-item div[class^="cv-list-"] p {
-                    font-size: 0.9rem;
-                    /* 모바일 책임 내용 크기 조정 */
-                }
+                /* .cv-work-item div[class^="cv-list-"] p mobile styles handled above */
 
 
                 .section-title-wrapper {
@@ -1102,8 +1143,7 @@
         </nav>
 
         <header class="header" id="home">
-            <img src="" alt="헤더 배경 이미지" class="header-video"
-                onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/000000/333333?text=Image+Not+Found';">
+            <img src="" alt="헤더 배경 이미지" class="header-video">
             <div class="header-content fade-in">
                 <h1 data-en="Minje Jeon" data-ko="전민제">전민제</h1>
                 <h2 data-en="Media Artist • AI Creative Director • Creative Technologist"
@@ -1482,23 +1522,19 @@
                     <p data-en="<strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift, Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose"
                         data-ko="AWS(EMR, S3, Lambda, Api gateway, RDS, DynamoDB, Opensearch, Aurora, Redshift, Athena, Ec2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose)">
                         <strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift,
-                        Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose
-                    </p>
+                        Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose</p>
                     <p data-en="<strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream"
                         data-ko="GCP(Bigquery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream)">
                         <strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub,
-                        Datastream
-                    </p>
+                        Datastream</p>
                     <p data-en="<strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards"
                         data-ko="시각화 서비스(Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, Opensashboard)">
                         <strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight,
-                        Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards
-                    </p>
+                        Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards</p>
                     <p data-en="<strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize"
                         data-ko="기타 (Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, hotjar, hackle, Google Optimize)">
                         <strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive,
-                        Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize
-                    </p>
+                        Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize</p>
                 </div>
 
                 <h4><span data-en="Artistic Practice & Recognition" data-ko="Artistic Practice & Recognition">Artistic
@@ -1521,8 +1557,7 @@
                     <p data-en="2024, <FuturaCanvas>, Cave House, Seoul" data-ko="2024, <FuturaCanvas>, 케이브하우스, 서울">
                         2024, <FuturaCanvas>, 케이브하우스, 서울</p>
                     <p data-en="2023, <Clean Slate>, Mullae Art Space, Seoul" data-ko="2023, <깨끗한 석판>, 문래예술공장, 서울">2023,
-                        <깨끗한 석판>, 문래예술공장, 서울
-                    </p>
+                        <깨끗한 석판>, 문래예술공장, 서울</p>
                     <p data-en="2022, <Artience Daejeon>, Daejeon Artist House, Daejeon"
                         data-ko="2022, <아티언스 대전>, 대전예술가의집, 대전">2022, <아티언스 대전>, 대전예술가의집, 대전</p>
                     <p data-en="2022, <Urban Resonance>, National Museum of Modern and Contemporary Art (MMCA), Cheongju"
@@ -1569,8 +1604,7 @@
                 <h5><span data-en="Performances" data-ko="공연">공연</span></h5>
                 <div class="cv-list-art">
                     <p data-en="2022, <Radio Shower>, Windmill, Seoul" data-ko="2022, <Radio Shower>, 윈드밀, 서울">2022,
-                        <Radio Shower>, 윈드밀, 서울
-                    </p>
+                        <Radio Shower>, 윈드밀, 서울</p>
                     <p data-en="2020, <Site-Specific Performance Project>, Incheon Art Platform, Incheon"
                         data-ko="2020, <장소특정형 공연 프로젝트>, 인천아트플랫폼, 인천">2020, <장소특정형 공연 프로젝트>, 인천아트플랫폼, 인천</p>
                     <p data-en="2020, <Open Media Art Festival>, Oil Tank Culture Park, Seoul"
@@ -1665,7 +1699,7 @@
 
                     const text = el.getAttribute(`data-${lang}`);
                     if (text !== null) { // Check if attribute exists and has value
-                        // Use innerHTML instead of textContent to render <br> tags
+                        // Use innerHTML instead of textContent to render <br> tags and potentially other HTML like <i> for titles
                         el.innerHTML = text;
                     }
                 });
@@ -1738,7 +1772,7 @@
                     }
                     // Optional: Remove 'visible' class if element scrolls out of view (to re-trigger animation)
                     /* else {
-                       element.classList.remove('visible');
+                        element.classList.remove('visible');
                     } */
                 });
             });
