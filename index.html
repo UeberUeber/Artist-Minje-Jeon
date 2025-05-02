@@ -1,1160 +1,1830 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Àü¹ÎÁ¦ - ¹Ìµğ¾î ¾ÆÆ¼½ºÆ®</title> <style>
-        /* Base Style Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* ±âº» ÆùÆ® ¼³Á¤ */
-        }
 
-        body {
-            background-color: #000; /* ¹è°æ»ö: °ËÁ¤ */
-            color: #fff; /* ±ÛÀÚ»ö: Èò»ö */
-            line-height: 1.6; /* ÁÙ °£°İ */
-            overflow-x: hidden; /* °¡·Î ½ºÅ©·Ñ¹Ù ¼û±è */
-            -webkit-font-smoothing: antialiased; /* À¥Å¶ ºê¶ó¿ìÀú ÆùÆ® ºÎµå·´°Ô */
-            -moz-osx-font-smoothing: grayscale; /* ÆÄÀÌ¾îÆø½º ÆùÆ® ºÎµå·´°Ô */
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ì „ë¯¼ì œ - ë¯¸ë””ì–´ ì•„í‹°ìŠ¤íŠ¸</title>
+        <style>
+            /* Base Style Reset */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+                /* ê¸°ë³¸ í°íŠ¸ ì„¤ì • */
+            }
 
-        /* Language Toggle Button */
-        #langToggle {
-            background-color: transparent;
-            color: #fff;
-            border: 1px solid #ff4081;
-            padding: 5px 10px;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-            cursor: pointer; /* Å¬¸¯ °¡´É Ç¥½Ã */
-            margin-left: 1rem; /* ´Ù¸¥ ¸µÅ©¿ÍÀÇ °£°İ */
-            font-family: 'Inter', sans-serif; /* ¹öÆ° ÆùÆ® */
-            font-size: 0.9rem; /* ¹öÆ° ÆùÆ® Å©±â */
-        }
+            body {
+                background-color: #000;
+                /* ë°°ê²½ìƒ‰: ê²€ì • */
+                color: #fff;
+                /* ê¸€ììƒ‰: í°ìƒ‰ */
+                line-height: 1.6;
+                /* ì¤„ ê°„ê²© */
+                overflow-x: hidden;
+                /* ê°€ë¡œ ìŠ¤í¬ë¡¤ë°” ìˆ¨ê¹€ */
+                -webkit-font-smoothing: antialiased;
+                /* ì›¹í‚· ë¸Œë¼ìš°ì € í°íŠ¸ ë¶€ë“œëŸ½ê²Œ */
+                -moz-osx-font-smoothing: grayscale;
+                /* íŒŒì´ì–´í­ìŠ¤ í°íŠ¸ ë¶€ë“œëŸ½ê²Œ */
+            }
 
-        #langToggle:hover {
-            background-color: #ff4081;
-            color: #fff;
-        }
+            /* Language Toggle Button */
+            #langToggle {
+                background-color: transparent;
+                color: #fff;
+                border: 1px solid #ff4081;
+                padding: 5px 10px;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                /* í´ë¦­ ê°€ëŠ¥ í‘œì‹œ */
+                margin-left: 1rem;
+                /* ë‹¤ë¥¸ ë§í¬ì™€ì˜ ê°„ê²© */
+                font-family: 'Inter', sans-serif;
+                /* ë²„íŠ¼ í°íŠ¸ */
+                font-size: 0.9rem;
+                /* ë²„íŠ¼ í°íŠ¸ í¬ê¸° */
+            }
 
-
-        /* Typography */
-        h1 {
-            font-size: clamp(2.5rem, 4vw, 5rem); /* ¹İÀÀÇü ÆùÆ® Å©±â */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-            margin-bottom: 0.5rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            line-height: 1.2; /* ÁÙ °£°İ */
-            font-family: 'Playfair Display', serif; /* Á¦¸ñ ÆùÆ® */
-            letter-spacing: 0; /* ÀÚ°£ */
-        }
-
-        h2 {
-            font-size: calc(1.5rem + 0.8vw); /* ¹İÀÀÇü ÆùÆ® Å©±â */
-            margin-bottom: 2rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            color: #f1f1f1; /* ±ÛÀÚ»ö */
-            font-weight: 400; /* ÆùÆ® ±½±â */
-            font-family: 'Inter', sans-serif; /* ºÎÁ¦¸ñ ÆùÆ® */
-            letter-spacing: 0; /* ÀÚ°£ */
-            white-space: nowrap; /* ÁÙ¹Ù²Ş ¹æÁö */
-        }
-
-        h3 {
-            font-size: 2rem; /* ÆùÆ® Å©±â */
-            margin-bottom: 1rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-            font-family: 'Playfair Display', serif; /* Á¦¸ñ ÆùÆ® */
-            letter-spacing: 0; /* ÀÚ°£ */
-        }
-
-        p {
-            font-size: 1.05rem; /* ÆùÆ® Å©±â */
-            margin-bottom: 1.5rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            max-width: 800px; /* ÃÖ´ë ³Êºñ */
-            line-height: 1.6; /* ÁÙ °£°İ */
-            font-weight: 400; /* ÆùÆ® ±½±â */
-            letter-spacing: 0; /* ÀÚ°£ */
-            font-family: 'Inter', sans-serif; /* º»¹® ÆùÆ® */
-        }
-
-        /* Layout */
-        .container {
-            width: 100%; /* ³Êºñ 100% */
-            max-width: 100%; /* ÃÖ´ë ³Êºñ 100% */
-            padding: 0; /* ¾ÈÂÊ ¿©¹é ¾øÀ½ */
-        }
-
-        /* Header Area */
-        .header {
-            width: 100%; /* ³Êºñ 100% */
-            height: 100vh; /* ³ôÀÌ: È­¸é ³ôÀÌ¸¸Å­ */
-            position: relative; /* »ó´ë À§Ä¡ */
-            overflow: hidden; /* ³ÑÄ¡´Â ³»¿ë ¼û±è */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            flex-direction: column; /* ¼¼·Î Á¤·Ä */
-            justify-content: center; /* ¼öÁ÷ °¡¿îµ¥ Á¤·Ä */
-            align-items: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-        }
-
-        .header-video { /* Çì´õ ¹è°æ ÀÌ¹ÌÁö/ºñµğ¿À */
-            position: absolute; /* Àı´ë À§Ä¡ */
-            top: 0;
-            left: 0;
-            width: 100%; /* ³Êºñ 100% */
-            height: 100%; /* ³ôÀÌ 100% */
-            object-fit: cover; /* ºñÀ² À¯ÁöÇÏ¸ç Ã¤¿ì±â */
-            z-index: -1; /* ´Ù¸¥ ¿ä¼Ò µÚ·Î º¸³»±â */
-            filter: brightness(0.5); /* ¹à±â Á¶Àı */
-        }
-
-        .header-content { /* Çì´õ ÅØ½ºÆ® ³»¿ë */
-            z-index: 1; /* ´Ù¸¥ ¿ä¼Ò À§·Î ¿Ã¸®±â */
-            padding: 2rem; /* ¾ÈÂÊ ¿©¹é */
-            width: 90%; /* ³Êºñ 90% */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-        }
-
-        /* Navigation */
-        .navigation {
-            position: fixed; /* È­¸é¿¡ °íÁ¤ */
-            top: 0;
-            left: 0;
-            width: 100%; /* ³Êºñ 100% */
-            z-index: 1000; /* °¡Àå À§·Î ¿Ã¸®±â */
-            padding: 1.5rem 2rem; /* ¾ÈÂÊ ¿©¹é */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            justify-content: space-between; /* ¾çÂÊ ³¡ Á¤·Ä */
-            align-items: center; /* ¼öÁ÷ °¡¿îµ¥ Á¤·Ä */
-            transition: all 0.3s ease; /* ºÎµå·¯¿î ÀüÈ¯ È¿°ú */
-            background: rgba(0, 0, 0, 0.8); /* ¹İÅõ¸í °ËÁ¤ ¹è°æ */
-        }
-
-        .navigation.scrolled { /* ½ºÅ©·Ñ ½Ã ³»ºñ°ÔÀÌ¼Ç ½ºÅ¸ÀÏ º¯°æ */
-            padding: 0.8rem 2rem; /* ¾ÈÂÊ ¿©¹é ÁÙÀÓ */
-            background: rgba(0, 0, 0, 0.95); /* ´õ ÁøÇÑ ¹è°æ */
-        }
-
-        .logo {
-            font-size: 1.5rem; /* ÆùÆ® Å©±â */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-            color: #fff; /* ±ÛÀÚ»ö: Èò»ö */
-            text-decoration: none; /* ¹ØÁÙ Á¦°Å */
-            letter-spacing: 1px; /* ÀÚ°£ */
-            text-transform: uppercase; /* ´ë¹®ÀÚ º¯È¯ */
-            font-family: 'Inter', sans-serif; /* ·Î°í ÆùÆ® */
-        }
-
-        .nav-links {
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            list-style: none; /* ¸ñ·Ï ½ºÅ¸ÀÏ Á¦°Å */
-            align-items: center; /* ¼¼·Î Áß¾Ó Á¤·Ä (¾ğ¾î ¹öÆ° Æ÷ÇÔ) */
-        }
-
-        .nav-links li {
-            margin-left: 2rem; /* ¿ŞÂÊ ¿©¹é */
-        }
-
-        .nav-links li:last-child { /* ¸¶Áö¸· Ç×¸ñ(¾ğ¾î ¹öÆ°)ÀÇ ¿©¹é Á¦°Å */
-             margin-left: 0; /* ±âº»°ªÀ¸·Î µÎ°í ¹öÆ° ÀÚÃ¼¿¡ margin-left Ãß°¡ */
-        }
+            #langToggle:hover {
+                background-color: #ff4081;
+                color: #fff;
+            }
 
 
-        .nav-links a {
-            color: #fff; /* ±ÛÀÚ»ö: Èò»ö */
-            text-decoration: none; /* ¹ØÁÙ Á¦°Å */
-            font-size: 0.95rem; /* ÆùÆ® Å©±â */
-            letter-spacing: 0.5px; /* ÀÚ°£ */
-            transition: color 0.3s; /* »ö»ó ÀüÈ¯ È¿°ú */
-            font-family: 'Inter', sans-serif; /* ¸µÅ© ÆùÆ® */
-            font-weight: 400; /* ÆùÆ® ±½±â */
-            text-transform: lowercase; /* ¼Ò¹®ÀÚ º¯È¯ */
-        }
-        /* Keep CV link uppercase */
-        .nav-links a[href="#cv"] {
-            text-transform: uppercase;
-        }
-
-
-        .nav-links a:hover { /* ¸µÅ© È£¹ö ½Ã */
-            color: #ff4081; /* °­Á¶ »ö»ó */
-        }
-
-        /* Common Section Styles */
-        section {
-            padding: 5rem 2rem; /* ¼½¼Ç ¾ÈÂÊ ¿©¹é */
-            overflow: hidden; /* ³ÑÄ¡´Â ³»¿ë ¼û±è */
-        }
-
-        .section-title-wrapper { /* ¼½¼Ç Á¦¸ñ Áß¾Ó Á¤·Ä¿ë ·¡ÆÛ */
-            text-align: center;
-            width: 100%;
-            margin-bottom: 4rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-        }
-
-        .section-title { /* ¼½¼Ç Á¦¸ñ ½ºÅ¸ÀÏ */
-            position: relative; /* »ó´ë À§Ä¡ */
-            display: inline-block; /* ÀÎ¶óÀÎ ºí·Ï ¿ä¼Ò */
-            /* margin-bottom Á¦°Å (·¡ÆÛ¿¡¼­ Ã³¸®) */
-            font-size: clamp(2rem, 3vw, 3.5rem); /* ¹İÀÀÇü ÆùÆ® Å©±â */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-            font-family: 'Playfair Display', serif; /* Á¦¸ñ ÆùÆ® */
-            letter-spacing: 0; /* ÀÚ°£ */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-        }
-
-        .section-title::after { /* ¼½¼Ç Á¦¸ñ ¾Æ·¡ °­Á¶¼± */
-            content: '';
-            position: absolute; /* Àı´ë À§Ä¡ */
-            bottom: -12px; /* Á¦¸ñ ¾Æ·¡ À§Ä¡ */
-            left: 50%; /* °¡¿îµ¥ Á¤·Ä */
-            transform: translateX(-50%); /* Á¤È®ÇÑ °¡¿îµ¥ Á¤·Ä */
-            width: 80px; /* ¼± ³Êºñ */
-            height: 2px; /* ¼± ³ôÀÌ */
-            background-color: #ff4081; /* °­Á¶ »ö»ó */
-        }
-
-        /* Artist Statement Section */
-        .about { /* ÀÛ°¡ ¼Ò°³ ¼½¼Ç */
-            background-color: #0d0d0d; /* ¾à°£ ¹àÀº °ËÁ¤ ¹è°æ */
-            position: relative; /* »ó´ë À§Ä¡ */
-        }
-
-        .about-content {
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            flex-direction: column; /* ¼¼·Î Á¤·Ä */
-            align-items: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-            width: 100%; /* Ensure content wrapper takes full width for centering */
-        }
-
-        .artist-statement { /* ÀÛ°¡ ³ëÆ® ÅØ½ºÆ® */
-            max-width: 90%; /* ÃÖ´ë ³Êºñ 90% */
-            /* margin: 0 auto; /* °¡¿îµ¥ Á¤·Ä - Redundant due to parent's align-items: center */
-            font-size: 1.15rem; /* ÆùÆ® Å©±â */
-            line-height: 1.6; /* ÁÙ °£°İ */
-            font-weight: 400; /* ÆùÆ® ±½±â */
-            font-family: 'Inter', sans-serif; /* º»¹® ÆùÆ® */
-            letter-spacing: 0; /* ÀÚ°£ */
-            text-align: center; /* Ensure text inside is centered */
-        }
-        .artist-statement p { /* ÀÛ°¡ ³ëÆ® ³» p ÅÂ±× °¡¿îµ¥ Á¤·Ä */
-             margin-left: auto;
-             margin-right: auto;
-        }
-
-        /* Works Gallery */
-        .works { /* ÀÛÇ° ¼½¼Ç */
-            padding: 0; /* ¾ÈÂÊ ¿©¹é ¾øÀ½ */
-        }
-
-        .work-item { /* °¢ ÀÛÇ° ¾ÆÀÌÅÛ */
-            width: 100%; /* ³Êºñ 100% */
-            position: relative; /* »ó´ë À§Ä¡ */
-            min-height: 100vh; /* ÃÖ¼Ò ³ôÀÌ: È­¸é ³ôÀÌ¸¸Å­ */
-            padding: 5rem 2rem; /* À§¾Æ·¡ ¾ÈÂÊ ¿©¹é (³»¿ë ±æÀÌ¿¡ µû¶ó ³ôÀÌ Á¶Àı) */
-            overflow: hidden; /* ³ÑÄ¡´Â ³»¿ë ¼û±è */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            flex-direction: column; /* ¼¼·Î Á¤·Ä */
-            justify-content: center; /* ¼öÁ÷ °¡¿îµ¥ Á¤·Ä */
-            align-items: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-            background-color: #0a0a0a; /* ÀÛÇ° ¹è°æ»ö */
-            border-bottom: 1px solid #222; /* ÀÛÇ° ±¸ºĞ¼± */
-        }
-        .work-item:last-child {
-             border-bottom: none; /* ¸¶Áö¸· ÀÛÇ° ±¸ºĞ¼± Á¦°Å */
-        }
-
-
-        .work-background { /* ÀÛÇ° ¹è°æ ÀÌ¹ÌÁö (ÇÊ¿ä½Ã »ç¿ë) */
-            position: absolute; /* Àı´ë À§Ä¡ */
-            top: 0;
-            left: 0;
-            width: 100%; /* ³Êºñ 100% */
-            height: 100%; /* ³ôÀÌ 100% */
-            object-fit: cover; /* ºñÀ² À¯ÁöÇÏ¸ç Ã¤¿ì±â */
-            filter: brightness(0.4); /* ¹à±â Á¶Àı */
-            z-index: -1; /* ´Ù¸¥ ¿ä¼Ò µÚ·Î º¸³»±â */
-            transition: all 1s ease; /* ºÎµå·¯¿î ÀüÈ¯ È¿°ú */
-        }
-
-        .work-item:hover .work-background { /* È£¹ö È¿°ú (ÇÊ¿ä½Ã »ç¿ë) */
-            transform: scale(1.05); /* ¾à°£ È®´ë */
-            filter: brightness(0.5); /* ¾à°£ ¹à°Ô */
-        }
-
-        .work-content { /* ÀÛÇ° ÅØ½ºÆ® ¹× ºñµğ¿À ÄÁÅ×ÀÌ³Ê */
-            z-index: 1; /* ´Ù¸¥ ¿ä¼Ò À§·Î ¿Ã¸®±â */
-            padding: 2rem; /* ¾ÈÂÊ ¿©¹é */
-            /* text-align: center; /* Removed, flexbox handles alignment */
-            max-width: 1200px; /* ÃÖ´ë ³Êºñ */
-            margin-left: auto; /* °¡¿îµ¥ Á¤·Ä (Flexbox ÀÚ½Ä ¿ä¼ÒÀÌ¹Ç·Î align-items: center°¡ ÁÖ ¿ªÇÒ) */
-            margin-right: auto; /* °¡¿îµ¥ Á¤·Ä */
-            width: 100%; /* ³Êºñ 100% (max-width Á¦ÇÑ ¾È¿¡¼­) */
-            /* --- Centering Improvement --- */
-            display: flex; /* Use flexbox for internal alignment */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center children horizontally */
-            /* --- End Centering Improvement --- */
-        }
-
-        .work-title { /* ÀÛÇ° Á¦¸ñ */
-            font-size: clamp(2.5rem, 4vw, 3.5rem); /* ¹İÀÀÇü ÆùÆ® Å©±â */
-            margin-bottom: 0.5rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-            font-family: 'Playfair Display', serif; /* Á¦¸ñ ÆùÆ® */
-            color: #ff4081; /* °­Á¶ »ö»ó */
-            text-align: center; /* ¸í½ÃÀû °¡¿îµ¥ Á¤·Ä (ÅØ½ºÆ® ÀÚÃ¼ Á¤·Ä) */
-            width: 100%; /* Ensure title takes full width for centering */
-        }
-
-        .work-year, .work-medium, .work-data-source { /* ÀÛÇ° Á¤º¸ (Å¬·¡½º Ãß°¡) */
-            font-size: 1.1rem; /* ÆùÆ® Å©±â */
-            margin-bottom: 0.8rem; /* ¾Æ·¡ÂÊ ¿©¹é */
-            font-family: 'Inter', sans-serif; /* Á¤º¸ ÆùÆ® */
-            color: #cccccc; /* ±ÛÀÚ»ö */
-            letter-spacing: 1px; /* ÀÚ°£ */
-            text-align: center; /* ¸í½ÃÀû °¡¿îµ¥ Á¤·Ä (ÅØ½ºÆ® ÀÚÃ¼ Á¤·Ä) */
-            width: 100%; /* Ensure info takes full width for centering */
-            line-height: 1.4; /* Adjust line height for <br> */
-        }
-
-        .work-medium { /* ÀÛÇ° ¸ÅÃ¼ Á¤º¸ °­Á¶ */
-            color: #ff4081; /* °­Á¶ »ö»ó */
-            font-weight: 500; /* ÆùÆ® ±½±â */
-        }
-
-        .work-description { /* ÀÛÇ° ¼³¸í */
-            font-size: clamp(1rem, 1.5vw, 1.2rem); /* ¹İÀÀÇü ÆùÆ® Å©±â */
-            margin-bottom: 0; /* ¾Æ·¡ÂÊ ¿©¹é Á¦°Å (ºñµğ¿À µÚ·Î ÀÌµ¿) */
-            margin-left: auto; /* °¡¿îµ¥ Á¤·Ä (Flexbox align-items °¡ ÁÖ ¿ªÇÒ) */
-            margin-right: auto; /* °¡¿îµ¥ Á¤·Ä */
-            max-width: 800px; /* ÃÖ´ë ³Êºñ */
-            width: 100%; /* Ensure it takes available width up to max-width */
-            line-height: 1.8; /* ÁÙ °£°İ */
-            font-family: 'Inter', sans-serif; /* º»¹® ÆùÆ® */
-            text-align: center; /* ÅØ½ºÆ® ³»¿ë °¡¿îµ¥ Á¤·Ä (¸í½ÃÀû Ãß°¡) */
-            order: 1; /* Flexbox ¼ø¼­ º¯°æ: ºñµğ¿À µÚ·Î */
-            margin-top: 3rem; /* ºñµğ¿À¿ÍÀÇ °£°İ Ãß°¡ */
-        }
-        .work-description p { /* Ensure paragraphs inside description inherit centering */
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 0; /* Remove default paragraph margin */
-        }
-
-
-        .video-container { /* À¯Æ©ºê ºñµğ¿À ÄÁÅ×ÀÌ³Ê */
-            width: 100%; /* ³Êºñ 100% */
-            max-width: 1000px; /* ÃÖ´ë ³Êºñ */
-            margin-left: auto; /* °¡¿îµ¥ Á¤·Ä (Flexbox align-items °¡ ÁÖ ¿ªÇÒ) */
-            margin-right: auto; /* °¡¿îµ¥ Á¤·Ä */
-            margin-top: 2rem; /* À§ÂÊ Á¦¸ñ/Á¤º¸¿ÍÀÇ °£°İ Ãß°¡ */
-            margin-bottom: 0; /* Reset bottom margin if needed */
-            position: relative; /* »ó´ë À§Ä¡ (iframe Àı´ë À§Ä¡ ±âÁØ) */
-            padding-bottom: 56.25%; /* 16:9 ºñÀ² À¯Áö */
-            height: 0; /* ³ôÀÌ 0 (padding-bottomÀ¸·Î ºñÀ² Á¶Àı) */
-            overflow: hidden; /* ³ÑÄ¡´Â ³»¿ë ¼û±è */
-            border-radius: 8px; /* ¸ğ¼­¸® µÕ±Û°Ô */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* ±×¸²ÀÚ È¿°ú */
-            order: 0; /* Flexbox ¼ø¼­ º¯°æ: ¼³¸í ¾ÕÀ¸·Î */
-        }
-
-        .video-container iframe { /* À¯Æ©ºê iframe */
-            position: absolute; /* Àı´ë À§Ä¡ */
-            top: 0;
-            left: 0;
-            width: 100%; /* ³Êºñ 100% */
-            height: 100%; /* ³ôÀÌ 100% */
-            border: none; /* Å×µÎ¸® Á¦°Å */
-        }
-
-        /* Contact Section */
-        .contact {
-            background-color: #000; /* ¹è°æ»ö: °ËÁ¤ */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-            padding: 8rem 2rem; /* À§¾Æ·¡ ¾ÈÂÊ ¿©¹é */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            flex-direction: column; /* ¼¼·Î Á¤·Ä */
-            align-items: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-        }
-
-        /* CV Section */
-        .cv-section {
-            background-color: #0d0d0d; /* Slightly lighter black */
-            min-height: 80vh; /* Ensure it takes significant height */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Align content to the top */
-            text-align: center;
-        }
-        .cv-content {
-            max-width: 900px; /* Adjust max-width as needed */
-            width: 90%;
-            margin-top: 4rem; /* Add some space below the title */
-            text-align: left; /* Align CV text to the left */
-        }
-        .cv-content h4 { /* Styling for CV subheadings */
-            font-size: 1.5rem;
-            color: #ff4081;
-            margin-top: 2.5rem; /* Increased top margin */
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
-        }
-         .cv-content h5 { /* Styling for CV secondary subheadings */
-            color: #cccccc;
-            font-weight: 500;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem; /* Slightly smaller than h4 */
-            font-family: 'Inter', sans-serif;
-        }
-        .cv-content p, .cv-content div[class^="cv-list-"] p { /* Styling for CV text and list items (using p now) */
-            font-size: 1.05rem;
-            margin-bottom: 0.5rem; /* Reduced margin for list items */
-            font-family: 'Inter', sans-serif;
-            color: #e0e0e0; /* Slightly lighter text color */
-            position: relative; /* Needed for pseudo-element positioning */
-            padding-left: 1.5em; /* Space for the bullet */
-        }
-        /* Specific paragraphs that shouldn't have bullets */
-        .cv-content > p:first-of-type, /* Summary paragraph */
-        .cv-work-item > p:first-of-type, /* Role description */
-        .cv-content .cv-skills p, /* Skills paragraphs */
-        .cv-content h4 + p /* Education paragraph */
-        {
-            padding-left: 0;
-            margin-bottom: 1.5rem; /* Restore default margin for non-list paragraphs */
-        }
-        .cv-content > p:first-of-type::before,
-        .cv-work-item > p:first-of-type::before,
-        .cv-content .cv-skills p::before,
-        .cv-content h4 + p::before
-         {
-            content: none; /* Remove bullet */
-        }
-
-        .cv-content div[class^="cv-list-"] p::before { /* Add bullet point only to list items */
-            content: "?";
-            color: #ff4081; /* Bullet color */
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1.5em; /* Position bullet before text */
-            position: absolute;
-            left: 0.5em; /* Adjust horizontal position */
-        }
-
-        .cv-content .cv-skills strong { /* Style skill categories */
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-
-        /* Style for specific CV sections like Work Experience */
-        .cv-work-item {
-            margin-bottom: 2rem; /* Increased spacing between work items */
-        }
-        .cv-work-item strong { /* Job title and company */
-            display: block;
-            font-weight: 600;
-            color: #ffffff; /* White color for emphasis */
-            margin-bottom: 0.25rem;
-            font-size: 1.15rem; /* Slightly larger font size */
-        }
-        .cv-work-item span { /* Dates */
-             display: block;
-             font-size: 0.95rem;
-             color: #aaaaaa; /* Lighter gray for dates */
-             margin-bottom: 0.5rem;
-        }
-        .cv-work-item > p:first-of-type { /* Style for the role description paragraph */
-            margin-bottom: 1rem; /* More space after role description */
-            font-style: italic;
-            color: #b0b0b0;
-        }
-
-        .cv-work-item div[class^="cv-list-"] { /* Container for bulleted list items */
-            margin-top: 0.5rem;
-        }
-        .cv-work-item div[class^="cv-list-"] p { /* Style for bulleted responsibilities */
-            color: #d0d0d0; /* Slightly lighter than default p */
-            font-size: 1rem; /* Slightly smaller font for details */
-            margin-bottom: 0.4rem; /* Tighter spacing for list items */
-        }
-
-
-        .social-links { /* ¼Ò¼È ¹Ìµğ¾î ¸µÅ© */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            justify-content: center; /* °¡¿îµ¥ Á¤·Ä */
-            gap: 2.5rem; /* ¾ÆÀÌÄÜ °£°İ */
-            margin: 2rem 0; /* À§¾Æ·¡ ¿©¹é */
-        }
-
-        .social-icon { /* ¼Ò¼È ¹Ìµğ¾î ¾ÆÀÌÄÜ */
-            font-size: 2.2rem; /* ¾ÆÀÌÄÜ Å©±â */
-            color: #fff; /* ¾ÆÀÌÄÜ »ö»ó: Èò»ö */
-            transition: color 0.3s; /* »ö»ó ÀüÈ¯ È¿°ú */
-        }
-
-        .social-icon:hover { /* ¾ÆÀÌÄÜ È£¹ö ½Ã */
-            color: #ff4081; /* °­Á¶ »ö»ó */
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #000; /* ¹è°æ»ö: °ËÁ¤ */
-            text-align: center; /* ÅØ½ºÆ® °¡¿îµ¥ Á¤·Ä */
-            padding: 2rem; /* ¾ÈÂÊ ¿©¹é */
-            font-size: 0.9rem; /* ÆùÆ® Å©±â */
-            opacity: 0.7; /* Åõ¸íµµ */
-            display: flex; /* Flexbox ·¹ÀÌ¾Æ¿ô */
-            justify-content: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-            align-items: center; /* ¼öÁ÷ °¡¿îµ¥ Á¤·Ä */
-        }
-        .footer p { /* Footer p ÅÂ±× ¸¶Áø Á¦°Å */
-            margin-bottom: 0;
-        }
-
-        /* Animations */
-        .fade-in { /* ÆäÀÌµå ÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç */
-            opacity: 0; /* ÃÊ±â Åõ¸íµµ 0 */
-            transform: translateY(20px); /* ÃÊ±â À§Ä¡ ¾Æ·¡·Î 20px */
-            transition: opacity 1s ease, transform 1s ease; /* ºÎµå·¯¿î ÀüÈ¯ È¿°ú */
-        }
-
-        .fade-in.visible { /* È­¸é¿¡ º¸ÀÏ ¶§ */
-            opacity: 1; /* Åõ¸íµµ 1 */
-            transform: translateY(0); /* ¿ø·¡ À§Ä¡·Î ÀÌµ¿ */
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 768px) { /* È­¸é ³Êºñ 768px ÀÌÇÏ */
+            /* Typography */
             h1 {
-                font-size: clamp(2rem, 6vw, 3rem); /* ¸ğ¹ÙÀÏ Çì´õ Á¦¸ñ Å©±â Á¶Á¤ */
+                font-size: clamp(2.5rem, 4vw, 5rem);
+                /* ë°˜ì‘í˜• í°íŠ¸ í¬ê¸° */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+                margin-bottom: 0.5rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                line-height: 1.2;
+                /* ì¤„ ê°„ê²© */
+                font-family: 'Playfair Display', serif;
+                /* ì œëª© í°íŠ¸ */
+                letter-spacing: 0;
+                /* ìê°„ */
             }
+
             h2 {
-                font-size: calc(1.2rem + 1vw); /* ¸ğ¹ÙÀÏ Çì´õ ºÎÁ¦¸ñ Å©±â Á¶Á¤ */
-                 white-space: normal; /* ¸ğ¹ÙÀÏ¿¡¼­ ºÎÁ¦¸ñ ÁÙ¹Ù²Ş Çã¿ë */
-            }
-             .section-title {
-                 font-size: 2.2rem; /* ¸ğ¹ÙÀÏ ¼½¼Ç Á¦¸ñ Å©±â Á¶Á¤ */
-            }
-
-            .work-title {
-                 font-size: clamp(2rem, 5vw, 2.8rem); /* ¸ğ¹ÙÀÏ ÀÛÇ° Á¦¸ñ Å©±â Á¶Á¤ */
-            }
-             .work-description {
-                  font-size: clamp(0.95rem, 2vw, 1.1rem); /* ¸ğ¹ÙÀÏ ÀÛÇ° ¼³¸í Å©±â Á¶Á¤ */
-                  margin-top: 2rem; /* ¸ğ¹ÙÀÏ¿¡¼­ ºñµğ¿À¿ÍÀÇ °£°İ Á¶Á¤ */
-             }
-
-            .navigation { /* ³»ºñ°ÔÀÌ¼Ç ½ºÅ¸ÀÏ Á¶Á¤ */
-                padding: 1rem; /* ¾ÈÂÊ ¿©¹é Á¶Á¤ */
-            }
-             .logo {
-                 font-size: 1.3rem; /* ¸ğ¹ÙÀÏ ·Î°í Å©±â Á¶Á¤ */
-             }
-
-            .nav-links { /* ³»ºñ°ÔÀÌ¼Ç ¸µÅ© ÄÁÅ×ÀÌ³Ê (¸ğ¹ÙÀÏ ¸Ş´º Åä±Û ½Ã ½ºÅ¸ÀÏ) */
-                /* ¸ğ¹ÙÀÏ ¸Ş´º Åä±Û ½Ã ½ºÅ¸ÀÏÀº ¾Æ·¡¿¡¼­ Á¤ÀÇ */
+                font-size: calc(1.5rem + 0.8vw);
+                /* ë°˜ì‘í˜• í°íŠ¸ í¬ê¸° */
+                margin-bottom: 2rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                color: #f1f1f1;
+                /* ê¸€ììƒ‰ */
+                font-weight: 400;
+                /* í°íŠ¸ êµµê¸° */
+                font-family: 'Inter', sans-serif;
+                /* ë¶€ì œëª© í°íŠ¸ */
+                letter-spacing: 0;
+                /* ìê°„ */
+                white-space: nowrap;
+                /* ì¤„ë°”ê¿ˆ ë°©ì§€ */
             }
 
-            .nav-links li { /* ³»ºñ°ÔÀÌ¼Ç ¸µÅ© ¾ÆÀÌÅÛ (¸ğ¹ÙÀÏ ¸Ş´º Åä±Û ½Ã ½ºÅ¸ÀÏ) */
-                 margin-left: 1.5rem; /* ¸ğ¹ÙÀÏ ³×ºñ ¸µÅ© °£°İ Á¶Á¤ */
+            h3 {
+                font-size: 2rem;
+                /* í°íŠ¸ í¬ê¸° */
+                margin-bottom: 1rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+                font-family: 'Playfair Display', serif;
+                /* ì œëª© í°íŠ¸ */
+                letter-spacing: 0;
+                /* ìê°„ */
             }
 
-            .artist-statement { /* ÀÛ°¡ ³ëÆ® ÆùÆ® Å©±â Á¶Á¤ */
-                font-size: 1.1rem;
+            p {
+                font-size: 1.05rem;
+                /* í°íŠ¸ í¬ê¸° */
+                margin-bottom: 1.5rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                max-width: 800px;
+                /* ìµœëŒ€ ë„ˆë¹„ */
+                line-height: 1.6;
+                /* ì¤„ ê°„ê²© */
+                font-weight: 400;
+                /* í°íŠ¸ êµµê¸° */
+                letter-spacing: 0;
+                /* ìê°„ */
+                font-family: 'Inter', sans-serif;
+                /* ë³¸ë¬¸ í°íŠ¸ */
             }
 
-            .header-content { /* Çì´õ ³»¿ë ³Êºñ Á¶Á¤ */
-                width: 95%;
+            /* Layout */
+            .container {
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                max-width: 100%;
+                /* ìµœëŒ€ ë„ˆë¹„ 100% */
+                padding: 0;
+                /* ì•ˆìª½ ì—¬ë°± ì—†ìŒ */
             }
 
-            .work-item {
-                 padding: 4rem 1rem; /* ¸ğ¹ÙÀÏ ÀÛÇ° ¼½¼Ç ÆĞµù Á¶Á¤ */
-            }
-             .video-container {
-                 border-radius: 4px; /* ¸ğ¹ÙÀÏ ºñµğ¿À ¸ğ¼­¸® ¾à°£ µÕ±Û°Ô */
-                 max-width: 100%; /* ¸ğ¹ÙÀÏ¿¡¼­´Â ºñµğ¿À ³Êºñ¸¦ ÄÁÅ×ÀÌ³Ê¿¡ ¸ÂÃã */
-                 margin-top: 1.5rem; /* ¸ğ¹ÙÀÏ¿¡¼­ ºñµğ¿À À§ÂÊ °£°İ Á¶Á¤ */
-             }
-             .social-icon {
-                 font-size: 2rem; /* ¸ğ¹ÙÀÏ ¼Ò¼È ¾ÆÀÌÄÜ Å©±â Á¶Á¤ */
-             }
-             .contact {
-                  padding: 6rem 1rem; /* ¸ğ¹ÙÀÏ ¿¬¶ôÃ³ ¼½¼Ç ÆĞµù Á¶Á¤ */
-             }
-             .cv-section {
-                 padding: 4rem 1rem; /* ¸ğ¹ÙÀÏ CV ¼½¼Ç ÆĞµù Á¶Á¤ */
-             }
-             .cv-content {
-                 margin-top: 2rem; /* ¸ğ¹ÙÀÏ CV ³»¿ë À§ÂÊ °£°İ Á¶Á¤ */
-             }
-             .cv-content h4 {
-                 font-size: 1.3rem; /* ¸ğ¹ÙÀÏ CV ºÎÁ¦¸ñ Å©±â Á¶Á¤ */
-             }
-              .cv-content h5 {
-                 font-size: 1.1rem; /* ¸ğ¹ÙÀÏ CV 2Â÷ ºÎÁ¦¸ñ Å©±â Á¶Á¤ */
-             }
-             .cv-content p, .cv-content div[class^="cv-list-"] p {
-                 font-size: 0.95rem; /* ¸ğ¹ÙÀÏ CV ÅØ½ºÆ® Å©±â Á¶Á¤ */
-                 padding-left: 1.2em; /* ¸ğ¹ÙÀÏ ºÒ·¿ °£°İ Á¶Á¤ */
-             }
-             .cv-content div[class^="cv-list-"] p::before {
-                 margin-left: -1.2em; /* ¸ğ¹ÙÀÏ ºÒ·¿ À§Ä¡ Á¶Á¤ */
-                 left: 0.4em;
-             }
-             .cv-work-item strong {
-                 font-size: 1.1rem; /* ¸ğ¹ÙÀÏ Á÷Ã¥/È¸»ç¸í Å©±â Á¶Á¤ */
-             }
-             .cv-work-item div[class^="cv-list-"] p {
-                 font-size: 0.9rem; /* ¸ğ¹ÙÀÏ Ã¥ÀÓ ³»¿ë Å©±â Á¶Á¤ */
-             }
-
-
-             .section-title-wrapper {
-                 margin-bottom: 3rem; /* ¸ğ¹ÙÀÏ ¼½¼Ç Á¦¸ñ ¾Æ·¡ ¿©¹é Á¶Á¤ */
-             }
-             .work-description {
-                 max-width: 90%; /* ¸ğ¹ÙÀÏ¿¡¼­ ¼³¸í ³Êºñ Á¶Á¤ */
-             }
-             .work-data-source {
-                 font-size: 1rem; /* ¸ğ¹ÙÀÏ¿¡¼­ µ¥ÀÌÅÍ ¼Ò½º ÆùÆ® Å©±â Á¶Á¤ */
-             }
-
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle { /* ÇÜ¹ö°Å ¸Ş´º ¾ÆÀÌÄÜ */
-            display: none; /* ±âº» ¼û±è */
-            cursor: pointer; /* ¸¶¿ì½º Ä¿¼­ º¯°æ */
-            font-size: 1.5rem; /* ¾ÆÀÌÄÜ Å©±â */
-            color: #fff; /* ¾ÆÀÌÄÜ »ö»ó */
-            position: absolute; /* Àı´ë À§Ä¡ (³»ºñ°ÔÀÌ¼Ç ±âÁØ) */
-            top: 50%; /* ¼öÁ÷ Áß¾Ó Á¤·Ä */
-            transform: translateY(-50%); /* Á¤È®ÇÑ ¼öÁ÷ Áß¾Ó Á¤·Ä */
-            right: 2rem; /* ¿À¸¥ÂÊ À§Ä¡ Á¶Á¤ */
-            z-index: 1100; /* ³»ºñ°ÔÀÌ¼Ç ¸µÅ©º¸´Ù À§ */
-        }
-
-        @media screen and (max-width: 768px) { /* È­¸é ³Êºñ 768px ÀÌÇÏ */
-            .menu-toggle {
-                display: block; /* ÇÜ¹ö°Å ¸Ş´º º¸ÀÌ±â */
-                right: 1rem; /* ¸ğ¹ÙÀÏ¿¡¼­ ¿À¸¥ÂÊ ¿©¹é Á¶Á¤ */
+            /* Header Area */
+            .header {
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                height: 100vh;
+                /* ë†’ì´: í™”ë©´ ë†’ì´ë§Œí¼ */
+                position: relative;
+                /* ìƒëŒ€ ìœ„ì¹˜ */
+                overflow: hidden;
+                /* ë„˜ì¹˜ëŠ” ë‚´ìš© ìˆ¨ê¹€ */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                flex-direction: column;
+                /* ì„¸ë¡œ ì •ë ¬ */
+                justify-content: center;
+                /* ìˆ˜ì§ ê°€ìš´ë° ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
             }
 
-            .nav-links { /* ¸ğ¹ÙÀÏ ¸Ş´º ½ºÅ¸ÀÏ */
-                position: fixed; /* È­¸é¿¡ °íÁ¤ */
+            .header-video {
+                /* í—¤ë” ë°°ê²½ ì´ë¯¸ì§€/ë¹„ë””ì˜¤ */
+                position: absolute;
+                /* ì ˆëŒ€ ìœ„ì¹˜ */
                 top: 0;
-                right: -100%; /* ÃÊ±â »óÅÂ: È­¸é ¿À¸¥ÂÊ ¹Û */
-                width: 80%; /* ³Êºñ 80% */
-                max-width: 300px; /* ÃÖ´ë ³Êºñ ¼³Á¤ */
-                height: 100vh; /* ³ôÀÌ: È­¸é ³ôÀÌ¸¸Å­ */
-                background: rgba(0, 0, 0, 0.97); /* ¹è°æ»ö ¾à°£ ´õ ÁøÇÏ°Ô */
-                flex-direction: column; /* ¼¼·Î Á¤·Ä */
-                align-items: center; /* ¼öÆò °¡¿îµ¥ Á¤·Ä */
-                justify-content: center; /* ¼öÁ÷ °¡¿îµ¥ Á¤·Ä */
-                transition: right 0.5s ease; /* ºÎµå·¯¿î ½½¶óÀÌµå È¿°ú */
-                margin-top: 0; /* ±âÁ¸ margin-top Á¦°Å */
-                padding-top: 5rem; /* ¸Ş´º »ó´Ü ¿©¹é */
+                left: 0;
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                height: 100%;
+                /* ë†’ì´ 100% */
+                object-fit: cover;
+                /* ë¹„ìœ¨ ìœ ì§€í•˜ë©° ì±„ìš°ê¸° */
+                z-index: -1;
+                /* ë‹¤ë¥¸ ìš”ì†Œ ë’¤ë¡œ ë³´ë‚´ê¸° */
+                filter: brightness(0.5);
+                /* ë°ê¸° ì¡°ì ˆ */
             }
 
-            .nav-links.active { /* È°¼ºÈ­ ½Ã (¸Ş´º ¿­¸²) */
-                right: 0; /* È­¸é ¿À¸¥ÂÊÀ¸·Î ½½¶óÀÌµå ÀÎ */
+            .header-content {
+                /* í—¤ë” í…ìŠ¤íŠ¸ ë‚´ìš© */
+                z-index: 1;
+                /* ë‹¤ë¥¸ ìš”ì†Œ ìœ„ë¡œ ì˜¬ë¦¬ê¸° */
+                padding: 2rem;
+                /* ì•ˆìª½ ì—¬ë°± */
+                width: 90%;
+                /* ë„ˆë¹„ 90% */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
+            }
+
+            /* Navigation */
+            .navigation {
+                position: fixed;
+                /* í™”ë©´ì— ê³ ì • */
+                top: 0;
+                left: 0;
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                z-index: 1000;
+                /* ê°€ì¥ ìœ„ë¡œ ì˜¬ë¦¬ê¸° */
+                padding: 1.5rem 2rem;
+                /* ì•ˆìª½ ì—¬ë°± */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                justify-content: space-between;
+                /* ì–‘ìª½ ë ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜ì§ ê°€ìš´ë° ì •ë ¬ */
+                transition: all 0.3s ease;
+                /* ë¶€ë“œëŸ¬ìš´ ì „í™˜ íš¨ê³¼ */
+                background: rgba(0, 0, 0, 0.8);
+                /* ë°˜íˆ¬ëª… ê²€ì • ë°°ê²½ */
+            }
+
+            .navigation.scrolled {
+                /* ìŠ¤í¬ë¡¤ ì‹œ ë‚´ë¹„ê²Œì´ì…˜ ìŠ¤íƒ€ì¼ ë³€ê²½ */
+                padding: 0.8rem 2rem;
+                /* ì•ˆìª½ ì—¬ë°± ì¤„ì„ */
+                background: rgba(0, 0, 0, 0.95);
+                /* ë” ì§„í•œ ë°°ê²½ */
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                /* í°íŠ¸ í¬ê¸° */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+                color: #fff;
+                /* ê¸€ììƒ‰: í°ìƒ‰ */
+                text-decoration: none;
+                /* ë°‘ì¤„ ì œê±° */
+                letter-spacing: 1px;
+                /* ìê°„ */
+                text-transform: uppercase;
+                /* ëŒ€ë¬¸ì ë³€í™˜ */
+                font-family: 'Inter', sans-serif;
+                /* ë¡œê³  í°íŠ¸ */
+            }
+
+            .nav-links {
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                list-style: none;
+                /* ëª©ë¡ ìŠ¤íƒ€ì¼ ì œê±° */
+                align-items: center;
+                /* ì„¸ë¡œ ì¤‘ì•™ ì •ë ¬ (ì–¸ì–´ ë²„íŠ¼ í¬í•¨) */
             }
 
             .nav-links li {
-                margin: 1.5rem 0; /* À§¾Æ·¡ ¿©¹é */
-                margin-left: 0; /* ¸ğ¹ÙÀÏ ¸Ş´º¿¡¼­´Â ¿ŞÂÊ ¿©¹é Á¦°Å */
-            }
-             /* ¸ğ¹ÙÀÏ ¸Ş´ºÀÇ ¾ğ¾î Åä±Û ¹öÆ° ½ºÅ¸ÀÏ */
-             .nav-links #langToggle {
-                 margin-left: 0; /* ¸ğ¹ÙÀÏ ¸Ş´º ³»¿¡¼­´Â ¿ŞÂÊ ¿©¹é Á¦°Å */
-                 margin-top: 1rem; /* ´Ù¸¥ ¸µÅ©¿ÍÀÇ °£°İ */
-             }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-    <nav class="navigation" id="navbar">
-        <a href="#home" class="logo">MINJE JEON</a>
-        <div class="menu-toggle" id="menu-toggle">
-            <i class="fas fa-bars"></i> </div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#statement">ÀÛ°¡³ëÆ®</a></li>
-            <li><a href="#works">ÀÛÇ°</a></li>
-            <li><a href="#contact">¿¬¶ôÃ³</a></li>
-            <li><a href="#cv">CV</a></li>
-            <li><button id="langToggle">ENG</button></li> </ul>
-    </nav>
-
-    <header class="header" id="home">
-        <img src="" alt="Çì´õ ¹è°æ ÀÌ¹ÌÁö" class="header-video" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/000000/333333?text=Image+Not+Found';">
-        <div class="header-content fade-in">
-            <h1 data-en="Minje Jeon" data-ko="Àü¹ÎÁ¦">Àü¹ÎÁ¦</h1>
-            <h2 data-en="Media Artist ? AI Creative Director ? Creative Technologist" data-ko="¹Ìµğ¾î ¾ÆÆ¼½ºÆ® ? AI Å©¸®¿¡ÀÌÆ¼ºê µğ·ºÅÍ ? Å©¸®¿¡ÀÌÆ¼ºê Å×Å©³î·ÎÁö½ºÆ®">¹Ìµğ¾î ¾ÆÆ¼½ºÆ® ? AI Å©¸®¿¡ÀÌÆ¼ºê µğ·ºÅÍ ? Å©¸®¿¡ÀÌÆ¼ºê Å×Å©³î·ÎÁö½ºÆ®</h2>
-        </div>
-    </header>
-
-    <section class="about fade-in" id="statement">
-        <div class="about-content">
-             <div class="section-title-wrapper">
-                 <h2 class="section-title" data-en="Artist Statement" data-ko="ÀÛ°¡³ëÆ®">ÀÛ°¡³ëÆ®</h2>
-            </div>
-            <div class="artist-statement">
-                <p data-en="In my artistic universe, data transcends mere information. It serves as an artistic tool capturing countless fragments of events and phenomena permeating everyday life, while also forming the foundation of my creative materials. During the process of collecting and analyzing vast amounts of data, I often discover hidden aspects of society that we have failed to notice. My artistic practice involves precisely this: revealing the overlooked dimensions of mundane life through the prism of data, and raising questions about them." data-ko="³ªÀÇ ÀÛÇ° ¼¼°è¿¡¼­ µ¥ÀÌÅÍ´Â ´Ü¼øÇÑ Á¤º¸ ÀÌ»óÀÇ ÀÇ¹Ì¸¦ Áö´Ñ´Ù. ±×°ÍÀº ÀÏ»óÀ» °üÅëÇÏ´Â ¹«¼öÇÑ »ç°Ç°ú Çö»óÀÇ ´ÜÆíµéÀ» Æ÷ÂøÇÏ°í ±â·ÏÇÏ´Â ¿¹¼úÀû µµ±¸ÀÌÀÚ, ÀÛÇ° Ã¢ÀÛÀÇ ±Ù°£À» ÀÌ·ç´Â Àç·áÀÌ±âµµ ÇÏ´Ù. ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ ¼öÁıÇÏ°í ºĞ¼®ÇÏ´Â °úÁ¤¿¡¼­ ³ª´Â ¿ì¸®°¡ ¹ÌÃ³ Æ÷ÂøÇÏÁö ¸øÇÑ »çÈ¸ °÷°÷ÀÇ ¼û°ÜÁø ÀÌ¸éÀ» ¹ß°ßÇÏ°ï ÇÑ´Ù. ÀÛÇ° È°µ¿Àº ¹Ù·Î ÀÌ·± ¹«µò ÀÏ»óÀÇ ÀÌ¸éÀ» µ¥ÀÌÅÍ¶ó´Â ÇÁ¸®ÁòÀ» ÅëÇØ ±Ø¸íÇÏ°Ô µå·¯³»°í, ±×¿¡ ´ëÇÑ Áú¹®À» ´øÁö´Â °úÁ¤ÀÌ´Ù.">³ªÀÇ ÀÛÇ° ¼¼°è¿¡¼­ µ¥ÀÌÅÍ´Â ´Ü¼øÇÑ Á¤º¸ ÀÌ»óÀÇ ÀÇ¹Ì¸¦ Áö´Ñ´Ù. ±×°ÍÀº ÀÏ»óÀ» °üÅëÇÏ´Â ¹«¼öÇÑ »ç°Ç°ú Çö»óÀÇ ´ÜÆíµéÀ» Æ÷ÂøÇÏ°í ±â·ÏÇÏ´Â ¿¹¼úÀû µµ±¸ÀÌÀÚ, ÀÛÇ° Ã¢ÀÛÀÇ ±Ù°£À» ÀÌ·ç´Â Àç·áÀÌ±âµµ ÇÏ´Ù. ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ ¼öÁıÇÏ°í ºĞ¼®ÇÏ´Â °úÁ¤¿¡¼­ ³ª´Â ¿ì¸®°¡ ¹ÌÃ³ Æ÷ÂøÇÏÁö ¸øÇÑ »çÈ¸ °÷°÷ÀÇ ¼û°ÜÁø ÀÌ¸éÀ» ¹ß°ßÇÏ°ï ÇÑ´Ù. ÀÛÇ° È°µ¿Àº ¹Ù·Î ÀÌ·± ¹«µò ÀÏ»óÀÇ ÀÌ¸éÀ» µ¥ÀÌÅÍ¶ó´Â ÇÁ¸®ÁòÀ» ÅëÇØ ±Ø¸íÇÏ°Ô µå·¯³»°í, ±×¿¡ ´ëÇÑ Áú¹®À» ´øÁö´Â °úÁ¤ÀÌ´Ù.</p>
-                <p data-en="To handle such data, I've come to experimentally utilize various genres and techniques including painting, sculpture, video, installation, sound, and new media. This approach also serves as a methodology to express the multi-layered properties inherent in data. Ultimately, my work can be described as a process of creating opportunities to discover and view the previously unnoticed dimensions of our world through a new lens, by artistically reinterpreting the data that permeates our daily lives." data-ko="ÀÌ·¯ÇÑ µ¥ÀÌÅÍ¸¦ ´Ù·ç±â À§ÇØ È¸È­, Á¶°¢, ¿µ»ó, ¼³Ä¡, »ç¿îµå, ´º ¹Ìµğ¾î µî ´Ù¾çÇÑ Àå¸£¿Í ±â¹ıÀ» ½ÇÇèÀûÀ¸·Î È°¿ëÇÏ°Ô µÇ¾ú´Ù. ÀÌ´Â µ¥ÀÌÅÍ°¡ Áö´Ñ ´ÙÃşÀû ¼Ó¼ºÀ» Ç¥ÇöÇÏ±â À§ÇÑ ¹æ¹ı·ĞÀÌ±âµµ ÇÏ´Ù. ±Ã±ØÀûÀ¸·Î ³ªÀÇ ÀÛ¾÷Àº ÀÏ»óÀ» °üÅëÇÏ´Â µ¥ÀÌÅÍ¸¦ ¿¹¼úÀûÀ¸·Î ÀçÇØ¼®ÇÔÀ¸·Î½á, ¿ì¸®°¡ ¹ÌÃ³ Æ÷ÂøÇÏÁö ¸øÇß´ø ¼¼°èÀÇ ÀÌ¸éÀ» ¹ß°ßÇÏ°í »õ·Î¿î ½Ã¼±À¸·Î ¹Ù¶óº¼ ¼ö ÀÖ´Â °è±â¸¦ ¸¶·ÃÇÏ´Â °úÁ¤ÀÌ¶ó ÇÒ ¼ö ÀÖ´Ù.">ÀÌ·¯ÇÑ µ¥ÀÌÅÍ¸¦ ´Ù·ç±â À§ÇØ È¸È­, Á¶°¢, ¿µ»ó, ¼³Ä¡, »ç¿îµå, ´º ¹Ìµğ¾î µî ´Ù¾çÇÑ Àå¸£¿Í ±â¹ıÀ» ½ÇÇèÀûÀ¸·Î È°¿ëÇÏ°Ô µÇ¾ú´Ù. ÀÌ´Â µ¥ÀÌÅÍ°¡ Áö´Ñ ´ÙÃşÀû ¼Ó¼ºÀ» Ç¥ÇöÇÏ±â À§ÇÑ ¹æ¹ı·ĞÀÌ±âµµ ÇÏ´Ù. ±Ã±ØÀûÀ¸·Î ³ªÀÇ ÀÛ¾÷Àº ÀÏ»óÀ» °üÅëÇÏ´Â µ¥ÀÌÅÍ¸¦ ¿¹¼úÀûÀ¸·Î ÀçÇØ¼®ÇÔÀ¸·Î½á, ¿ì¸®°¡ ¹ÌÃ³ Æ÷ÂøÇÏÁö ¸øÇß´ø ¼¼°èÀÇ ÀÌ¸éÀ» ¹ß°ßÇÏ°í »õ·Î¿î ½Ã¼±À¸·Î ¹Ù¶óº¼ ¼ö ÀÖ´Â °è±â¸¦ ¸¶·ÃÇÏ´Â °úÁ¤ÀÌ¶ó ÇÒ ¼ö ÀÖ´Ù.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="works" id="works">
-        <div class="work-item fade-in">
-            <div class="work-content">
-                <h3 class="work-title" data-en="POINT" data-ko="POINT">POINT</h3>
-                <p class="work-year">2017</p>
-                <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing, Max/MSP</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/qZpZjA_UhxA?si=O7SzkNPQJA2v0sXM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <p class="work-description" data-en="This work began with the single sentence, 'Diversity has created history.'" data-ko="ÀÌ ÀÛ¾÷Àº '´Ù¾ç¼ºÀÌ ¿ª»ç¸¦ ¸¸µé¾ú´Ù'¶ó´Â ÇÑ ¹®Àå¿¡¼­ ºÎÅÍ ½ÃÀÛµÇ¾ú´Ù.">ÀÌ ÀÛ¾÷Àº '´Ù¾ç¼ºÀÌ ¿ª»ç¸¦ ¸¸µé¾ú´Ù'¶ó´Â ÇÑ ¹®Àå¿¡¼­ ºÎÅÍ ½ÃÀÛµÇ¾ú´Ù.</p>
-            </div>
-        </div>
-
-        <div class="work-item fade-in">
-            <div class="work-content">
-                <h3 class="work-title" data-en="#shapeofgreed" data-ko="#shapeofgreed">#shapeofgreed</h3>
-                <p class="work-year" data-en="2019" data-ko="2019">2019</p>
-                <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing, Max/MSP</p>
-                <p class="work-data-source" data-en="Instagram data (hashtags related to food and their images)" data-ko="ÀÎ½ºÅ¸±×·¥ µ¥ÀÌÅÍ(À½½Ä¿¡ °ü·ÃµÈ ÇØ½ÃÅÂ±×¿Í ±× ÀÌ¹ÌÁö)">ÀÎ½ºÅ¸±×·¥ µ¥ÀÌÅÍ(À½½Ä¿¡ °ü·ÃµÈ ÇØ½ÃÅÂ±×¿Í ±× ÀÌ¹ÌÁö)</p>
-                <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/8OsySLFpTMk?si=iACEwGelm5WltFBW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <p class="work-description" data-en="On Instagram, many photos are uploaded with food-related hashtags like #food, #foodporn. If the act of taking and uploading food pictures has become a cultural act, what is the driving force that sustains these actions? If one of them is human greed and desire, in what form can this be represented? This question became the motivation for the work. To me, images tagged with food hashtags appeared as quantitative and qualitative forms of greedy data. Therefore, I attempted an experiment to collect, dismantle, and analyze large amounts of image data and reconstruct them into visual and sound elements." data-ko="ÀÎ½ºÅ¸±×·¥¿¡´Â #food, #foodpornÃ³·³ À½½Ä¿¡ °ü·ÃµÈ ÇØ½ÃÅÂ±×·Î ¸¹Àº »çÁøÀÌ ¿Ã¶ó¿Â´Ù. À½½ÄÀ» Âï¾î ¿Ã¸®´Â ÇàÀ§°¡ ÇÏ³ªÀÇ ¹®È­Àû ÇàÀ§·Î ÀÚ¸® Àâ¾Ò´Ù¸é ÇàÀ§µéÀ» Áö¼Ó °¡´ÉÇÏ°Ô ÇÏ´Â ¿øµ¿·ÂÀº ´ëÃ¼ ¹«¾ùÀÏ±î? ±× Áß ÇÏ³ª°¡ ÀÎ°£ÀÇ Å½¿å, ¿å¸ÁÀÌ¶ó°í ÇÑ´Ù¸é ÀÌ°ÍÀ» ¾î¶² ÇüÅÂ·Î ³ªÅ¸³¾ ¼ö ÀÖÀ»±î? ¶ó´Â ¹°À½ÀÌ ÀÛ¾÷ÀÇ µ¿±â°¡ µÇ¾ú´Ù. ³ª¿¡°Ô À½½Ä ÇØ½ÃÅÂ±×°¡ ´Ş¸° ÀÌ¹ÌÁö´Â Á¤·®ÀûÀÌ°í Á¤¼ºÀûÀÎ ÇüÅÂÀÇ Å½¿å½º·¯¿î µ¥ÀÌÅÍ·Î º¸¿´´Ù. ±×·¡¼­ ´ë·®ÀÇ ÀÌ¹ÌÁö µ¥ÀÌÅÍ¸¦ ¼öÁı, ÇØÃ¼ ºĞ¼®ÇÏ¿© ½Ã°¢, »ç¿îµå ¿ä¼Ò·Î Àç±¸ÃàÇÏ´Â ½ÇÇèÀ» ½ÃµµÇÏ°Ô µÇ¾ú´Ù.">ÀÎ½ºÅ¸±×·¥¿¡´Â #food, #foodpornÃ³·³ À½½Ä¿¡ °ü·ÃµÈ ÇØ½ÃÅÂ±×·Î ¸¹Àº »çÁøÀÌ ¿Ã¶ó¿Â´Ù. À½½ÄÀ» Âï¾î ¿Ã¸®´Â ÇàÀ§°¡ ÇÏ³ªÀÇ ¹®È­Àû ÇàÀ§·Î ÀÚ¸® Àâ¾Ò´Ù¸é ÇàÀ§µéÀ» Áö¼Ó °¡´ÉÇÏ°Ô ÇÏ´Â ¿øµ¿·ÂÀº ´ëÃ¼ ¹«¾ùÀÏ±î? ±× Áß ÇÏ³ª°¡ ÀÎ°£ÀÇ Å½¿å, ¿å¸ÁÀÌ¶ó°í ÇÑ´Ù¸é ÀÌ°ÍÀ» ¾î¶² ÇüÅÂ·Î ³ªÅ¸³¾ ¼ö ÀÖÀ»±î? ¶ó´Â ¹°À½ÀÌ ÀÛ¾÷ÀÇ µ¿±â°¡ µÇ¾ú´Ù. ³ª¿¡°Ô À½½Ä ÇØ½ÃÅÂ±×°¡ ´Ş¸° ÀÌ¹ÌÁö´Â Á¤·®ÀûÀÌ°í Á¤¼ºÀûÀÎ ÇüÅÂÀÇ Å½¿å½º·¯¿î µ¥ÀÌÅÍ·Î º¸¿´´Ù. ±×·¡¼­ ´ë·®ÀÇ ÀÌ¹ÌÁö µ¥ÀÌÅÍ¸¦ ¼öÁı, ÇØÃ¼ ºĞ¼®ÇÏ¿© ½Ã°¢, »ç¿îµå ¿ä¼Ò·Î Àç±¸ÃàÇÏ´Â ½ÇÇèÀ» ½ÃµµÇÏ°Ô µÇ¾ú´Ù.</p>
-            </div>
-        </div>
-
-        <div class="work-item fade-in">
-            <div class="work-content">
-                <h3 class="work-title" data-en="footprint" data-ko="footprint">footprint</h3>
-                <p class="work-year">2022</p>
-                <p class="work-data-source" data-en="2021 data from Daejeon<br>(vehicle traffic, vehicle speed, surface temperature, humidity, wind speed)" data-ko="´ëÀüÀÇ 2021³â µ¥ÀÌÅÍ<br>(Â÷·®ÅëÇà·®, Â÷·®ÅëÇà¼Óµµ, ÁöÇ¥¸é ¿Âµµ, ½Àµµ, Ç³¼Ó)">´ëÀüÀÇ 2021³â µ¥ÀÌÅÍ<br>(Â÷·®ÅëÇà·®, Â÷·®ÅëÇà¼Óµµ, ÁöÇ¥¸é ¿Âµµ, ½Àµµ, Ç³¼Ó)</p>
-                <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/XUIinWVIiyc?si=owikTpea-tMk5TSn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <p class="work-description" data-en="footprint visualizes non-exhaust particulate matter (PM) from automobiles by creating friction between everyday media using data. Non-exhaust PM is generated by friction between tires and asphalt, and brake pads and discs. This byproduct arises from human foot movements controlling the vehicle, like footprints in ordinary daily life. footprint blatantly reveals invisible fine dust using familiar materials like chalk found in everyday life. The material worn down by friction represents environmental variable data that generates non-exhaust PM: ground temperature, humidity, vehicle traffic volume, and vehicle traffic speed, with its size changing relatively according to the data values. The work's cooling fan, whose speed is controlled by wind speed data, affects the friction between the pigment and the ground, and the spread of fine dust generated by friction. The work guides the audience to understand and sense macroscopic and microscopic phenomena that are difficult to perceive in daily life, based on data." data-ko="footprint´Â µ¥ÀÌÅÍ·Î ÀÏ»óÀÇ ¸ÅÃ¼¸¦ ¸¶Âû½ÃÄÑ ÀÚµ¿Â÷ ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö(Non-exhaust PM)¸¦ ½Ã°¢È­ÇÑ ÀÛÇ°ÀÌ´Ù. ÀÚµ¿Â÷ ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö´Â Å¸ÀÌ¾î-¾Æ½ºÆÈÆ®, ºê·¹ÀÌÅ© ÆĞµå-µğ½ºÅ© »çÀÌÀÇ ¸¶Âû·Î ¹ß»ıÇÑ´Ù. ÀÌ ºÎ»ê¹°Àº Â÷·®À» Á¦¾îÇÏ´Â ÀÎ°£ÀÇ ¹ßÁşÀ¸·Î, Æò¹üÇÑ ÀÏ»ó ¼ÓÀÇ ¹ßÀÚ±¹Ã³·³ »ı°Ü³­´Ù. footprint´Â ÀÏ»ó¿¡ Á¸ÀçÇÏ´Â ºĞÇÊ°ú °°Àº ÀÍ¼÷ÇÑ ¹°ÁúÀ» »ç¿ëÇØ º¸ÀÌÁö ¾Ê´Â ¹Ì¼¼¸ÕÁö¸¦ ³ë°ñÀûÀ¸·Î µå·¯³½´Ù. ¸¶Âû·Î ¸¶¸ğµÇ´Â ¹°ÁúÀº ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö¸¦ ¹ß»ı½ÃÅ°´Â È¯°æº¯¼ö µ¥ÀÌÅÍÀÎ Áö¸é¿Âµµ, ½Àµµ, Â÷·® ÅëÇà·®, Â÷·® ÅëÇà¼Óµµ¸¦ ³ªÅ¸³»¸ç, ±× µ¥ÀÌÅÍ °ª¿¡ µû¶ó »ó´ëÀûÀ¸·Î »çÀÌÁî°¡ ´Ş¶óÁø´Ù. Ç³¼Óµ¥ÀÌÅÍ¿¡ µû¶ó ¼Óµµ°¡ Á¦¾îµÇ´Â ÀÛÇ°ÀÇ Äğ¸µÆÒÀº ÇÇ±×¸ÕÆ®¿Í ±×¶ó¿îµåÀÇ ¸¶Âû ±×¸®°í ¸¶Âû·Î ¹ß»ıÇÏ´Â ¹Ì¼¼¸ÕÁöÀÇ È®»ê¿¡ ¿µÇâÀ» ¹ÌÄ£´Ù. ÀÛÇ°Àº ÀÏ»ó¿¡¼­ ÀÎÁöÇÏ±â ¾î·Á¿î °Å½ÃÀû, ¹Ì½ÃÀûÀÎ Çö»óÀ» µ¥ÀÌÅÍ¿¡ ±â¹İÇØ °ü¶÷°´ÀÌ ÀÌÇØÇÏ°í °¨°¢ÇØº¸±â¸¦ À¯µµÇÑ´Ù.">footprint´Â µ¥ÀÌÅÍ·Î ÀÏ»óÀÇ ¸ÅÃ¼¸¦ ¸¶Âû½ÃÄÑ ÀÚµ¿Â÷ ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö(Non-exhaust PM)¸¦ ½Ã°¢È­ÇÑ ÀÛÇ°ÀÌ´Ù. ÀÚµ¿Â÷ ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö´Â Å¸ÀÌ¾î-¾Æ½ºÆÈÆ®, ºê·¹ÀÌÅ© ÆĞµå-µğ½ºÅ© »çÀÌÀÇ ¸¶Âû·Î ¹ß»ıÇÑ´Ù. ÀÌ ºÎ»ê¹°Àº Â÷·®À» Á¦¾îÇÏ´Â ÀÎ°£ÀÇ ¹ßÁşÀ¸·Î, Æò¹üÇÑ ÀÏ»ó ¼ÓÀÇ ¹ßÀÚ±¹Ã³·³ »ı°Ü³­´Ù. footprint´Â ÀÏ»ó¿¡ Á¸ÀçÇÏ´Â ºĞÇÊ°ú °°Àº ÀÍ¼÷ÇÑ ¹°ÁúÀ» »ç¿ëÇØ º¸ÀÌÁö ¾Ê´Â ¹Ì¼¼¸ÕÁö¸¦ ³ë°ñÀûÀ¸·Î µå·¯³½´Ù. ¸¶Âû·Î ¸¶¸ğµÇ´Â ¹°ÁúÀº ºñ(Şª)¹è±â ¹Ì¼¼¸ÕÁö¸¦ ¹ß»ı½ÃÅ°´Â È¯°æº¯¼ö µ¥ÀÌÅÍÀÎ Áö¸é¿Âµµ, ½Àµµ, Â÷·® ÅëÇà·®, Â÷·® ÅëÇà¼Óµµ¸¦ ³ªÅ¸³»¸ç, ±× µ¥ÀÌÅÍ °ª¿¡ µû¶ó »ó´ëÀûÀ¸·Î »çÀÌÁî°¡ ´Ş¶óÁø´Ù. Ç³¼Óµ¥ÀÌÅÍ¿¡ µû¶ó ¼Óµµ°¡ Á¦¾îµÇ´Â ÀÛÇ°ÀÇ Äğ¸µÆÒÀº ÇÇ±×¸ÕÆ®¿Í ±×¶ó¿îµåÀÇ ¸¶Âû ±×¸®°í ¸¶Âû·Î ¹ß»ıÇÏ´Â ¹Ì¼¼¸ÕÁöÀÇ È®»ê¿¡ ¿µÇâÀ» ¹ÌÄ£´Ù. ÀÛÇ°Àº ÀÏ»ó¿¡¼­ ÀÎÁöÇÏ±â ¾î·Á¿î °Å½ÃÀû, ¹Ì½ÃÀûÀÎ Çö»óÀ» µ¥ÀÌÅÍ¿¡ ±â¹İÇØ °ü¶÷°´ÀÌ ÀÌÇØÇÏ°í °¨°¢ÇØº¸±â¸¦ À¯µµÇÑ´Ù.</p>
-            </div>
-        </div>
-
-        <div class="work-item fade-in">
-            <div class="work-content">
-                <h3 class="work-title" data-en="The Musical Score of City" data-ko="µµ½ÃÀÇ ¾Çº¸µé">µµ½ÃÀÇ ¾Çº¸µé</h3>
-                <p class="work-year" data-en="2017" data-ko="2017">2017</p>
-                <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing, Max/MSP</p>
-                <div class="video-container">
-                    <iframe id="work4-video-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="work-description">
-                    <p data-en="This work started from the questions, 'What is a city? How does the city approach me?'.<br>It visualizes and sonifies 30 years of building data from 25 districts in Seoul." data-ko="¡®µµ½Ã´Â ¹«¾ùÀÎ°¡? µµ½Ã´Â ³ª¿¡°Ô ¾î¶»°Ô ´Ù°¡¿À´Â°¡?¡¯¶ó´Â ¹°À½¿¡¼­ Ãâ¹ßÇÑ ÀÛ¾÷.<br>¼­¿ï 25°³ ±¸ÀÇ 30³â°£ °Ç¹°µ¥ÀÌÅÍ¸¦ ºĞ¼®ÇÏ¿© ½Ã°¢È­-Ã»°¢È­ÇÑ ÀÛ¾÷ÀÌ´Ù.">¡®µµ½Ã´Â ¹«¾ùÀÎ°¡? µµ½Ã´Â ³ª¿¡°Ô ¾î¶»°Ô ´Ù°¡¿À´Â°¡?¡¯¶ó´Â ¹°À½¿¡¼­ Ãâ¹ßÇÑ ÀÛ¾÷.<br>¼­¿ï 25°³ ±¸ÀÇ 30³â°£ °Ç¹°µ¥ÀÌÅÍ¸¦ ºĞ¼®ÇÏ¿© ½Ã°¢È­-Ã»°¢È­ÇÑ ÀÛ¾÷ÀÌ´Ù.</p>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="contact fade-in" id="contact">
-         <div class="section-title-wrapper">
-             <h2 class="section-title" data-en="Contact" data-ko="¿¬¶ôÃ³">¿¬¶ôÃ³</h2>
-        </div>
-        <div class="social-links">
-            <a href="https://www.instagram.com/ueber_ueber/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/ueberueber/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.youtube.com/watch?v=qZpZjA_UhxA" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-        </div>
-    </section>
-
-    <section class="cv-section fade-in" id="cv">
-        <div class="section-title-wrapper">
-            <h2 class="section-title" data-en="CV" data-ko="CV">CV</h2>
-        </div>
-        <div class="cv-content">
-            <h4><span data-en="Summary" data-ko="Summary">Summary</span></h4>
-            <p data-en="I have built data infrastructure and fostered a data-driven culture to create organizations where data flows seamlessly. Starting my career as a developer, I have gained experience as a Data Analyst/Engineer/Scientist, Data Team Lead, and CTO, handling large volumes of data across diverse domains. Currently, as the AI Creative Director at JYP Entertainment, I am leading AI-driven new business initiatives and R&D." data-ko="µ¥ÀÌÅÍ°¡ Èå¸£´Â Á¶Á÷À» ¸¸µé±â À§ÇØ µ¥ÀÌÅÍ ÀÎÇÁ¶ó, µ¥ÀÌÅÍ·Î ÀÏÇÏ´Â ¹®È­¸¦ ¸¸µé¾î¿Ô½À´Ï´Ù. °³¹ßÀÚ·Î Ä¿¸®¾î¸¦ ½ÃÀÛÇØ µ¥ÀÌÅÍ ºĞ¼®°¡/¿£Áö´Ï¾î/»çÀÌ¾ğÆ¼½ºÆ®, µ¥ÀÌÅÍÆÀ ¸®µå¿Í CTO¸¦ °æÇèÇÏ¸ç ´Ù¾çÇÑ µµ¸ŞÀÎ¿¡¼­ ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ ´Ù·ï¿Ô½À´Ï´Ù. ÇöÀç´Â JYPÀÇ AI Creative Director·Î¼­ AI½Å»ç¾÷°ú R&D¸¦ ¸®µùÇÏ°í ÀÖ½À´Ï´Ù.">µ¥ÀÌÅÍ°¡ Èå¸£´Â Á¶Á÷À» ¸¸µé±â À§ÇØ µ¥ÀÌÅÍ ÀÎÇÁ¶ó, µ¥ÀÌÅÍ·Î ÀÏÇÏ´Â ¹®È­¸¦ ¸¸µé¾î¿Ô½À´Ï´Ù. °³¹ßÀÚ·Î Ä¿¸®¾î¸¦ ½ÃÀÛÇØ µ¥ÀÌÅÍ ºĞ¼®°¡/¿£Áö´Ï¾î/»çÀÌ¾ğÆ¼½ºÆ®, µ¥ÀÌÅÍÆÀ ¸®µå¿Í CTO¸¦ °æÇèÇÏ¸ç ´Ù¾çÇÑ µµ¸ŞÀÎ¿¡¼­ ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ ´Ù·ï¿Ô½À´Ï´Ù. ÇöÀç´Â JYPÀÇ AI Creative Director·Î¼­ AI½Å»ç¾÷°ú R&D¸¦ ¸®µùÇÏ°í ÀÖ½À´Ï´Ù.</p>
-
-            <h4><span data-en="Work Experience" data-ko="Work experience">Work experience</span></h4>
-            <div class="cv-work-item">
-                 <strong data-en="AI Creative Director, JYP Entertainment" data-ko="AI Creative Director, JYP Entertainment">AI Creative Director, JYP Entertainment</strong>
-                <span data-en="2024-06 - Present" data-ko="2024-06 - ÇöÀç">2024-06 - ÇöÀç</span>
-                <p data-en="[Planning AI-driven new businesses, prototyping, R&D, and technology validation]" data-ko="[AIÈ°¿ë ½Å»ç¾÷ ±âÈ¹, ÇÁ·ÎÅäÅ¸ÀÌÇÎ, R&D ¹× ±â¼ú°ËÁõ]">Planning AI-driven new businesses, prototyping, R&D, and technology validation</p>
-                <div class="cv-list-work">
-                    <p data-en="Ideated, prototyped, stealth-tested, data-validated, and reported over 50 AI-driven new business concepts to executives." data-ko="AI¸¦ È°¿ëÇÑ 50¿©°¡ÁöÀÇ ½Å»ç¾÷ ¾ÆÀÌµ¥ÀÌ¼Ç/ÇÁ·ÎÅäÅ¸ÀÌÇÎ/½ºÅÚ½ºÅÂ½ºÆ®/µ¥ÀÌÅÍ °ËÁõ/ÀÓ¿øº¸°í">Ideated, prototyped, stealth-tested, data-validated, and reported over 50 AI-driven new business concepts to executives.</p>
-                    <p data-en="Collected quantitative and qualitative data through stealth user testing of prototype services." data-ko="ÇÁ·ÎÅäÅ¸ÀÌÇÎ ¼­ºñ½ºÀÇ ½ºÅÚ½º À¯ÀúÅ×½ºÆ®¸¦ ÅëÇØ Á¤·®/Á¤¼ºµ¥ÀÌÅÍ ¼öÁı.">Collected quantitative and qualitative data through stealth user testing of prototype services.</p>
-                    <p data-en="Designed key metrics, implemented logging, and developed dashboards to analyze service performance and drive continuous improvement, informing go/no-go decisions for projects." data-ko="»ç¾÷ÀÇ  go/stopÀ»  °áÁ¤ÇÒ ÇÙ½ÉÁöÇ¥ µğÀÚÀÎ/·Î±ë/´ë½Ãº¸µå °³¹ß·Î ¼­ºñ½º ¼º°úºĞ¼® ¹× Áö¼ÓÀû °³¼±">Designed key metrics, implemented logging, and developed dashboards to analyze service performance and drive continuous improvement, informing go/no-go decisions for projects.</p>
-                    <p data-en="Led the refinement of business ideas through planning and operating AI R&D initiatives." data-ko="AI R&D ±âÈ¹, ¿î¿µÀ» ÅëÇØ »ç¾÷ ¾ÆÀÌµğ¾î ±¸Ã¼È­ ¸®µå">Led the refinement of business ideas through planning and operating AI R&D initiatives.</p>
-                    <p data-en="Managed hiring processes aligned with business direction. Created competency models and interview question guides for informal chats (tea time) and formal interviews." data-ko="»ç¾÷ ¹æÇâ¿¡ µû¸¥ Ã¤¿ë ÁøÇà. Æ¼Å¸ÀÓ ¹× ÀÎÅÍºä¿¡ È°¿ëÇÒ ¿ª·®¸ğµ¨°ú Áú¹® °¡ÀÌµå Á¦ÀÛ">Managed hiring processes aligned with business direction. Created competency models and interview question guides for informal chats (tea time) and formal interviews.</p>
-                </div>
-            </div>
-             <div class="cv-work-item">
-                 <strong data-en="Data Team Lead, Data Engineer, Carpenstreet" data-ko="µ¥ÀÌÅÍÆÀ ¸®µå, Data Engineer, Carpenstreet">Data Team Lead, Data Engineer, Carpenstreet</strong>
-                <span data-en="2022-11 - 2023-10" data-ko="2022-11 - 2023-10">2022-11 - 2023-10</span>
-                <p data-en="[Establishing a metrics/data-driven work culture and systems, Leading AI New Business Task Force]" data-ko="[ÁöÇ¥-µ¥ÀÌÅÍ ±â¹İÀ¸·Î ÀÏÇÏ´Â ¹®È­¿Í ½Ã½ºÅÛ ±¸Ãà, AI ½Å»ç¾÷ TF ¸®µù]">Establishing a metrics/data-driven work culture and systems, Leading AI New Business Task Force</p>
-                <div class="cv-list-work">
-                    <p data-en="Designed company-wide, team-specific, and individual metrics in collaboration with business units and executives. Developed and disseminated dashboards for work monitoring and feedback." data-ko="Àü»ç-ÆÀ-°³ÀÎÀ» À§ÇÑ ÁöÇ¥¸¦ »ç¾÷ºÎ¿Í ÀÓ¿ø°ú Çù¾÷ÇÏ¿© ¼³°è. ¾÷¹« ¸ğ´ÏÅÍ¸µ/ÇÇµå¹éÀ» À§ÇÑ ´ë½Ãº¸µå °³¹ß ¹× ÀüÆÄ">Designed company-wide, team-specific, and individual metrics in collaboration with business units and executives. Developed and disseminated dashboards for work monitoring and feedback.</p>
-                    <p data-en="Established work pipelines, data platforms, and business processes for handling company-wide data requests." data-ko="Àü»ç µ¥ÀÌÅÍ ¿äÃ»À» Ã³¸®ÇÏ´Â ¾÷¹« ÆÄÀÌÇÁ¶óÀÎ, µ¥ÀÌÅÍ ÇÃ·§Æû, ¾÷¹« ÇÁ·Î¼¼½º ¼ö¸³">Established work pipelines, data platforms, and business processes for handling company-wide data requests.</p>
-                    <p data-en="Supported relevant departments (Development, Business, Marketing, IP Production, Operations) with various data analyses to resolve issues." data-ko="°¢Á¾ µ¥ÀÌÅÍ ºĞ¼®À¸·Î °³¹ß, »ç¾÷, ¸¶ÄÉÆÃ, ipÁ¦ÀÛ, ¿î¿µÆÀ µî À¯°üºÎ¼­ÀÇ ¹®Á¦ ÇØ°á µ¥ÀÌÅÍ Áö¿ø.">Supported relevant departments (Development, Business, Marketing, IP Production, Operations) with various data analyses to resolve issues.</p>
-                    <p data-en="Enhanced data literacy among staff through weekly company-wide data sessions (covering work challenges, metric achievement mentoring, data tool training, etc.)." data-ko="¸ÅÁÖ Àü»ç µ¥ÀÌÅÍ ¼¼¼ÇÀ» ¿­¾î ±¸¼º¿øÀÇ µ¥ÀÌÅÍ ¸®ÅÍ·¯½Ã Çâ»ó (¾÷¹« °í¹Î, ÁöÇ¥ ´Ş¼º ¸àÅä¸µ, µ¥ÀÌÅÍ Åø ±³À° µî)">Enhanced data literacy among staff through weekly company-wide data sessions (covering work challenges, metric achievement mentoring, data tool training, etc.).</p>
-                    <p data-en="Led AI new business research and projects, including team formation, prototyping, metric design, data validation, and media advertising execution." data-ko="AI ½Å»ç¾÷ ¸®¼­Ä¡ ¹× ÇÁ·ÎÁ§Æ® ¸®µù, ÆÀ ±¸¼º, ÇÁ·ÎÅäÅ¸ÀÌÇÎ, ÁöÇ¥¼³°è, µ¥ÀÌÅÍ °ËÁõ, ¸ÅÃ¼±¤°í ÁıÇà">Led AI new business research and projects, including team formation, prototyping, metric design, data validation, and media advertising execution.</p>
-                    <p data-en="Led UX research. Designed and educated on UX research methodologies for new service PMF (Product-Market Fit) validation and MVP design. Designed and conducted core user interviews." data-ko="UX¸®¼­Ä¡ ¸®µå. ½Å±Ô ¼­ºñ½ºÀÇ PMF°ËÁõ, MVP¼³°èÇÏ±â À§ÇÑ UX¸®¼­Ä¡ ¹æ¹ı·ĞÀ» ¼³°èÇÏ°í ±³À°. ÄÚ¾î À¯Àú ÀÎÅÍºä ¼³°è ¹× ÁøÇà">Led UX research. Designed and educated on UX research methodologies for new service PMF (Product-Market Fit) validation and MVP design. Designed and conducted core user interviews.</p>
-                    <p data-en="Developed competency models for hiring, created Job Descriptions (JDs), defined hiring processes, wrote interview guides, and provided training." data-ko="Ã¤¿ëÀ» À§ÇÑ ¿ª·®¸ğµ¨ °³¹ß, JD, Ã¤¿ë ÇÁ·Î¼¼½º, ÀÎÅÍºä °¡ÀÌµå ÀÛ¼º°ú ±³À°.">Developed competency models for hiring, created Job Descriptions (JDs), defined hiring processes, wrote interview guides, and provided training.</p>
-                </div>
-            </div>
-             <div class="cv-work-item">
-                 <strong data-en="Data Scientist, Photo Widget" data-ko="Data Scientist, Photo Widget">Data Scientist, Photo Widget</strong>
-                <span data-en="2022-05 - 2022-08" data-ko="2022-05 - 2022-08">2022-05 - 2022-08</span>
-                <p data-en="[Building data infrastructure supporting a service with 2.5 million MAU]" data-ko="[MAU 250¸¸ ¼­ºñ½º¸¦ ÁöÅÊÇÏ´Â µ¥ÀÌÅÍ ÀÎÇÁ¶ó ±¸Ãà]">Building data infrastructure supporting a service with 2.5 million MAU</p>
-                 <div class="cv-list-work">
-                    <p data-en="Supported decision-making for Business, Operations, Design, and Development teams by designing metrics, logs, and data structures for a global app with 270k DAU." data-ko="DAU 27¸¸ÀÇ ±Û·Î¹ú ¾Û ÁöÇ¥ ¼³°è, ·Î±× ¼³°è, µ¥ÀÌÅÍ ±¸Á¶ ¼³°è·Î »ç¾÷, ¿î¿µ, µğÀÚÀÎ, °³¹ßÆÀÀÇ ÀÇ»ç°áÁ¤ Áö¿ø">Supported decision-making for Business, Operations, Design, and Development teams by designing metrics, logs, and data structures for a global app with 270k DAU.</p>
-                    <p data-en="Designed and developed a Lambda Architecture for handling real-time/batch data. Developed processes using AWS to collect, refine, and visualize service logs in real-time and batch modes." data-ko="½Ç½Ã°£/¹èÄ¡ µ¥ÀÌÅÍ¸¦ ÇÚµé¸µÇÏ´Â Lambda Architecture ¼³°è ¹× °³¹ß. AWS¸¦ È°¿ëÇØ ¼­ºñ½º ·Î±×¸¦ ½Ç½Ã°£/¹èÄ¡·Î ¼öÁıÇÏ°í Á¤Á¦ÇÏ°í ½Ã°¢È­ÇÏ´Â ÇÁ·Î¼¼½º °³¹ß.">Designed and developed a Lambda Architecture for handling real-time/batch data. Developed processes using AWS to collect, refine, and visualize service logs in real-time and batch modes.</p>
-                    <p data-en="Enabled real-time monitoring of statistical and business metrics through dashboard development. Installed internal dashboards." data-ko="´ë½Ãº¸µå °³¹ß·Î Åë°è ¹× ºñÁî´Ï½º ÁöÇ¥¸¦ ½Ç½Ã°£ È®ÀÎ°¡´ÉÇÏ°Ô Áö¿ø. »ç³» ´ë½Ãº¸µå ¼³Ä¡">Enabled real-time monitoring of statistical and business metrics through dashboard development. Installed internal dashboards.</p>
-                </div>
-            </div>
-            <div class="cv-work-item">
-                 <strong data-en="CTO, Data Scientist, HomoMimicus" data-ko="CTO, Data Scientist, HomoMimicus">CTO, Data Scientist, HomoMimicus</strong>
-                <span data-en="2017-07 - 2022-04" data-ko="2017-07 - 2022-04">2017-07 - 2022-04</span>
-                <p data-en="[Led the development of machine learning search services and data infrastructure utilizing large datasets on AWS/GCP]" data-ko="[AWS/GCP¸¦ È°¿ëÇØ ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ È°¿ëÇÏ´Â ¸Ó½Å·¯´× °Ë»ö¼­ºñ½º¿Í µ¥ÀÌÅÍ ÀÎÇÁ¶ó ±¸Ãà ¸®µå]">Led the development of machine learning search services and data infrastructure utilizing large datasets on AWS/GCP</p>
-                <div class="cv-list-work">
-                    <p data-en="Led the end-to-end (A-Z) development of a service recommending biomimicry ideas by collecting and analyzing tens of millions of NLP-related papers and patents. Designed, developed, and operated the global ML search service." data-ko="±Û·Î¹ú ¸Ó½Å·¯´× °Ë»ö¼­ºñ½º ¼³°è/°³¹ß/¿î¿µ. ÀÚ¿¬¿¡ °ü·ÃµÈ ¼öÃµ¸¸°ÇÀÇ ³í¹®, Æ¯Çã µ¥ÀÌÅÍ¸¦ ¼öÁıÇÏ°í ºĞ¼®ÇÏ¿© ÀÚ¿¬¸ğ¹æ ¾ÆÀÌµğ¾î¸¦ ÃßÃµÇØÁÖ´Â ¼­ºñ½º A-Z ¸®µù">Led the end-to-end (A-Z) development of a service recommending biomimicry ideas by collecting and analyzing tens of millions of NLP-related papers and patents. Designed, developed, and operated the global ML search service.</p>
-                    <p data-en="Developed BERT-based search/recommendation services. Designed and operated the entire system architecture on AWS. Built and operated CPU-based ML model serving infrastructure, achieving 200x cost reduction compared to GPU." data-ko="¸Ó½Å·¯´×(BERT)±â¹İÀÇ °Ë»ö/ÃßÃµ ¼­ºñ½º °³¹ß. AWS¿¡¼­ ÀüÃ¼ ½Ã½ºÅÛ ¾ÆÅ°ÅØÃÄ ¼³°è ¹× ¿î¿µ. CPU ¸Ó½Å·¯´× ¸ğµ¨ ¼­ºù¼­¹ö ±¸Ãà ¹× ¿î¿µÀ¸·Î GPU´ëºñ 200¹è ºñ¿ë Àı°¨">Developed BERT-based search/recommendation services. Designed and operated the entire system architecture on AWS. Built and operated CPU-based ML model serving infrastructure, achieving 200x cost reduction compared to GPU.</p>
-                    <p data-en="Conducted various projects and provided technical consulting for domestic and international military organizations, research institutes, universities, government agencies, and corporations." data-ko="±¹³»¿Ü ±º, ¿¬±¸¼Ò, ÇĞ±³, ±â°ü, ±â¾÷°ú °¢Á¾ ÇÁ·ÎÁ§Æ® ¹× ±â¼úÄÁ¼³ÆÃ ÁøÇà.">Conducted various projects and provided technical consulting for domestic and international military organizations, research institutes, universities, government agencies, and corporations.</p>
-                    <p data-en="Designed service user action logs, developed data pipelines, built dashboards, and monitored user responses to new features for service improvement." data-ko="¼­ºñ½º À¯Àú ¾×¼Ç ·Î±× ¼³°è, µ¥ÀÌÅÍ ÆÄÀÌÇÁ¶óÀÎ °³¹ß, ´ë½Ãº¸µå °³¹ß. ¼­ºñ½ºÀÇ ½Å±Ô ÇÇÃÄ Ãß°¡¿¡ µû¸¥ À¯Àú ¹İÀÀ ¸ğ´ÏÅÍ¸µ ¹× ¼­ºñ½º °³¼± ÁøÇà">Designed service user action logs, developed data pipelines, built dashboards, and monitored user responses to new features for service improvement.</p>
-                    <p data-en="Collaborated with frontend/backend developers, UX researchers, designers, and consultants to design and lead the service roadmap and development prioritization." data-ko="ÇÁ·ĞÆ®, ¹é¿£µå, UX¸®¼­ÃÄ, µğÀÚÀÌ³Ê, ÄÁ¼³ÅÏÆ® µî°ú Çù¾÷ÇÏ¸ç ¼­ºñ½º ·Îµå¸Ê ¹× °³¹ß ¿ì¼±¼øÀ§ ¼³°è/¸®µå">Collaborated with frontend/backend developers, UX researchers, designers, and consultants to design and lead the service roadmap and development prioritization.</p>
-                    <p data-en="Designed custom UI/UX to facilitate interdisciplinary idea searching within the service; filed related patents." data-ko="¼­ºñ½º ³»ÀÇ ´ÙÇĞÁ¦ ¾ÆÀÌµğ¾î °Ë»öÀ» µµ¿ÍÁÖ´Â ¸ÂÃãÇü UI/UX µğÀÚÀÎ ¹× Æ¯ÇãÃâ¿ø">Designed custom UI/UX to facilitate interdisciplinary idea searching within the service; filed related patents.</p>
-                    <p data-en="Improved service features using qualitative data obtained through UX research. Established internal UX research methodology guides (usability testing, focus groups, surveys, card sorting, etc.)." data-ko="UX ¸®¼­Ä¡¸¦ ÅëÇØ Á¤¼ºµ¥ÀÌÅÍ¸¦ È°¿ëÇÑ ¼­ºñ½º ÇÇÃÄ °³¼± ÁøÇà. »ç³» UX ¸®¼­Ä¡ ¹æ¹ı·Ğ(»ç¿ë¼ºÅ×½ºÆ®, Æ÷Ä¿½º ±×·ì Å×½ºÆ®, ¼³¹®, Ä«µå¼ÒÆÃ µî) °¡ÀÌµå ¼ö¸³">Improved service features using qualitative data obtained through UX research. Established internal UX research methodology guides (usability testing, focus groups, surveys, card sorting, etc.).</p>
-                </div>
-            </div>
-            <div class="cv-work-item">
-                <strong data-en="Developer, Google News Lab Fellowship (3-month project)" data-ko="°³¹ßÀÚ, Google NewsLab Fellowship (3°³¿ù ÇÁ·ÎÁ§Æ®)">Developer, Google News Lab Fellowship (3-month project)</strong>
-                <span data-en="2017-12 - 2018-03" data-ko="2017-12 - 2018-03">2017-12 - 2018-03</span>
-                <p data-en="[Analyzing diverse societal data to create content for various media outlets]" data-ko="[»çÈ¸ÀÇ ´Ù¾çÇÑ µ¥ÀÌÅÍ¸¦ ºĞ¼®ÇÏ¿© ´Ù¾çÇÑ ¸ÅÃ¼ÀÇ ÄÜÅÙÃ÷·Î Á¦ÀÛ]">Analyzing diverse societal data to create content for various media outlets</p>
-                 <div class="cv-list-work">
-                    <p data-en="Collaborated on projects with domestic media companies as part of a team comprising journalists, designers, video producers, and developers." data-ko="±âÀÚ, µğÀÚÀÌ³Ê, ¿µ»óÁ¦ÀÛÀÚ, °³¹ßÀÚ°¡ ÇÑ ÆÀÀ» ÀÌ·ç¾î ±¹³» ¾ğ·Ğ»ç¿Í Çù¾÷ ÇÁ·ÎÁ§Æ® ÁøÇà">Collaborated on projects with domestic media companies as part of a team comprising journalists, designers, video producers, and developers.</p>
-                    <p data-en="Developed data journalism content by collecting quantitative and qualitative data from target audiences." data-ko="Á¤·®/Á¤¼ºµ¥ÀÌÅÍ¸¦ Å¸°Ù°í°´À¸·Î ºÎÅÍ ¼öÁıÇÏ¿© µ¥ÀÌÅÍ Àú³Î¸®Áò ÄÜÅÙÃ÷ °³¹ß">Developed data journalism content by collecting quantitative and qualitative data from target audiences.</p>
-                </div>
-            </div>
-            <div class="cv-work-item">
-                 <strong data-en="Data Scientist, Art Center Nabi (6-month project)" data-ko="Data Scientist, Art Center Nabi (6°³¿ù ÇÁ·ÎÁ§Æ®)">Data Scientist, Art Center Nabi (6-month project)</strong>
-                <span data-en="2017-06 - 2017-12" data-ko="2017-06 - 2017-12">2017-06 - 2017-12</span>
-                <p data-en="[Conducted interdisciplinary (Technology, Art, Medicine, Biology, Urban Engineering) data projects]" data-ko="[´ÙÇĞÁ¦(±â¼ú, ¿¹¼ú, ÀÇÇĞ, »ı¹°ÇĞ, µµ½Ã°øÇĞ)µ¥ÀÌÅÍ ÇÁ·ÎÁ§Æ® ¼öÇà]">Conducted interdisciplinary (Technology, Art, Medicine, Biology, Urban Engineering) data projects</p>
-                 <div class="cv-list-work">
-                    <p data-en="Conducted research on cities and cancer in collaboration with Seoul National University Hospital, Art Center Nabi, and Seoul Women's University B-MADE Center." data-ko="¼­¿ï´ëº´¿ø, ¹Ì¼ú°ü ¾ÆÆ®¼¾ÅÍ ³ªºñ, ¼­¿ï¿©´ë B-MADE¼¾ÅÍ¿Í Çù¾÷ÇÏ¿© µµ½Ã¿Í ¾Ï¿¡ ´ëÇÑ ¿¬±¸ ÁøÇà.">Conducted research on cities and cancer in collaboration with Seoul National University Hospital, Art Center Nabi, and Seoul Women's University B-MADE Center.</p>
-                    <p data-en="Responsible for collecting and analyzing data and papers on cities and cancer, and transforming them into visual and auditory representations (visualization and sonification)." data-ko="µµ½Ã¿Í ¾Ï¿¡ ´ëÇÑ µ¥ÀÌÅÍ¿Í ³í¹®À» ¼öÁıÇÏ°í ºĞ¼®ÇÏ¿© ½Ã°¢, Ã»°¢È­ ´ã´ç">Responsible for collecting and analyzing data and papers on cities and cancer, and transforming them into visual and auditory representations (visualization and sonification).</p>
-                    <p data-en="Participated in global hackathons based on the research content." data-ko="¿¬±¸ ³»¿ëÀ¸·Î ±Û·Î¹ú ÇØÄ¿Åæ Âü¿©">Participated in global hackathons based on the research content.</p>
-                    <p data-en="Exhibited the work <NeoPlasia : city and cancer> at the exhibition <neotopia data and humanity> held at Art Center Nabi's Tajakmadang." data-ko="¾ÆÆ®¼¾ÅÍ ³ªºñ Å¸ÀÛ¸¶´ç¿¡¼­ ¿­¸° <neotopia data and humanity>¶ó´Â Àü½Ã¿¡ <NeoPlasia : city and cancer>¶ó´Â ÀÛÇ° Àü½Ã">Exhibited the work <NeoPlasia : city and cancer> at the exhibition <neotopia data and humanity> held at Art Center Nabi's Tajakmadang.</p>
-                    <p data-en="Created and presented a Data Visualization/Sonification work analyzing 30 years of building data for Seoul's 25 districts." data-ko="¼­¿ïÀÇ 25°³ ±¸ÀÇ 30³â°£ °Ç¹° µ¥ÀÌÅÍ¸¦ ºĞ¼®ÇÑ Data Visualization/Sonification ÀÛ¾÷ Á¦ÀÛ/¹ßÇ¥">Created and presented a Data Visualization/Sonification work analyzing 30 years of building data for Seoul's 25 districts.</p>
-                </div>
-            </div>
-             <div class="cv-work-item">
-                 <strong data-en="Mobile Data Analyst, NCSoft" data-ko="¸ğ¹ÙÀÏ µ¥ÀÌÅÍ ºĞ¼®°¡, ¿£¾¾¼ÒÇÁÆ®">Mobile Data Analyst, NCSoft</strong>
-                <span data-en="2017-01 - 2017-05" data-ko="2017-01 - 2017-05">2017-01 - 2017-05</span>
-                <p data-en="[Analyzed mobile game data, collaborating with domestic and international offices. Supported executive decision-making]" data-ko="[¸ğ¹ÙÀÏ °ÔÀÓ µ¥ÀÌÅÍ¸¦ ºĞ¼®ÇÏ¿© ±¹³»¿Ü ¿ÀÇÇ½º¿Í Çù¾÷. ÀÓ¿ø ÀÇ»ç°áÁ¤ Áö¿ø]">Analyzed mobile game data, collaborating with domestic and international offices. Supported executive decision-making</p>
-                 <div class="cv-list-work">
-                    <p data-en="Supported decision-making for domestic and international business units by extracting and analyzing data for ¡®Lineage Red Knights¡¯, ¡®Final Blade¡¯, and ¡®H2¡¯." data-ko="'¸®´ÏÁö ·¹µå³ªÀÌÃ÷', 'ÆÄÀÌ³Î ºí·¹ÀÌµå', 'H2' µ¥ÀÌÅÍ ÃßÃâ ¹× ºĞ¼®À¸·Î ±¹³»¿Ü »ç¾÷ºÎ ÀÇ»ç°áÁ¤ Áö¿ø">Supported decision-making for domestic and international business units by extracting and analyzing data for ¡®Lineage Red Knights¡¯, ¡®Final Blade¡¯, and ¡®H2¡¯.</p>
-                    <p data-en="Collected user feedback on service updates by crawling user community data; reported findings weekly to leads via data reports." data-ko="À¯Àú Ä¿¹Â´ÏÆ¼ µ¥ÀÌÅÍ Å©·Ñ¸µÀ¸·Î ¼­ºñ½º ¾÷µ¥ÀÌÆ®¿¡ ´ëÇÑ À¯Àú ¹İÀÀ ¼öÁı. µ¥ÀÌÅÍ ¸®Æ÷Æ®·Î ÁÖ°£ ¸®´õº¸°í">Collected user feedback on service updates by crawling user community data; reported findings weekly to leads via data reports.</p>
-                    <p data-en="Developed and internally exhibited visualization models for analyzing user content consumption processes." data-ko="À¯Àú ÄÁÅÙÃ÷ ¼Òºñ ÇÁ·Î¼¼½º ºĞ¼®À» À§ÇÑ ½Ã°¢È­¸ğµ¨À» °³¹ßÇÏ¿© »ç³» Àü½Ã">Developed and internally exhibited visualization models for analyzing user content consumption processes.</p>
-                </div>
-            </div>
-             <div class="cv-work-item">
-                 <strong data-en="Developer, AfreecaTV" data-ko="°³¹ßÀÚ, ¾ÆÇÁ¸®Ä«Æ¼ºñ">Developer, AfreecaTV</strong>
-                <span data-en="2015-06 - 2016-08" data-ko="2015-06 - 2016-08">2015-06 - 2016-08</span>
-                <p data-en="[Solving business and service problems through development and data]" data-ko="[°³¹ß ¹× µ¥ÀÌÅÍ·Î ºñÁî´Ï½º¿Í ¼­ºñ½ºÀÇ ¹®Á¦ÇØ°á]">Solving business and service problems through development and data</p>
-                 <div class="cv-list-work">
-                    <p data-en="Improved development efficiency by collecting, analyzing, and labeling chat data for AI BJ (Broadcasting Jockey) development, including developing and operating a management page." data-ko="AI BJ°³¹ßÀ» À§ÇÑ Ã¤ÆÃ µ¥ÀÌÅÍ ¼öÁı, ºĞ¼®, ¶óº§¸µ °ü¸®ÆäÀÌÁö °³¹ß ¹× ¿î¿µÀ¸·Î °³¹ß È¿À² Çâ»ó">Improved development efficiency by collecting, analyzing, and labeling chat data for AI BJ (Broadcasting Jockey) development, including developing and operating a management page.</p>
-                    <p data-en="Supported business decision-making for relevant departments and executives through analysis of large-scale real-time and batch data (Hadoop, Elasticsearch)." data-ko="´ë·®ÀÇ ½Ç½Ã°£, ¹èÄ¡ µ¥ÀÌÅÍ ºĞ¼®(Hadoop, ElasticSearch)À¸·Î À¯°üºÎ¼­ ¹× ÀÓ¿øÀÇ »ç¾÷ ÀÇ»ç°áÁ¤ Áö¿ø">Supported business decision-making for relevant departments and executives through analysis of large-scale real-time and batch data (Hadoop, Elasticsearch).</p>
-                    <p data-en="Increased efficiency of user trend and service monitoring by designing and developing various service metrics." data-ko="°¢Á¾ ¼­ºñ½º ÁöÇ¥¸¦ ¼³°èÇÏ°í °³¹ßÇÏ¿© À¯Àú µ¿Çâ°ú ¼­ºñ½º ¸ğ´ÏÅÍ¸µ È¿À² Áõ´ë">Increased efficiency of user trend and service monitoring by designing and developing various service metrics.</p>
-                    <p data-en="Achieved clean chat goals by developing profanity and advertisement detection modules for the monitoring team's moderation efforts, and developing a monitoring page." data-ko="¸ğ´ÏÅÍ¸µ ÆÀÀÇ ºÒ·®Ã¤ÆÃ Á¦Àç¸¦ À§ÇÑ ¿å¼³ ¹× ±¤°í ¸ğµâ °³¹ß, ¸ğ´ÏÅÍ¸µ ÆäÀÌÁö °³¹ß·Î Å¬¸°Ã¤ÆÃ ¸ñÇ¥ ´Ş¼º">Achieved clean chat goals by developing profanity and advertisement detection modules for the monitoring team's moderation efforts, and developing a monitoring page.</p>
-                    <p data-en="Improved internal work efficiency by developing various data visualization pages." data-ko="°¢Á¾ µ¥ÀÌÅÍ ½Ã°¢È­ ÆäÀÌÁö °³¹ß·Î »ç³» ¾÷¹« È¿À² Çâ»ó">Improved internal work efficiency by developing various data visualization pages.</p>
-                </div>
-            </div>
-
-
-            <h4><span data-en="Skills" data-ko="Skills">Skills</span></h4>
-             <div class="cv-skills">
-                  <p data-en="<strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift, Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose" data-ko="AWS(EMR, S3, Lambda, Api gateway, RDS, DynamoDB, Opensearch, Aurora, Redshift, Athena, Ec2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose)"><strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift, Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose</p>
-                 <p data-en="<strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream" data-ko="GCP(Bigquery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream)"><strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream</p>
-                 <p data-en="<strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards" data-ko="½Ã°¢È­ ¼­ºñ½º(Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, Opensashboard)"><strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards</p>
-                 <p data-en="<strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize" data-ko="±âÅ¸ (Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, hotjar, hackle, Google Optimize)"><strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize</p>
-            </div>
-
-            <h4><span data-en="Artistic Practice & Recognition" data-ko="Artistic Practice & Recognition">Artistic Practice & Recognition</span></h4>
-            <h5><span data-en="Residencies" data-ko="·¹Áö´ø½Ã">·¹Áö´ø½Ã</span></h5>
-            <div class="cv-list-art">
-                <p data-en="2021-2022, Daejeon Artience" data-ko="2021~2022, ´ëÀü¾ÆÆ¼¾ğ½º">2021~2022, ´ëÀü¾ÆÆ¼¾ğ½º</p>
-                <p data-en="2019, Incheon Art Platform 10th Cohort" data-ko="2019, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû 10±â">2019, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû 10±â</p>
-                <p data-en="2019, Asia Culture Center (ACC) First Half" data-ko="2019, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç(ACC) »ó¹İ±â">2019, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç(ACC) »ó¹İ±â</p>
-                <p data-en="2018, Art Center Nabi - Creative Mentoring Program for Young Professionals" data-ko="2018, Art Center Nabi - Creative Mentoring Program for Young Professionals">2018, Art Center Nabi - Creative Mentoring Program for Young Professionals</p>
-            </div>
-             <h5><span data-en="Exhibitions" data-ko="Àü½Ã">Àü½Ã</span></h5>
-            <div class="cv-list-art">
-                <p data-en="2024, <Shining City, Dark Ecstasy>, Seoul Museum of Art (SeMA), Seoul" data-ko="2024, <ºû³ª´Â µµ½Ã, ¾îµÎ¿î È²È¦°æ>, ¼­¿ï½Ã¸³¹Ì¼ú°ü, ¼­¿ï">2024, <ºû³ª´Â µµ½Ã, ¾îµÎ¿î È²È¦°æ>, ¼­¿ï½Ã¸³¹Ì¼ú°ü, ¼­¿ï</p>
-                <p data-en="2024, <FuturaCanvas>, Cave House, Seoul" data-ko="2024, <FuturaCanvas>, ÄÉÀÌºêÇÏ¿ì½º, ¼­¿ï">2024, <FuturaCanvas>, ÄÉÀÌºêÇÏ¿ì½º, ¼­¿ï</p>
-                <p data-en="2023, <Clean Slate>, Mullae Art Space, Seoul" data-ko="2023, <±ú²ıÇÑ ¼®ÆÇ>, ¹®·¡¿¹¼ú°øÀå, ¼­¿ï">2023, <±ú²ıÇÑ ¼®ÆÇ>, ¹®·¡¿¹¼ú°øÀå, ¼­¿ï</p>
-                <p data-en="2022, <Artience Daejeon>, Daejeon Artist House, Daejeon" data-ko="2022, <¾ÆÆ¼¾ğ½º ´ëÀü>, ´ëÀü¿¹¼ú°¡ÀÇÁı, ´ëÀü">2022, <¾ÆÆ¼¾ğ½º ´ëÀü>, ´ëÀü¿¹¼ú°¡ÀÇÁı, ´ëÀü</p>
-                <p data-en="2022, <Urban Resonance>, National Museum of Modern and Contemporary Art (MMCA), Cheongju" data-ko="2022, <µµ½Ã°ø¸í>, ±¹¸³Çö´ë¹Ì¼ú°ü, Ã»ÁÖ">2022, <µµ½Ã°ø¸í>, ±¹¸³Çö´ë¹Ì¼ú°ü, Ã»ÁÖ</p>
-                <p data-en="2022, <Noise Walk>, Seoul City Hall Sound Gallery, Seoul" data-ko="2022, <¼ÒÀ½»êÃ¥>, ¼­¿ï½ÃÃ» ¼Ò¸®°¶·¯¸®, ¼­¿ï">2022, <¼ÒÀ½»êÃ¥>, ¼­¿ï½ÃÃ» ¼Ò¸®°¶·¯¸®, ¼­¿ï</p>
-                <p data-en="2021, <Museum Evolves>, Yangpyeong Art Museum, Gyeonggi-do" data-ko="2021, <¹Ì¼ú°üÀº ÁøÈ­ÇÑ´Ù>, ¾çÆò±º¸³¹Ì¼ú°ü, °æ±âµµ">2021, <¹Ì¼ú°üÀº ÁøÈ­ÇÑ´Ù>, ¾çÆò±º¸³¹Ì¼ú°ü, °æ±âµµ</p>
-                <p data-en="2021, <Refrigerator Illusion>, Asia Culture Center (ACC), Gwangju" data-ko="2021, <³ÃÀå°í È¯»ó>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ">2021, <³ÃÀå°í È¯»ó>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ</p>
-                <p data-en="2021, <Urban Regeneration Device #2: Radiophonic Orchestration>, Space TYPE, Seoul" data-ko="2021, <µµ½ÃÀç»ıÀåÄ¡#2 : Radiophonic Orchestration>, °ø°£TYPE, ¼­¿ï">2021, <µµ½ÃÀç»ıÀåÄ¡#2 : Radiophonic Orchestration>, °ø°£TYPE, ¼­¿ï</p>
-                <p data-en="2020, <ASEAN Street Food: Hororok Chapchap Omulomul>, ASEAN Culture House, Busan" data-ko="2020, <¾Æ¼¼¾È ¸¸¸®À½½Ä : È£·Î·Ï ªyªy ¿À¹°¿À¹°>, ¾Æ¼¼¾È¹®È­¿ø, ºÎ»ê">2020, <¾Æ¼¼¾È ¸¸¸®À½½Ä : È£·Î·Ï ªyªy ¿À¹°¿À¹°>, ¾Æ¼¼¾È¹®È­¿ø, ºÎ»ê</p>
-                <p data-en="2020, <Follow, Flow, Feed>, Arko Art Center, Seoul" data-ko="2020, <³»°¡ »ç´Â ÇÇµå>, ¾Æ¸£ÄÚ¹Ì¼ú°ü, ¼­¿ï">2020, <³»°¡ »ç´Â ÇÇµå>, ¾Æ¸£ÄÚ¹Ì¼ú°ü, ¼­¿ï</p>
-                <p data-en="2019, <#HackingFood>, Asia Culture Center (ACC), Gwangju" data-ko="2019, <#ÇØÅ·Çªµå>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ">2019, <#ÇØÅ·Çªµå>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ</p>
-                <p data-en="2019, <ACT festival Food Hack>, Asia Culture Center (ACC), Gwangju" data-ko="2019, <ACT festival Food Hack>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ">2019, <ACT festival Food Hack>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ</p>
-                <p data-en="2019, <web-retro> Seoul Museum of Art Buk-Seoul Museum of Art, Seoul, Participated as a web art restoration programmer" data-ko="2019, <web-retro> ¼­¿ï½Ã¸³ ºÏ¼­¿ï¹Ì¼ú°ü, ¼­¿ï, À¥¾ÆÆ® º¹¿ø ÇÁ·Î±×·¡¸Ó·Î Âü¿©">2019, <web-retro> ¼­¿ï½Ã¸³ ºÏ¼­¿ï¹Ì¼ú°ü, ¼­¿ï, À¥¾ÆÆ® º¹¿ø ÇÁ·Î±×·¡¸Ó·Î Âü¿©</p>
-                <p data-en="2018, <Gwangju Media Art Festival: Algorithm Society>, Asia Culture Center (ACC), Gwangju" data-ko="2018, <±¤ÁÖ ¹Ìµğ¾î¾ÆÆ® Æä½ºÆ¼¹ú : ¾Ë°í¸®Áò ¼Ò»çÀÌ¾îÆ¼>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ">2018, <±¤ÁÖ ¹Ìµğ¾î¾ÆÆ® Æä½ºÆ¼¹ú : ¾Ë°í¸®Áò ¼Ò»çÀÌ¾îÆ¼>, ±¹¸³¾Æ½Ã¾Æ¹®È­Àü´ç, ±¤ÁÖ</p>
-                <p data-en="2018, <A.I.MAGINE>, Urban Data Science Lab, Seoul" data-ko="2018, <A.I.MAGINE>, µµ½Ãµ¥ÀÌÅÍ»çÀÌ¾ğ½º¿¬±¸¼Ò, ¼­¿ï">2018, <A.I.MAGINE>, µµ½Ãµ¥ÀÌÅÍ»çÀÌ¾ğ½º¿¬±¸¼Ò, ¼­¿ï</p>
-                <p data-en="2018, <Play, This Creative Imagine, Play>, Korea Creative Content Agency, Seoul" data-ko="2018, <³îÀÌ, ÀÌÅä·Ï Ã¢ÀÇ·Î¿î Imagine, Play>, ÄÜÅÙÃ÷ÁøÈï¿ø, ¼­¿ï">2018, <³îÀÌ, ÀÌÅä·Ï Ã¢ÀÇ·Î¿î Imagine, Play>, ÄÜÅÙÃ÷ÁøÈï¿ø, ¼­¿ï</p>
-                <p data-en="2017, <Neotopia: Data and Humanity>, Art Center Nabi Tajakmadang, Seoul" data-ko="2017, <Neotopia: Data and Humanity>, ¾ÆÆ®¼¾ÅÍ ³ªºñ Å¸ÀÛ¸¶´ç, ¼­¿ï">2017, <Neotopia: Data and Humanity>, ¾ÆÆ®¼¾ÅÍ ³ªºñ Å¸ÀÛ¸¶´ç, ¼­¿ï</p>
-                <p data-en="2017, <Things to Hear Before Sound>, NCGallery, Gyeonggi-do" data-ko="2017, <¼Ò¸®°¡ ³ª±â Àü¿¡ µéÀ» °Í>, NCGallery, °æ±âµµ">2017, <¼Ò¸®°¡ ³ª±â Àü¿¡ µéÀ» °Í>, NCGallery, °æ±âµµ</p>
-                <p data-en="2015, <AfreecaTV Broadcasting Data Visualization>, COEX, Seoul" data-ko="2015, <AfreecaTV Broadcasting Data Visualization>, COEX, ¼­¿ï">2015, <AfreecaTV Broadcasting Data Visualization>, COEX, ¼­¿ï</p>
-            </div>
-            <h5><span data-en="Performances" data-ko="°ø¿¬">°ø¿¬</span></h5>
-            <div class="cv-list-art">
-                <p data-en="2022, <Radio Shower>, Windmill, Seoul" data-ko="2022, <Radio Shower>, À©µå¹Ğ, ¼­¿ï">2022, <Radio Shower>, À©µå¹Ğ, ¼­¿ï</p>
-                <p data-en="2020, <Site-Specific Performance Project>, Incheon Art Platform, Incheon" data-ko="2020, <Àå¼ÒÆ¯Á¤Çü °ø¿¬ ÇÁ·ÎÁ§Æ®>, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû, ÀÎÃµ">2020, <Àå¼ÒÆ¯Á¤Çü °ø¿¬ ÇÁ·ÎÁ§Æ®>, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû, ÀÎÃµ</p>
-                <p data-en="2020, <Open Media Art Festival>, Oil Tank Culture Park, Seoul" data-ko="2020, <Open Media Art Festival>, ¹®È­ºñÃà±âÁö, ¼­¿ï">2020, <Open Media Art Festival>, ¹®È­ºñÃà±âÁö, ¼­¿ï</p>
-                <p data-en="2020, <United Movement: Our Sound, Our Era's Movement>, Kim Swoo Geun Foundation Underground Theater, Seoul" data-ko="2020, <¿¬ÇÕ¿îµ¿ Ö¤ùêê¡ÔÑ: ¿ì¸® ¼Ò¸®, ¿ì¸® ½Ã´ëÀÇ ¸öÁş>, ±è¼ö±Ù ¹®È­Àç´Ü ÁöÇÏ±ØÀå, ¼­¿ï">2020, <¿¬ÇÕ¿îµ¿ Ö¤ùêê¡ÔÑ: ¿ì¸® ¼Ò¸®, ¿ì¸® ½Ã´ëÀÇ ¸öÁş>, ±è¼ö±Ù ¹®È­Àç´Ü ÁöÇÏ±ØÀå, ¼­¿ï</p>
-                <p data-en="2020, <B39 PRECTX SHOWCASE>, Bucheon Art Bunker B39, Gyeonggi-do" data-ko="2020, <B39 PRECTX SHOWCASE>, ºÎÃµ¾ÆÆ®º¡Ä¿, °æ±âµµ">2020, <B39 PRECTX SHOWCASE>, ºÎÃµ¾ÆÆ®º¡Ä¿, °æ±âµµ</p>
-                <p data-en="2020, <Real Time Art>, Post Territory Ujeongguk, Seoul" data-ko="2020, <Real Time Art>, Å»¿µ¿ª¿ìÁ¤±¹, ¼­¿ï">2020, <Real Time Art>, Å»¿µ¿ª¿ìÁ¤±¹, ¼­¿ï</p>
-                <p data-en="2019, <Data Pulse : Incheon>, Incheon Art Platform, Incheon" data-ko="2019, <Data Pulse : Incheon>, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû, ÀÎÃµ">2019, <Data Pulse : Incheon>, ÀÎÃµ¾ÆÆ®ÇÃ·§Æû, ÀÎÃµ</p>
-                <p data-en="2018, <A.I.MAGINE>, Urban Data Science Lab, Seoul" data-ko="2018, <A.I.MAGINE>, µµ½Ãµ¥ÀÌÅÍ»çÀÌ¾ğ½º¿¬±¸¼Ò, ¼­¿ï">2018, <A.I.MAGINE>, µµ½Ãµ¥ÀÌÅÍ»çÀÌ¾ğ½º¿¬±¸¼Ò, ¼­¿ï</p>
-                <p data-en="2018, <zer01ne day creator camp>, zer01ne, Seoul" data-ko="2018, <zer01ne day creator camp>, zer01ne, ¼­¿ï">2018, <zer01ne day creator camp>, zer01ne, ¼­¿ï</p>
-                <p data-en="2018, <Seoul International Digital Festival>, DDP, Seoul" data-ko="2018, <Seoul International Digital Festival>, DDP, ¼­¿ï">2018, <Seoul International Digital Festival>, DDP, ¼­¿ï</p>
-                <p data-en="2017, <DigiLog 2016 4Q chosun>, Alley Sound, Seoul" data-ko="2017, <DigiLog 2016 4Q chosun>, Alley Sound, ¼­¿ï">2017, <DigiLog 2016 4Q chosun>, Alley Sound, ¼­¿ï</p>
-            </div>
-             <h5><span data-en="Awards" data-ko="¼ö»ó">¼ö»ó</span></h5>
-            <div class="cv-list-art">
-                <p data-en="2024, Hyundai Motor Chung Mong-Koo Foundation ONSO MEDIA CONTEST, Honorable Mention" data-ko="2024, Çö´ëÂ÷ Á¤¸ù±¸ Àç´Ü ONSO MEDIA CONTEST, ÀÔ¼±">2024, Çö´ëÂ÷ Á¤¸ù±¸ Àç´Ü ONSO MEDIA CONTEST, ÀÔ¼±</p>
-                <p data-en="2024, Seoul City Hall Soul Lounge Media Art Competition, Winner (Solo Exhibition Award)" data-ko="2024, ¼­¿ï½ÃÃ» ¼Ò¿ï¶ó¿îÁö ¹Ìµğ¾î¾ÆÆ® °ø¸ğÀü, ¼ö»ó, °³ÀÎÀü">2024, ¼­¿ï½ÃÃ» ¼Ò¿ï¶ó¿îÁö ¹Ìµğ¾î¾ÆÆ® °ø¸ğÀü, ¼ö»ó, °³ÀÎÀü</p>
-            </div>
-            <h5><span data-en="Collections" data-ko="¼ÒÀå">¼ÒÀå</span></h5>
-            <div class="cv-list-art">
-                <p data-en="2020, Seoul Youth Arts Center (SAPY) Collection" data-ko="2020, Ã»³â¿¹¼úÃ»(SAPY) ÀÛÇ° ¼ÒÀå">2020, Ã»³â¿¹¼úÃ»(SAPY) ÀÛÇ° ¼ÒÀå</p>
-            </div>
-            <h5><span data-en="Composition" data-ko="ÀÛ°î">ÀÛ°î</span></h5>
-            <div class="cv-list-art">
-                 <p data-en="2018, Seo Hyun-suk <Lost Voyage> documentary insert music - <The Musical Score of City : Jongno>" data-ko="2018, ¼­Çö¼® <ÀÒ¾î¹ö¸° Ç×ÇØ> ´ÙÅ¥¸àÅÍ¸® »ğÀÔ À½¾Ç Áß <The Musical Score of City : Jongno>">2018, ¼­Çö¼® <ÀÒ¾î¹ö¸° Ç×ÇØ> ´ÙÅ¥¸àÅÍ¸® »ğÀÔ À½¾Ç Áß <The Musical Score of City : Jongno></p>
-                 <p data-en="2017, Seo Hyun-suk <Fantasy City> documentary insert music - <neoplasia>" data-ko="2017, ¼­Çö¼® <È¯»óµµ½Ã> ´ÙÅ¥¸àÅÍ¸® »ğÀÔ À½¾Ç Áß <neoplasia>">2017, ¼­Çö¼® <È¯»óµµ½Ã> ´ÙÅ¥¸àÅÍ¸® »ğÀÔ À½¾Ç Áß <neoplasia></p>
-            </div>
-
-
-            <h4><span data-en="Education" data-ko="Education">Education</span></h4>
-            <p data-en="Soongsil University, BS in Computer Science, 2008 - 2015" data-ko="¼ş½Ç´ëÇĞ±³, ÄÄÇ»ÅÍÇĞºÎ ÇĞ»ç, 2008 - 2015">Soongsil University, BS in Computer Science, 2008 - 2015</p>
-
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>? 2025 Minje Jeon. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // DOM ¿ä¼Ò °¡Á®¿À±â (Get DOM elements)
-        const navbar = document.getElementById('navbar');
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        const langToggle = document.getElementById('langToggle');
-        // Get the iframe for the fourth work
-        const work4VideoIframe = document.getElementById('work4-video-iframe');
-        // Get the footer paragraph
-        const footerText = document.querySelector('.footer p');
-
-        // Default language set to Korean
-        let currentLang = 'ko';
-
-        // Video URLs for the fourth work
-        const videoUrls = {
-            ko: "https://www.youtube.com/embed/88DeL0bQRpM?si=QaaJBQSS9Mrpecwh",
-            en: "https://www.youtube.com/embed/zWeqboH2ncM?si=jPwiDt2uFxHcESH8"
-        };
-
-        // Function to update content based on language
-        function updateContent(lang) {
-             // data-en ¶Ç´Â data-ko ¼Ó¼ºÀ» °¡Áø ¸ğµç ¿ä¼Ò ¼±ÅÃ (Select all elements with data-en or data-ko attributes)
-            const elementsToTranslate = document.querySelectorAll('[data-en], [data-ko]');
-
-            elementsToTranslate.forEach(el => {
-                // Skip footer text translation
-                if (el === footerText) return;
-
-                const text = el.getAttribute(`data-${lang}`);
-                if (text !== null) { // Check if attribute exists and has value
-                    // Use innerHTML instead of textContent to render <br> tags
-                    el.innerHTML = text;
-                 }
-            });
-
-             // ³×ºñ°ÔÀÌ¼Ç ¸µÅ© ÅØ½ºÆ® ¾÷µ¥ÀÌÆ® (Update navigation link text)
-             // Use querySelector for safer selection
-             const statementLink = document.querySelector('.nav-links a[href="#statement"]');
-             if (statementLink) statementLink.textContent = lang === 'en' ? 'Statement' : 'ÀÛ°¡³ëÆ®';
-
-             const worksLink = document.querySelector('.nav-links a[href="#works"]');
-             if (worksLink) worksLink.textContent = lang === 'en' ? 'Works' : 'ÀÛÇ°';
-
-             const contactLink = document.querySelector('.nav-links a[href="#contact"]');
-             if (contactLink) contactLink.textContent = lang === 'en' ? 'Contact' : '¿¬¶ôÃ³';
-
-             // Update CV link text (always uppercase)
-             const cvLink = document.querySelector('.nav-links a[href="#cv"]');
-             if (cvLink) cvLink.textContent = 'CV'; // Always uppercase
-
-            // ¾ğ¾î Åä±Û ¹öÆ° ÅØ½ºÆ® ¾÷µ¥ÀÌÆ® (Update language toggle button text)
-            // Button shows the language to switch TO
-            langToggle.textContent = lang === 'en' ? 'KOR' : 'ENG';
-
-            // HTML lang ¼Ó¼º ¾÷µ¥ÀÌÆ® (Update HTML lang attribute)
-            document.documentElement.lang = lang;
-
-            // Update the video source for the fourth work
-            if (work4VideoIframe) {
-                work4VideoIframe.src = videoUrls[lang];
-            }
-        }
-
-
-        // Language toggle click event
-        langToggle.addEventListener('click', (event) => {
-            event.preventDefault(); // ±âº» µ¿ÀÛ ¹æÁö (Prevent default action)
-            currentLang = currentLang === 'en' ? 'ko' : 'en'; // ¾ğ¾î ÀüÈ¯ (Switch language)
-            updateContent(currentLang); // ÄÜÅÙÃ÷ ¾÷µ¥ÀÌÆ® ÇÔ¼ö È£Ãâ (Call update content function)
-
-            // ¸ğ¹ÙÀÏ ¸Ş´º°¡ ¿­·ÁÀÖÀ¸¸é ´İ±â (Close mobile menu if open)
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                // ¾ÆÀÌÄÜ ¿ø·¡´ë·Î º¯°æ (Change icon back)
-                const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-
-        // ½ºÅ©·Ñ ÀÌº¥Æ® ¸®½º³Ê (Scroll event listener)
-        window.addEventListener('scroll', () => {
-            // ³»ºñ°ÔÀÌ¼Ç ½ºÅ¸ÀÏ º¯°æ (½ºÅ©·Ñ À§Ä¡¿¡ µû¶ó) (Change navigation style based on scroll position)
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+                margin-left: 2rem;
+                /* ì™¼ìª½ ì—¬ë°± */
             }
 
-            // ÆäÀÌµå ÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç Àû¿ë (Apply fade-in animation)
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top; // ¿ä¼ÒÀÇ ºäÆ÷Æ® »ó´Ü±îÁöÀÇ °Å¸® (Distance from element top to viewport top)
-                const elementBottom = element.getBoundingClientRect().bottom; // ¿ä¼ÒÀÇ ºäÆ÷Æ® ÇÏ´Ü±îÁöÀÇ °Å¸® (Distance from element bottom to viewport top)
-                const windowHeight = window.innerHeight; // ºäÆ÷Æ® ³ôÀÌ (Viewport height)
+            .nav-links li:last-child {
+                /* ë§ˆì§€ë§‰ í•­ëª©(ì–¸ì–´ ë²„íŠ¼)ì˜ ì—¬ë°± ì œê±° */
+                margin-left: 0;
+                /* ê¸°ë³¸ê°’ìœ¼ë¡œ ë‘ê³  ë²„íŠ¼ ìì²´ì— margin-left ì¶”ê°€ */
+            }
 
-                // ¿ä¼Ò°¡ È­¸é¿¡ ÀÏÁ¤ ºÎºĞ º¸ÀÏ ¶§ 'visible' Å¬·¡½º Ãß°¡ (Add 'visible' class when element is partially visible)
-                // Adjust the offset (100) as needed
-                if (elementTop < windowHeight - 100 && elementBottom > 0) {
-                     element.classList.add('visible');
+
+            .nav-links a {
+                color: #fff;
+                /* ê¸€ììƒ‰: í°ìƒ‰ */
+                text-decoration: none;
+                /* ë°‘ì¤„ ì œê±° */
+                font-size: 0.95rem;
+                /* í°íŠ¸ í¬ê¸° */
+                letter-spacing: 0.5px;
+                /* ìê°„ */
+                transition: color 0.3s;
+                /* ìƒ‰ìƒ ì „í™˜ íš¨ê³¼ */
+                font-family: 'Inter', sans-serif;
+                /* ë§í¬ í°íŠ¸ */
+                font-weight: 400;
+                /* í°íŠ¸ êµµê¸° */
+                text-transform: lowercase;
+                /* ì†Œë¬¸ì ë³€í™˜ */
+            }
+
+            /* Keep CV link uppercase */
+            .nav-links a[href="#cv"] {
+                text-transform: uppercase;
+            }
+
+
+            .nav-links a:hover {
+                /* ë§í¬ í˜¸ë²„ ì‹œ */
+                color: #ff4081;
+                /* ê°•ì¡° ìƒ‰ìƒ */
+            }
+
+            /* Common Section Styles */
+            section {
+                padding: 5rem 2rem;
+                /* ì„¹ì…˜ ì•ˆìª½ ì—¬ë°± */
+                overflow: hidden;
+                /* ë„˜ì¹˜ëŠ” ë‚´ìš© ìˆ¨ê¹€ */
+            }
+
+            .section-title-wrapper {
+                /* ì„¹ì…˜ ì œëª© ì¤‘ì•™ ì •ë ¬ìš© ë˜í¼ */
+                text-align: center;
+                width: 100%;
+                margin-bottom: 4rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+            }
+
+            .section-title {
+                /* ì„¹ì…˜ ì œëª© ìŠ¤íƒ€ì¼ */
+                position: relative;
+                /* ìƒëŒ€ ìœ„ì¹˜ */
+                display: inline-block;
+                /* ì¸ë¼ì¸ ë¸”ë¡ ìš”ì†Œ */
+                /* margin-bottom ì œê±° (ë˜í¼ì—ì„œ ì²˜ë¦¬) */
+                font-size: clamp(2rem, 3vw, 3.5rem);
+                /* ë°˜ì‘í˜• í°íŠ¸ í¬ê¸° */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+                font-family: 'Playfair Display', serif;
+                /* ì œëª© í°íŠ¸ */
+                letter-spacing: 0;
+                /* ìê°„ */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
+            }
+
+            .section-title::after {
+                /* ì„¹ì…˜ ì œëª© ì•„ë˜ ê°•ì¡°ì„  */
+                content: '';
+                position: absolute;
+                /* ì ˆëŒ€ ìœ„ì¹˜ */
+                bottom: -12px;
+                /* ì œëª© ì•„ë˜ ìœ„ì¹˜ */
+                left: 50%;
+                /* ê°€ìš´ë° ì •ë ¬ */
+                transform: translateX(-50%);
+                /* ì •í™•í•œ ê°€ìš´ë° ì •ë ¬ */
+                width: 80px;
+                /* ì„  ë„ˆë¹„ */
+                height: 2px;
+                /* ì„  ë†’ì´ */
+                background-color: #ff4081;
+                /* ê°•ì¡° ìƒ‰ìƒ */
+            }
+
+            /* Artist Statement Section */
+            .about {
+                /* ì‘ê°€ ì†Œê°œ ì„¹ì…˜ */
+                background-color: #0d0d0d;
+                /* ì•½ê°„ ë°ì€ ê²€ì • ë°°ê²½ */
+                position: relative;
+                /* ìƒëŒ€ ìœ„ì¹˜ */
+            }
+
+            .about-content {
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                flex-direction: column;
+                /* ì„¸ë¡œ ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
+                width: 100%;
+                /* Ensure content wrapper takes full width for centering */
+            }
+
+            .artist-statement {
+                /* ì‘ê°€ ë…¸íŠ¸ í…ìŠ¤íŠ¸ */
+                max-width: 90%;
+                /* ìµœëŒ€ ë„ˆë¹„ 90% */
+                /* margin: 0 auto; /* ê°€ìš´ë° ì •ë ¬ - Redundant due to parent's align-items: center */
+                font-size: 1.15rem;
+                /* í°íŠ¸ í¬ê¸° */
+                line-height: 1.6;
+                /* ì¤„ ê°„ê²© */
+                font-weight: 400;
+                /* í°íŠ¸ êµµê¸° */
+                font-family: 'Inter', sans-serif;
+                /* ë³¸ë¬¸ í°íŠ¸ */
+                letter-spacing: 0;
+                /* ìê°„ */
+                text-align: center;
+                /* Ensure text inside is centered */
+            }
+
+            .artist-statement p {
+                /* ì‘ê°€ ë…¸íŠ¸ ë‚´ p íƒœê·¸ ê°€ìš´ë° ì •ë ¬ */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Works Gallery */
+            .works {
+                /* ì‘í’ˆ ì„¹ì…˜ */
+                padding: 0;
+                /* ì•ˆìª½ ì—¬ë°± ì—†ìŒ */
+            }
+
+            .work-item {
+                /* ê° ì‘í’ˆ ì•„ì´í…œ */
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                position: relative;
+                /* ìƒëŒ€ ìœ„ì¹˜ */
+                min-height: 100vh;
+                /* ìµœì†Œ ë†’ì´: í™”ë©´ ë†’ì´ë§Œí¼ */
+                padding: 5rem 2rem;
+                /* ìœ„ì•„ë˜ ì•ˆìª½ ì—¬ë°± (ë‚´ìš© ê¸¸ì´ì— ë”°ë¼ ë†’ì´ ì¡°ì ˆ) */
+                overflow: hidden;
+                /* ë„˜ì¹˜ëŠ” ë‚´ìš© ìˆ¨ê¹€ */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                flex-direction: column;
+                /* ì„¸ë¡œ ì •ë ¬ */
+                justify-content: center;
+                /* ìˆ˜ì§ ê°€ìš´ë° ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+                background-color: #0a0a0a;
+                /* ì‘í’ˆ ë°°ê²½ìƒ‰ */
+                border-bottom: 1px solid #222;
+                /* ì‘í’ˆ êµ¬ë¶„ì„  */
+            }
+
+            .work-item:last-child {
+                border-bottom: none;
+                /* ë§ˆì§€ë§‰ ì‘í’ˆ êµ¬ë¶„ì„  ì œê±° */
+            }
+
+
+            .work-background {
+                /* ì‘í’ˆ ë°°ê²½ ì´ë¯¸ì§€ (í•„ìš”ì‹œ ì‚¬ìš©) */
+                position: absolute;
+                /* ì ˆëŒ€ ìœ„ì¹˜ */
+                top: 0;
+                left: 0;
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                height: 100%;
+                /* ë†’ì´ 100% */
+                object-fit: cover;
+                /* ë¹„ìœ¨ ìœ ì§€í•˜ë©° ì±„ìš°ê¸° */
+                filter: brightness(0.4);
+                /* ë°ê¸° ì¡°ì ˆ */
+                z-index: -1;
+                /* ë‹¤ë¥¸ ìš”ì†Œ ë’¤ë¡œ ë³´ë‚´ê¸° */
+                transition: all 1s ease;
+                /* ë¶€ë“œëŸ¬ìš´ ì „í™˜ íš¨ê³¼ */
+            }
+
+            .work-item:hover .work-background {
+                /* í˜¸ë²„ íš¨ê³¼ (í•„ìš”ì‹œ ì‚¬ìš©) */
+                transform: scale(1.05);
+                /* ì•½ê°„ í™•ëŒ€ */
+                filter: brightness(0.5);
+                /* ì•½ê°„ ë°ê²Œ */
+            }
+
+            .work-content {
+                /* ì‘í’ˆ í…ìŠ¤íŠ¸ ë° ë¹„ë””ì˜¤ ì»¨í…Œì´ë„ˆ */
+                z-index: 1;
+                /* ë‹¤ë¥¸ ìš”ì†Œ ìœ„ë¡œ ì˜¬ë¦¬ê¸° */
+                padding: 2rem;
+                /* ì•ˆìª½ ì—¬ë°± */
+                /* text-align: center; /* Removed, flexbox handles alignment */
+                max-width: 1200px;
+                /* ìµœëŒ€ ë„ˆë¹„ */
+                margin-left: auto;
+                /* ê°€ìš´ë° ì •ë ¬ (Flexbox ìì‹ ìš”ì†Œì´ë¯€ë¡œ align-items: centerê°€ ì£¼ ì—­í• ) */
+                margin-right: auto;
+                /* ê°€ìš´ë° ì •ë ¬ */
+                width: 100%;
+                /* ë„ˆë¹„ 100% (max-width ì œí•œ ì•ˆì—ì„œ) */
+                /* --- Centering Improvement --- */
+                display: flex;
+                /* Use flexbox for internal alignment */
+                flex-direction: column;
+                /* Stack children vertically */
+                align-items: center;
+                /* Center children horizontally */
+                /* --- End Centering Improvement --- */
+            }
+
+            .work-title {
+                /* ì‘í’ˆ ì œëª© */
+                font-size: clamp(2.5rem, 4vw, 3.5rem);
+                /* ë°˜ì‘í˜• í°íŠ¸ í¬ê¸° */
+                margin-bottom: 0.5rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+                font-family: 'Playfair Display', serif;
+                /* ì œëª© í°íŠ¸ */
+                color: #ff4081;
+                /* ê°•ì¡° ìƒ‰ìƒ */
+                text-align: center;
+                /* ëª…ì‹œì  ê°€ìš´ë° ì •ë ¬ (í…ìŠ¤íŠ¸ ìì²´ ì •ë ¬) */
+                width: 100%;
+                /* Ensure title takes full width for centering */
+            }
+
+            .work-year,
+            .work-medium,
+            .work-data-source {
+                /* ì‘í’ˆ ì •ë³´ (í´ë˜ìŠ¤ ì¶”ê°€) */
+                font-size: 1.1rem;
+                /* í°íŠ¸ í¬ê¸° */
+                margin-bottom: 0.8rem;
+                /* ì•„ë˜ìª½ ì—¬ë°± */
+                font-family: 'Inter', sans-serif;
+                /* ì •ë³´ í°íŠ¸ */
+                color: #cccccc;
+                /* ê¸€ììƒ‰ */
+                letter-spacing: 1px;
+                /* ìê°„ */
+                text-align: center;
+                /* ëª…ì‹œì  ê°€ìš´ë° ì •ë ¬ (í…ìŠ¤íŠ¸ ìì²´ ì •ë ¬) */
+                width: 100%;
+                /* Ensure info takes full width for centering */
+                line-height: 1.4;
+                /* Adjust line height for <br> */
+            }
+
+            .work-medium {
+                /* ì‘í’ˆ ë§¤ì²´ ì •ë³´ ê°•ì¡° */
+                color: #ff4081;
+                /* ê°•ì¡° ìƒ‰ìƒ */
+                font-weight: 500;
+                /* í°íŠ¸ êµµê¸° */
+            }
+
+            .work-description {
+                /* ì‘í’ˆ ì„¤ëª… */
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+                /* ë°˜ì‘í˜• í°íŠ¸ í¬ê¸° */
+                margin-bottom: 0;
+                /* ì•„ë˜ìª½ ì—¬ë°± ì œê±° (ë¹„ë””ì˜¤ ë’¤ë¡œ ì´ë™) */
+                margin-left: auto;
+                /* ê°€ìš´ë° ì •ë ¬ (Flexbox align-items ê°€ ì£¼ ì—­í• ) */
+                margin-right: auto;
+                /* ê°€ìš´ë° ì •ë ¬ */
+                max-width: 800px;
+                /* ìµœëŒ€ ë„ˆë¹„ */
+                width: 100%;
+                /* Ensure it takes available width up to max-width */
+                line-height: 1.8;
+                /* ì¤„ ê°„ê²© */
+                font-family: 'Inter', sans-serif;
+                /* ë³¸ë¬¸ í°íŠ¸ */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ë‚´ìš© ê°€ìš´ë° ì •ë ¬ (ëª…ì‹œì  ì¶”ê°€) */
+                order: 1;
+                /* Flexbox ìˆœì„œ ë³€ê²½: ë¹„ë””ì˜¤ ë’¤ë¡œ */
+                margin-top: 3rem;
+                /* ë¹„ë””ì˜¤ì™€ì˜ ê°„ê²© ì¶”ê°€ */
+            }
+
+            .work-description p {
+                /* Ensure paragraphs inside description inherit centering */
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 0;
+                /* Remove default paragraph margin */
+            }
+
+
+            .video-container {
+                /* ìœ íŠœë¸Œ ë¹„ë””ì˜¤ ì»¨í…Œì´ë„ˆ */
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                max-width: 1000px;
+                /* ìµœëŒ€ ë„ˆë¹„ */
+                margin-left: auto;
+                /* ê°€ìš´ë° ì •ë ¬ (Flexbox align-items ê°€ ì£¼ ì—­í• ) */
+                margin-right: auto;
+                /* ê°€ìš´ë° ì •ë ¬ */
+                margin-top: 2rem;
+                /* ìœ„ìª½ ì œëª©/ì •ë³´ì™€ì˜ ê°„ê²© ì¶”ê°€ */
+                margin-bottom: 0;
+                /* Reset bottom margin if needed */
+                position: relative;
+                /* ìƒëŒ€ ìœ„ì¹˜ (iframe ì ˆëŒ€ ìœ„ì¹˜ ê¸°ì¤€) */
+                padding-bottom: 56.25%;
+                /* 16:9 ë¹„ìœ¨ ìœ ì§€ */
+                height: 0;
+                /* ë†’ì´ 0 (padding-bottomìœ¼ë¡œ ë¹„ìœ¨ ì¡°ì ˆ) */
+                overflow: hidden;
+                /* ë„˜ì¹˜ëŠ” ë‚´ìš© ìˆ¨ê¹€ */
+                border-radius: 8px;
+                /* ëª¨ì„œë¦¬ ë‘¥ê¸€ê²Œ */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                /* ê·¸ë¦¼ì íš¨ê³¼ */
+                order: 0;
+                /* Flexbox ìˆœì„œ ë³€ê²½: ì„¤ëª… ì•ìœ¼ë¡œ */
+            }
+
+            .video-container iframe {
+                /* ìœ íŠœë¸Œ iframe */
+                position: absolute;
+                /* ì ˆëŒ€ ìœ„ì¹˜ */
+                top: 0;
+                left: 0;
+                width: 100%;
+                /* ë„ˆë¹„ 100% */
+                height: 100%;
+                /* ë†’ì´ 100% */
+                border: none;
+                /* í…Œë‘ë¦¬ ì œê±° */
+            }
+
+            /* Contact Section */
+            .contact {
+                background-color: #000;
+                /* ë°°ê²½ìƒ‰: ê²€ì • */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
+                padding: 8rem 2rem;
+                /* ìœ„ì•„ë˜ ì•ˆìª½ ì—¬ë°± */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                flex-direction: column;
+                /* ì„¸ë¡œ ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+            }
+
+            /* CV Section */
+            .cv-section {
+                background-color: #0d0d0d;
+                /* Slightly lighter black */
+                min-height: 80vh;
+                /* Ensure it takes significant height */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                /* Align content to the top */
+                text-align: center;
+            }
+
+            .cv-content {
+                max-width: 900px;
+                /* Adjust max-width as needed */
+                width: 90%;
+                margin-top: 4rem;
+                /* Add some space below the title */
+                text-align: left;
+                /* Align CV text to the left */
+            }
+
+            .cv-content h4 {
+                /* Styling for CV subheadings */
+                font-size: 1.5rem;
+                color: #ff4081;
+                margin-top: 2.5rem;
+                /* Increased top margin */
+                margin-bottom: 1rem;
+                font-family: 'Playfair Display', serif;
+                font-weight: 500;
+            }
+
+            .cv-content h5 {
+                /* Styling for CV secondary subheadings */
+                color: #cccccc;
+                font-weight: 500;
+                margin-top: 1.5rem;
+                margin-bottom: 0.5rem;
+                font-size: 1.2rem;
+                /* Slightly smaller than h4 */
+                font-family: 'Inter', sans-serif;
+            }
+
+            .cv-content p,
+            .cv-content div[class^="cv-list-"] p {
+                /* Styling for CV text and list items (using p now) */
+                font-size: 1.05rem;
+                margin-bottom: 0.5rem;
+                /* Reduced margin for list items */
+                font-family: 'Inter', sans-serif;
+                color: #e0e0e0;
+                /* Slightly lighter text color */
+                position: relative;
+                /* Needed for pseudo-element positioning */
+                padding-left: 1.5em;
+                /* Space for the bullet */
+            }
+
+            /* Specific paragraphs that shouldn't have bullets */
+            .cv-content>p:first-of-type,
+            /* Summary paragraph */
+            .cv-work-item>p:first-of-type,
+            /* Role description */
+            .cv-content .cv-skills p,
+            /* Skills paragraphs */
+            .cv-content h4+p
+
+            /* Education paragraph */
+                {
+                padding-left: 0;
+                margin-bottom: 1.5rem;
+                /* Restore default margin for non-list paragraphs */
+            }
+
+            .cv-content>p:first-of-type::before,
+            .cv-work-item>p:first-of-type::before,
+            .cv-content .cv-skills p::before,
+            .cv-content h4+p::before {
+                content: none;
+                /* Remove bullet */
+            }
+
+            .cv-content div[class^="cv-list-"] p::before {
+                /* Add bullet point only to list items */
+                content: "â€¢";
+                color: #ff4081;
+                /* Bullet color */
+                font-weight: bold;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1.5em;
+                /* Position bullet before text */
+                position: absolute;
+                left: 0.5em;
+                /* Adjust horizontal position */
+            }
+
+            .cv-content .cv-skills strong {
+                /* Style skill categories */
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+
+            /* Style for specific CV sections like Work Experience */
+            .cv-work-item {
+                margin-bottom: 2rem;
+                /* Increased spacing between work items */
+            }
+
+            .cv-work-item strong {
+                /* Job title and company */
+                display: block;
+                font-weight: 600;
+                color: #ffffff;
+                /* White color for emphasis */
+                margin-bottom: 0.25rem;
+                font-size: 1.15rem;
+                /* Slightly larger font size */
+            }
+
+            .cv-work-item span {
+                /* Dates */
+                display: block;
+                font-size: 0.95rem;
+                color: #aaaaaa;
+                /* Lighter gray for dates */
+                margin-bottom: 0.5rem;
+            }
+
+            .cv-work-item>p:first-of-type {
+                /* Style for the role description paragraph */
+                margin-bottom: 1rem;
+                /* More space after role description */
+                font-style: italic;
+                color: #b0b0b0;
+            }
+
+            .cv-work-item div[class^="cv-list-"] {
+                /* Container for bulleted list items */
+                margin-top: 0.5rem;
+            }
+
+            .cv-work-item div[class^="cv-list-"] p {
+                /* Style for bulleted responsibilities */
+                color: #d0d0d0;
+                /* Slightly lighter than default p */
+                font-size: 1rem;
+                /* Slightly smaller font for details */
+                margin-bottom: 0.4rem;
+                /* Tighter spacing for list items */
+            }
+
+
+            .social-links {
+                /* ì†Œì…œ ë¯¸ë””ì–´ ë§í¬ */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                justify-content: center;
+                /* ê°€ìš´ë° ì •ë ¬ */
+                gap: 2.5rem;
+                /* ì•„ì´ì½˜ ê°„ê²© */
+                margin: 2rem 0;
+                /* ìœ„ì•„ë˜ ì—¬ë°± */
+            }
+
+            .social-icon {
+                /* ì†Œì…œ ë¯¸ë””ì–´ ì•„ì´ì½˜ */
+                font-size: 2.2rem;
+                /* ì•„ì´ì½˜ í¬ê¸° */
+                color: #fff;
+                /* ì•„ì´ì½˜ ìƒ‰ìƒ: í°ìƒ‰ */
+                transition: color 0.3s;
+                /* ìƒ‰ìƒ ì „í™˜ íš¨ê³¼ */
+            }
+
+            .social-icon:hover {
+                /* ì•„ì´ì½˜ í˜¸ë²„ ì‹œ */
+                color: #ff4081;
+                /* ê°•ì¡° ìƒ‰ìƒ */
+            }
+
+            /* Footer */
+            .footer {
+                background-color: #000;
+                /* ë°°ê²½ìƒ‰: ê²€ì • */
+                text-align: center;
+                /* í…ìŠ¤íŠ¸ ê°€ìš´ë° ì •ë ¬ */
+                padding: 2rem;
+                /* ì•ˆìª½ ì—¬ë°± */
+                font-size: 0.9rem;
+                /* í°íŠ¸ í¬ê¸° */
+                opacity: 0.7;
+                /* íˆ¬ëª…ë„ */
+                display: flex;
+                /* Flexbox ë ˆì´ì•„ì›ƒ */
+                justify-content: center;
+                /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+                align-items: center;
+                /* ìˆ˜ì§ ê°€ìš´ë° ì •ë ¬ */
+            }
+
+            .footer p {
+                /* Footer p íƒœê·¸ ë§ˆì§„ ì œê±° */
+                margin-bottom: 0;
+            }
+
+            /* Animations */
+            .fade-in {
+                /* í˜ì´ë“œ ì¸ ì• ë‹ˆë©”ì´ì…˜ */
+                opacity: 0;
+                /* ì´ˆê¸° íˆ¬ëª…ë„ 0 */
+                transform: translateY(20px);
+                /* ì´ˆê¸° ìœ„ì¹˜ ì•„ë˜ë¡œ 20px */
+                transition: opacity 1s ease, transform 1s ease;
+                /* ë¶€ë“œëŸ¬ìš´ ì „í™˜ íš¨ê³¼ */
+            }
+
+            .fade-in.visible {
+                /* í™”ë©´ì— ë³´ì¼ ë•Œ */
+                opacity: 1;
+                /* íˆ¬ëª…ë„ 1 */
+                transform: translateY(0);
+                /* ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™ */
+            }
+
+            /* Responsive Design */
+            @media screen and (max-width: 768px) {
+
+                /* í™”ë©´ ë„ˆë¹„ 768px ì´í•˜ */
+                h1 {
+                    font-size: clamp(2rem, 6vw, 3rem);
+                    /* ëª¨ë°”ì¼ í—¤ë” ì œëª© í¬ê¸° ì¡°ì • */
                 }
-                 // Optional: Remove 'visible' class if element scrolls out of view (to re-trigger animation)
-                 /* else {
-                    element.classList.remove('visible');
-                 } */
-            });
-        });
 
-        // ¸ğ¹ÙÀÏ ¸Ş´º Åä±Û ¹öÆ° Å¬¸¯ ÀÌº¥Æ® (Mobile menu toggle button click event)
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active'); // 'active' Å¬·¡½º Åä±Û (¸Ş´º ¿­°í ´İ±â) (Toggle 'active' class to open/close menu)
-            // ¾ÆÀÌÄÜ º¯°æ (¼±ÅÃ »çÇ×) (Change icon (optional))
-            const icon = menuToggle.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times'); // ´İ±â ¾ÆÀÌÄÜÀ¸·Î º¯°æ (Change to close icon)
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars'); // ¸Ş´º ¾ÆÀÌÄÜÀ¸·Î º¯°æ (Change to menu icon)
+                h2 {
+                    font-size: calc(1.2rem + 1vw);
+                    /* ëª¨ë°”ì¼ í—¤ë” ë¶€ì œëª© í¬ê¸° ì¡°ì • */
+                    white-space: normal;
+                    /* ëª¨ë°”ì¼ì—ì„œ ë¶€ì œëª© ì¤„ë°”ê¿ˆ í—ˆìš© */
+                }
+
+                .section-title {
+                    font-size: 2.2rem;
+                    /* ëª¨ë°”ì¼ ì„¹ì…˜ ì œëª© í¬ê¸° ì¡°ì • */
+                }
+
+                .work-title {
+                    font-size: clamp(2rem, 5vw, 2.8rem);
+                    /* ëª¨ë°”ì¼ ì‘í’ˆ ì œëª© í¬ê¸° ì¡°ì • */
+                }
+
+                .work-description {
+                    font-size: clamp(0.95rem, 2vw, 1.1rem);
+                    /* ëª¨ë°”ì¼ ì‘í’ˆ ì„¤ëª… í¬ê¸° ì¡°ì • */
+                    margin-top: 2rem;
+                    /* ëª¨ë°”ì¼ì—ì„œ ë¹„ë””ì˜¤ì™€ì˜ ê°„ê²© ì¡°ì • */
+                }
+
+                .navigation {
+                    /* ë‚´ë¹„ê²Œì´ì…˜ ìŠ¤íƒ€ì¼ ì¡°ì • */
+                    padding: 1rem;
+                    /* ì•ˆìª½ ì—¬ë°± ì¡°ì • */
+                }
+
+                .logo {
+                    font-size: 1.3rem;
+                    /* ëª¨ë°”ì¼ ë¡œê³  í¬ê¸° ì¡°ì • */
+                }
+
+                .nav-links {
+                    /* ë‚´ë¹„ê²Œì´ì…˜ ë§í¬ ì»¨í…Œì´ë„ˆ (ëª¨ë°”ì¼ ë©”ë‰´ í† ê¸€ ì‹œ ìŠ¤íƒ€ì¼) */
+                    /* ëª¨ë°”ì¼ ë©”ë‰´ í† ê¸€ ì‹œ ìŠ¤íƒ€ì¼ì€ ì•„ë˜ì—ì„œ ì •ì˜ */
+                }
+
+                .nav-links li {
+                    /* ë‚´ë¹„ê²Œì´ì…˜ ë§í¬ ì•„ì´í…œ (ëª¨ë°”ì¼ ë©”ë‰´ í† ê¸€ ì‹œ ìŠ¤íƒ€ì¼) */
+                    margin-left: 1.5rem;
+                    /* ëª¨ë°”ì¼ ë„¤ë¹„ ë§í¬ ê°„ê²© ì¡°ì • */
+                }
+
+                .artist-statement {
+                    /* ì‘ê°€ ë…¸íŠ¸ í°íŠ¸ í¬ê¸° ì¡°ì • */
+                    font-size: 1.1rem;
+                }
+
+                .header-content {
+                    /* í—¤ë” ë‚´ìš© ë„ˆë¹„ ì¡°ì • */
+                    width: 95%;
+                }
+
+                .work-item {
+                    padding: 4rem 1rem;
+                    /* ëª¨ë°”ì¼ ì‘í’ˆ ì„¹ì…˜ íŒ¨ë”© ì¡°ì • */
+                }
+
+                .video-container {
+                    border-radius: 4px;
+                    /* ëª¨ë°”ì¼ ë¹„ë””ì˜¤ ëª¨ì„œë¦¬ ì•½ê°„ ë‘¥ê¸€ê²Œ */
+                    max-width: 100%;
+                    /* ëª¨ë°”ì¼ì—ì„œëŠ” ë¹„ë””ì˜¤ ë„ˆë¹„ë¥¼ ì»¨í…Œì´ë„ˆì— ë§ì¶¤ */
+                    margin-top: 1.5rem;
+                    /* ëª¨ë°”ì¼ì—ì„œ ë¹„ë””ì˜¤ ìœ„ìª½ ê°„ê²© ì¡°ì • */
+                }
+
+                .social-icon {
+                    font-size: 2rem;
+                    /* ëª¨ë°”ì¼ ì†Œì…œ ì•„ì´ì½˜ í¬ê¸° ì¡°ì • */
+                }
+
+                .contact {
+                    padding: 6rem 1rem;
+                    /* ëª¨ë°”ì¼ ì—°ë½ì²˜ ì„¹ì…˜ íŒ¨ë”© ì¡°ì • */
+                }
+
+                .cv-section {
+                    padding: 4rem 1rem;
+                    /* ëª¨ë°”ì¼ CV ì„¹ì…˜ íŒ¨ë”© ì¡°ì • */
+                }
+
+                .cv-content {
+                    margin-top: 2rem;
+                    /* ëª¨ë°”ì¼ CV ë‚´ìš© ìœ„ìª½ ê°„ê²© ì¡°ì • */
+                }
+
+                .cv-content h4 {
+                    font-size: 1.3rem;
+                    /* ëª¨ë°”ì¼ CV ë¶€ì œëª© í¬ê¸° ì¡°ì • */
+                }
+
+                .cv-content h5 {
+                    font-size: 1.1rem;
+                    /* ëª¨ë°”ì¼ CV 2ì°¨ ë¶€ì œëª© í¬ê¸° ì¡°ì • */
+                }
+
+                .cv-content p,
+                .cv-content div[class^="cv-list-"] p {
+                    font-size: 0.95rem;
+                    /* ëª¨ë°”ì¼ CV í…ìŠ¤íŠ¸ í¬ê¸° ì¡°ì • */
+                    padding-left: 1.2em;
+                    /* ëª¨ë°”ì¼ ë¶ˆë › ê°„ê²© ì¡°ì • */
+                }
+
+                .cv-content div[class^="cv-list-"] p::before {
+                    margin-left: -1.2em;
+                    /* ëª¨ë°”ì¼ ë¶ˆë › ìœ„ì¹˜ ì¡°ì • */
+                    left: 0.4em;
+                }
+
+                .cv-work-item strong {
+                    font-size: 1.1rem;
+                    /* ëª¨ë°”ì¼ ì§ì±…/íšŒì‚¬ëª… í¬ê¸° ì¡°ì • */
+                }
+
+                .cv-work-item div[class^="cv-list-"] p {
+                    font-size: 0.9rem;
+                    /* ëª¨ë°”ì¼ ì±…ì„ ë‚´ìš© í¬ê¸° ì¡°ì • */
+                }
+
+
+                .section-title-wrapper {
+                    margin-bottom: 3rem;
+                    /* ëª¨ë°”ì¼ ì„¹ì…˜ ì œëª© ì•„ë˜ ì—¬ë°± ì¡°ì • */
+                }
+
+                .work-description {
+                    max-width: 90%;
+                    /* ëª¨ë°”ì¼ì—ì„œ ì„¤ëª… ë„ˆë¹„ ì¡°ì • */
+                }
+
+                .work-data-source {
+                    font-size: 1rem;
+                    /* ëª¨ë°”ì¼ì—ì„œ ë°ì´í„° ì†ŒìŠ¤ í°íŠ¸ í¬ê¸° ì¡°ì • */
+                }
+
             }
-        });
 
-        // ³»ºñ°ÔÀÌ¼Ç ¸µÅ© Å¬¸¯ ½Ã - ¸ğ¹ÙÀÏ ¸Ş´º ´İ±â ¹× ºÎµå·¯¿î ½ºÅ©·Ñ (Navigation link click - close mobile menu and smooth scroll)
-        document.querySelectorAll('#nav-links a').forEach(link => { // Select only anchor links for scrolling
-             link.addEventListener('click', (event) => {
-                 // ¸ğ¹ÙÀÏ ¸Ş´º ´İ±â (Close mobile menu)
+            /* Mobile Menu Toggle */
+            .menu-toggle {
+                /* í–„ë²„ê±° ë©”ë‰´ ì•„ì´ì½˜ */
+                display: none;
+                /* ê¸°ë³¸ ìˆ¨ê¹€ */
+                cursor: pointer;
+                /* ë§ˆìš°ìŠ¤ ì»¤ì„œ ë³€ê²½ */
+                font-size: 1.5rem;
+                /* ì•„ì´ì½˜ í¬ê¸° */
+                color: #fff;
+                /* ì•„ì´ì½˜ ìƒ‰ìƒ */
+                position: absolute;
+                /* ì ˆëŒ€ ìœ„ì¹˜ (ë‚´ë¹„ê²Œì´ì…˜ ê¸°ì¤€) */
+                top: 50%;
+                /* ìˆ˜ì§ ì¤‘ì•™ ì •ë ¬ */
+                transform: translateY(-50%);
+                /* ì •í™•í•œ ìˆ˜ì§ ì¤‘ì•™ ì •ë ¬ */
+                right: 2rem;
+                /* ì˜¤ë¥¸ìª½ ìœ„ì¹˜ ì¡°ì • */
+                z-index: 1100;
+                /* ë‚´ë¹„ê²Œì´ì…˜ ë§í¬ë³´ë‹¤ ìœ„ */
+            }
+
+            @media screen and (max-width: 768px) {
+
+                /* í™”ë©´ ë„ˆë¹„ 768px ì´í•˜ */
+                .menu-toggle {
+                    display: block;
+                    /* í–„ë²„ê±° ë©”ë‰´ ë³´ì´ê¸° */
+                    right: 1rem;
+                    /* ëª¨ë°”ì¼ì—ì„œ ì˜¤ë¥¸ìª½ ì—¬ë°± ì¡°ì • */
+                }
+
+                .nav-links {
+                    /* ëª¨ë°”ì¼ ë©”ë‰´ ìŠ¤íƒ€ì¼ */
+                    position: fixed;
+                    /* í™”ë©´ì— ê³ ì • */
+                    top: 0;
+                    right: -100%;
+                    /* ì´ˆê¸° ìƒíƒœ: í™”ë©´ ì˜¤ë¥¸ìª½ ë°– */
+                    width: 80%;
+                    /* ë„ˆë¹„ 80% */
+                    max-width: 300px;
+                    /* ìµœëŒ€ ë„ˆë¹„ ì„¤ì • */
+                    height: 100vh;
+                    /* ë†’ì´: í™”ë©´ ë†’ì´ë§Œí¼ */
+                    background: rgba(0, 0, 0, 0.97);
+                    /* ë°°ê²½ìƒ‰ ì•½ê°„ ë” ì§„í•˜ê²Œ */
+                    flex-direction: column;
+                    /* ì„¸ë¡œ ì •ë ¬ */
+                    align-items: center;
+                    /* ìˆ˜í‰ ê°€ìš´ë° ì •ë ¬ */
+                    justify-content: center;
+                    /* ìˆ˜ì§ ê°€ìš´ë° ì •ë ¬ */
+                    transition: right 0.5s ease;
+                    /* ë¶€ë“œëŸ¬ìš´ ìŠ¬ë¼ì´ë“œ íš¨ê³¼ */
+                    margin-top: 0;
+                    /* ê¸°ì¡´ margin-top ì œê±° */
+                    padding-top: 5rem;
+                    /* ë©”ë‰´ ìƒë‹¨ ì—¬ë°± */
+                }
+
+                .nav-links.active {
+                    /* í™œì„±í™” ì‹œ (ë©”ë‰´ ì—´ë¦¼) */
+                    right: 0;
+                    /* í™”ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ìŠ¬ë¼ì´ë“œ ì¸ */
+                }
+
+                .nav-links li {
+                    margin: 1.5rem 0;
+                    /* ìœ„ì•„ë˜ ì—¬ë°± */
+                    margin-left: 0;
+                    /* ëª¨ë°”ì¼ ë©”ë‰´ì—ì„œëŠ” ì™¼ìª½ ì—¬ë°± ì œê±° */
+                }
+
+                /* ëª¨ë°”ì¼ ë©”ë‰´ì˜ ì–¸ì–´ í† ê¸€ ë²„íŠ¼ ìŠ¤íƒ€ì¼ */
+                .nav-links #langToggle {
+                    margin-left: 0;
+                    /* ëª¨ë°”ì¼ ë©”ë‰´ ë‚´ì—ì„œëŠ” ì™¼ìª½ ì—¬ë°± ì œê±° */
+                    margin-top: 1rem;
+                    /* ë‹¤ë¥¸ ë§í¬ì™€ì˜ ê°„ê²© */
+                }
+            }
+        </style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+
+    <body>
+        <nav class="navigation" id="navbar">
+            <a href="#home" class="logo">MINJE JEON</a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#statement">ì‘ê°€ë…¸íŠ¸</a></li>
+                <li><a href="#works">ì‘í’ˆ</a></li>
+                <li><a href="#contact">ì—°ë½ì²˜</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><button id="langToggle">ENG</button></li>
+            </ul>
+        </nav>
+
+        <header class="header" id="home">
+            <img src="" alt="í—¤ë” ë°°ê²½ ì´ë¯¸ì§€" class="header-video"
+                onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/000000/333333?text=Image+Not+Found';">
+            <div class="header-content fade-in">
+                <h1 data-en="Minje Jeon" data-ko="ì „ë¯¼ì œ">ì „ë¯¼ì œ</h1>
+                <h2 data-en="Media Artist â€¢ AI Creative Director â€¢ Creative Technologist"
+                    data-ko="ë¯¸ë””ì–´ ì•„í‹°ìŠ¤íŠ¸ â€¢ AI í¬ë¦¬ì—ì´í‹°ë¸Œ ë””ë ‰í„° â€¢ í¬ë¦¬ì—ì´í‹°ë¸Œ í…Œí¬ë†€ë¡œì§€ìŠ¤íŠ¸">ë¯¸ë””ì–´ ì•„í‹°ìŠ¤íŠ¸ â€¢ AI í¬ë¦¬ì—ì´í‹°ë¸Œ ë””ë ‰í„° â€¢ í¬ë¦¬ì—ì´í‹°ë¸Œ í…Œí¬ë†€ë¡œì§€ìŠ¤íŠ¸</h2>
+            </div>
+        </header>
+
+        <section class="about fade-in" id="statement">
+            <div class="about-content">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title" data-en="Artist Statement" data-ko="ì‘ê°€ë…¸íŠ¸">ì‘ê°€ë…¸íŠ¸</h2>
+                </div>
+                <div class="artist-statement">
+                    <p data-en="In my artistic universe, data transcends mere information. It serves as an artistic tool capturing countless fragments of events and phenomena permeating everyday life, while also forming the foundation of my creative materials. During the process of collecting and analyzing vast amounts of data, I often discover hidden aspects of society that we have failed to notice. My artistic practice involves precisely this: revealing the overlooked dimensions of mundane life through the prism of data, and raising questions about them."
+                        data-ko="ë‚˜ì˜ ì‘í’ˆ ì„¸ê³„ì—ì„œ ë°ì´í„°ëŠ” ë‹¨ìˆœí•œ ì •ë³´ ì´ìƒì˜ ì˜ë¯¸ë¥¼ ì§€ë‹Œë‹¤. ê·¸ê²ƒì€ ì¼ìƒì„ ê´€í†µí•˜ëŠ” ë¬´ìˆ˜í•œ ì‚¬ê±´ê³¼ í˜„ìƒì˜ ë‹¨í¸ë“¤ì„ í¬ì°©í•˜ê³  ê¸°ë¡í•˜ëŠ” ì˜ˆìˆ ì  ë„êµ¬ì´ì, ì‘í’ˆ ì°½ì‘ì˜ ê·¼ê°„ì„ ì´ë£¨ëŠ” ì¬ë£Œì´ê¸°ë„ í•˜ë‹¤. ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ ìˆ˜ì§‘í•˜ê³  ë¶„ì„í•˜ëŠ” ê³¼ì •ì—ì„œ ë‚˜ëŠ” ìš°ë¦¬ê°€ ë¯¸ì²˜ í¬ì°©í•˜ì§€ ëª»í•œ ì‚¬íšŒ ê³³ê³³ì˜ ìˆ¨ê²¨ì§„ ì´ë©´ì„ ë°œê²¬í•˜ê³¤ í•œë‹¤. ì‘í’ˆ í™œë™ì€ ë°”ë¡œ ì´ëŸ° ë¬´ë”˜ ì¼ìƒì˜ ì´ë©´ì„ ë°ì´í„°ë¼ëŠ” í”„ë¦¬ì¦˜ì„ í†µí•´ ê·¹ëª…í•˜ê²Œ ë“œëŸ¬ë‚´ê³ , ê·¸ì— ëŒ€í•œ ì§ˆë¬¸ì„ ë˜ì§€ëŠ” ê³¼ì •ì´ë‹¤.">
+                        ë‚˜ì˜ ì‘í’ˆ ì„¸ê³„ì—ì„œ ë°ì´í„°ëŠ” ë‹¨ìˆœí•œ ì •ë³´ ì´ìƒì˜ ì˜ë¯¸ë¥¼ ì§€ë‹Œë‹¤. ê·¸ê²ƒì€ ì¼ìƒì„ ê´€í†µí•˜ëŠ” ë¬´ìˆ˜í•œ ì‚¬ê±´ê³¼ í˜„ìƒì˜ ë‹¨í¸ë“¤ì„ í¬ì°©í•˜ê³  ê¸°ë¡í•˜ëŠ” ì˜ˆìˆ ì  ë„êµ¬ì´ì, ì‘í’ˆ ì°½ì‘ì˜ ê·¼ê°„ì„
+                        ì´ë£¨ëŠ” ì¬ë£Œì´ê¸°ë„ í•˜ë‹¤. ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ ìˆ˜ì§‘í•˜ê³  ë¶„ì„í•˜ëŠ” ê³¼ì •ì—ì„œ ë‚˜ëŠ” ìš°ë¦¬ê°€ ë¯¸ì²˜ í¬ì°©í•˜ì§€ ëª»í•œ ì‚¬íšŒ ê³³ê³³ì˜ ìˆ¨ê²¨ì§„ ì´ë©´ì„ ë°œê²¬í•˜ê³¤ í•œë‹¤. ì‘í’ˆ í™œë™ì€ ë°”ë¡œ ì´ëŸ° ë¬´ë”˜
+                        ì¼ìƒì˜ ì´ë©´ì„ ë°ì´í„°ë¼ëŠ” í”„ë¦¬ì¦˜ì„ í†µí•´ ê·¹ëª…í•˜ê²Œ ë“œëŸ¬ë‚´ê³ , ê·¸ì— ëŒ€í•œ ì§ˆë¬¸ì„ ë˜ì§€ëŠ” ê³¼ì •ì´ë‹¤.</p>
+                    <p data-en="To handle such data, I've come to experimentally utilize various genres and techniques including painting, sculpture, video, installation, sound, and new media. This approach also serves as a methodology to express the multi-layered properties inherent in data. Ultimately, my work can be described as a process of creating opportunities to discover and view the previously unnoticed dimensions of our world through a new lens, by artistically reinterpreting the data that permeates our daily lives."
+                        data-ko="ì´ëŸ¬í•œ ë°ì´í„°ë¥¼ ë‹¤ë£¨ê¸° ìœ„í•´ íšŒí™”, ì¡°ê°, ì˜ìƒ, ì„¤ì¹˜, ì‚¬ìš´ë“œ, ë‰´ ë¯¸ë””ì–´ ë“± ë‹¤ì–‘í•œ ì¥ë¥´ì™€ ê¸°ë²•ì„ ì‹¤í—˜ì ìœ¼ë¡œ í™œìš©í•˜ê²Œ ë˜ì—ˆë‹¤. ì´ëŠ” ë°ì´í„°ê°€ ì§€ë‹Œ ë‹¤ì¸µì  ì†ì„±ì„ í‘œí˜„í•˜ê¸° ìœ„í•œ ë°©ë²•ë¡ ì´ê¸°ë„ í•˜ë‹¤. ê¶ê·¹ì ìœ¼ë¡œ ë‚˜ì˜ ì‘ì—…ì€ ì¼ìƒì„ ê´€í†µí•˜ëŠ” ë°ì´í„°ë¥¼ ì˜ˆìˆ ì ìœ¼ë¡œ ì¬í•´ì„í•¨ìœ¼ë¡œì¨, ìš°ë¦¬ê°€ ë¯¸ì²˜ í¬ì°©í•˜ì§€ ëª»í–ˆë˜ ì„¸ê³„ì˜ ì´ë©´ì„ ë°œê²¬í•˜ê³  ìƒˆë¡œìš´ ì‹œì„ ìœ¼ë¡œ ë°”ë¼ë³¼ ìˆ˜ ìˆëŠ” ê³„ê¸°ë¥¼ ë§ˆë ¨í•˜ëŠ” ê³¼ì •ì´ë¼ í•  ìˆ˜ ìˆë‹¤.">
+                        ì´ëŸ¬í•œ ë°ì´í„°ë¥¼ ë‹¤ë£¨ê¸° ìœ„í•´ íšŒí™”, ì¡°ê°, ì˜ìƒ, ì„¤ì¹˜, ì‚¬ìš´ë“œ, ë‰´ ë¯¸ë””ì–´ ë“± ë‹¤ì–‘í•œ ì¥ë¥´ì™€ ê¸°ë²•ì„ ì‹¤í—˜ì ìœ¼ë¡œ í™œìš©í•˜ê²Œ ë˜ì—ˆë‹¤. ì´ëŠ” ë°ì´í„°ê°€ ì§€ë‹Œ ë‹¤ì¸µì  ì†ì„±ì„ í‘œí˜„í•˜ê¸°
+                        ìœ„í•œ ë°©ë²•ë¡ ì´ê¸°ë„ í•˜ë‹¤. ê¶ê·¹ì ìœ¼ë¡œ ë‚˜ì˜ ì‘ì—…ì€ ì¼ìƒì„ ê´€í†µí•˜ëŠ” ë°ì´í„°ë¥¼ ì˜ˆìˆ ì ìœ¼ë¡œ ì¬í•´ì„í•¨ìœ¼ë¡œì¨, ìš°ë¦¬ê°€ ë¯¸ì²˜ í¬ì°©í•˜ì§€ ëª»í–ˆë˜ ì„¸ê³„ì˜ ì´ë©´ì„ ë°œê²¬í•˜ê³  ìƒˆë¡œìš´ ì‹œì„ ìœ¼ë¡œ
+                        ë°”ë¼ë³¼ ìˆ˜ ìˆëŠ” ê³„ê¸°ë¥¼ ë§ˆë ¨í•˜ëŠ” ê³¼ì •ì´ë¼ í•  ìˆ˜ ìˆë‹¤.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="works" id="works">
+            <div class="work-item fade-in">
+                <div class="work-content">
+                    <h3 class="work-title" data-en="POINT" data-ko="POINT">POINT</h3>
+                    <p class="work-year">2017</p>
+                    <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing,
+                        Max/MSP</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/qZpZjA_UhxA?si=O7SzkNPQJA2v0sXM"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="work-description"
+                        data-en="This work began with the single sentence, 'Diversity has created history.'"
+                        data-ko="ì´ ì‘ì—…ì€ 'ë‹¤ì–‘ì„±ì´ ì—­ì‚¬ë¥¼ ë§Œë“¤ì—ˆë‹¤'ë¼ëŠ” í•œ ë¬¸ì¥ì—ì„œ ë¶€í„° ì‹œì‘ë˜ì—ˆë‹¤.">ì´ ì‘ì—…ì€ 'ë‹¤ì–‘ì„±ì´ ì—­ì‚¬ë¥¼ ë§Œë“¤ì—ˆë‹¤'ë¼ëŠ” í•œ ë¬¸ì¥ì—ì„œ ë¶€í„° ì‹œì‘ë˜ì—ˆë‹¤.</p>
+                </div>
+            </div>
+
+            <div class="work-item fade-in">
+                <div class="work-content">
+                    <h3 class="work-title" data-en="#shapeofgreed" data-ko="#shapeofgreed">#shapeofgreed</h3>
+                    <p class="work-year" data-en="2019" data-ko="2019">2019</p>
+                    <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing,
+                        Max/MSP</p>
+                    <p class="work-data-source" data-en="Instagram data (hashtags related to food and their images)"
+                        data-ko="ì¸ìŠ¤íƒ€ê·¸ë¨ ë°ì´í„°(ìŒì‹ì— ê´€ë ¨ëœ í•´ì‹œíƒœê·¸ì™€ ê·¸ ì´ë¯¸ì§€)">ì¸ìŠ¤íƒ€ê·¸ë¨ ë°ì´í„°(ìŒì‹ì— ê´€ë ¨ëœ í•´ì‹œíƒœê·¸ì™€ ê·¸ ì´ë¯¸ì§€)</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/8OsySLFpTMk?si=iACEwGelm5WltFBW"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="work-description"
+                        data-en="On Instagram, many photos are uploaded with food-related hashtags like #food, #foodporn. If the act of taking and uploading food pictures has become a cultural act, what is the driving force that sustains these actions? If one of them is human greed and desire, in what form can this be represented? This question became the motivation for the work. To me, images tagged with food hashtags appeared as quantitative and qualitative forms of greedy data. Therefore, I attempted an experiment to collect, dismantle, and analyze large amounts of image data and reconstruct them into visual and sound elements."
+                        data-ko="ì¸ìŠ¤íƒ€ê·¸ë¨ì—ëŠ” #food, #foodpornì²˜ëŸ¼ ìŒì‹ì— ê´€ë ¨ëœ í•´ì‹œíƒœê·¸ë¡œ ë§ì€ ì‚¬ì§„ì´ ì˜¬ë¼ì˜¨ë‹¤. ìŒì‹ì„ ì°ì–´ ì˜¬ë¦¬ëŠ” í–‰ìœ„ê°€ í•˜ë‚˜ì˜ ë¬¸í™”ì  í–‰ìœ„ë¡œ ìë¦¬ ì¡ì•˜ë‹¤ë©´ í–‰ìœ„ë“¤ì„ ì§€ì† ê°€ëŠ¥í•˜ê²Œ í•˜ëŠ” ì›ë™ë ¥ì€ ëŒ€ì²´ ë¬´ì—‡ì¼ê¹Œ? ê·¸ ì¤‘ í•˜ë‚˜ê°€ ì¸ê°„ì˜ íƒìš•, ìš•ë§ì´ë¼ê³  í•œë‹¤ë©´ ì´ê²ƒì„ ì–´ë–¤ í˜•íƒœë¡œ ë‚˜íƒ€ë‚¼ ìˆ˜ ìˆì„ê¹Œ? ë¼ëŠ” ë¬¼ìŒì´ ì‘ì—…ì˜ ë™ê¸°ê°€ ë˜ì—ˆë‹¤. ë‚˜ì—ê²Œ ìŒì‹ í•´ì‹œíƒœê·¸ê°€ ë‹¬ë¦° ì´ë¯¸ì§€ëŠ” ì •ëŸ‰ì ì´ê³  ì •ì„±ì ì¸ í˜•íƒœì˜ íƒìš•ìŠ¤ëŸ¬ìš´ ë°ì´í„°ë¡œ ë³´ì˜€ë‹¤. ê·¸ë˜ì„œ ëŒ€ëŸ‰ì˜ ì´ë¯¸ì§€ ë°ì´í„°ë¥¼ ìˆ˜ì§‘, í•´ì²´ ë¶„ì„í•˜ì—¬ ì‹œê°, ì‚¬ìš´ë“œ ìš”ì†Œë¡œ ì¬êµ¬ì¶•í•˜ëŠ” ì‹¤í—˜ì„ ì‹œë„í•˜ê²Œ ë˜ì—ˆë‹¤.">
+                        ì¸ìŠ¤íƒ€ê·¸ë¨ì—ëŠ” #food, #foodpornì²˜ëŸ¼ ìŒì‹ì— ê´€ë ¨ëœ í•´ì‹œíƒœê·¸ë¡œ ë§ì€ ì‚¬ì§„ì´ ì˜¬ë¼ì˜¨ë‹¤. ìŒì‹ì„ ì°ì–´ ì˜¬ë¦¬ëŠ” í–‰ìœ„ê°€ í•˜ë‚˜ì˜ ë¬¸í™”ì  í–‰ìœ„ë¡œ ìë¦¬ ì¡ì•˜ë‹¤ë©´ í–‰ìœ„ë“¤ì„ ì§€ì†
+                        ê°€ëŠ¥í•˜ê²Œ í•˜ëŠ” ì›ë™ë ¥ì€ ëŒ€ì²´ ë¬´ì—‡ì¼ê¹Œ? ê·¸ ì¤‘ í•˜ë‚˜ê°€ ì¸ê°„ì˜ íƒìš•, ìš•ë§ì´ë¼ê³  í•œë‹¤ë©´ ì´ê²ƒì„ ì–´ë–¤ í˜•íƒœë¡œ ë‚˜íƒ€ë‚¼ ìˆ˜ ìˆì„ê¹Œ? ë¼ëŠ” ë¬¼ìŒì´ ì‘ì—…ì˜ ë™ê¸°ê°€ ë˜ì—ˆë‹¤. ë‚˜ì—ê²Œ ìŒì‹
+                        í•´ì‹œíƒœê·¸ê°€ ë‹¬ë¦° ì´ë¯¸ì§€ëŠ” ì •ëŸ‰ì ì´ê³  ì •ì„±ì ì¸ í˜•íƒœì˜ íƒìš•ìŠ¤ëŸ¬ìš´ ë°ì´í„°ë¡œ ë³´ì˜€ë‹¤. ê·¸ë˜ì„œ ëŒ€ëŸ‰ì˜ ì´ë¯¸ì§€ ë°ì´í„°ë¥¼ ìˆ˜ì§‘, í•´ì²´ ë¶„ì„í•˜ì—¬ ì‹œê°, ì‚¬ìš´ë“œ ìš”ì†Œë¡œ ì¬êµ¬ì¶•í•˜ëŠ” ì‹¤í—˜ì„
+                        ì‹œë„í•˜ê²Œ ë˜ì—ˆë‹¤.</p>
+                </div>
+            </div>
+
+            <div class="work-item fade-in">
+                <div class="work-content">
+                    <h3 class="work-title" data-en="footprint" data-ko="footprint">footprint</h3>
+                    <p class="work-year">2022</p>
+                    <p class="work-data-source"
+                        data-en="2021 data from Daejeon<br>(vehicle traffic, vehicle speed, surface temperature, humidity, wind speed)"
+                        data-ko="ëŒ€ì „ì˜ 2021ë…„ ë°ì´í„°<br>(ì°¨ëŸ‰í†µí–‰ëŸ‰, ì°¨ëŸ‰í†µí–‰ì†ë„, ì§€í‘œë©´ ì˜¨ë„, ìŠµë„, í’ì†)">ëŒ€ì „ì˜ 2021ë…„ ë°ì´í„°<br>(ì°¨ëŸ‰í†µí–‰ëŸ‰, ì°¨ëŸ‰í†µí–‰ì†ë„, ì§€í‘œë©´
+                        ì˜¨ë„, ìŠµë„, í’ì†)</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/XUIinWVIiyc?si=owikTpea-tMk5TSn"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="work-description"
+                        data-en="footprint visualizes non-exhaust particulate matter (PM) from automobiles by creating friction between everyday media using data. Non-exhaust PM is generated by friction between tires and asphalt, and brake pads and discs. This byproduct arises from human foot movements controlling the vehicle, like footprints in ordinary daily life. footprint blatantly reveals invisible fine dust using familiar materials like chalk found in everyday life. The material worn down by friction represents environmental variable data that generates non-exhaust PM: ground temperature, humidity, vehicle traffic volume, and vehicle traffic speed, with its size changing relatively according to the data values. The work's cooling fan, whose speed is controlled by wind speed data, affects the friction between the pigment and the ground, and the spread of fine dust generated by friction. The work guides the audience to understand and sense macroscopic and microscopic phenomena that are difficult to perceive in daily life, based on data."
+                        data-ko="footprintëŠ” ë°ì´í„°ë¡œ ì¼ìƒì˜ ë§¤ì²´ë¥¼ ë§ˆì°°ì‹œì¼œ ìë™ì°¨ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€(Non-exhaust PM)ë¥¼ ì‹œê°í™”í•œ ì‘í’ˆì´ë‹¤. ìë™ì°¨ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€ëŠ” íƒ€ì´ì–´-ì•„ìŠ¤íŒ”íŠ¸, ë¸Œë ˆì´í¬ íŒ¨ë“œ-ë””ìŠ¤í¬ ì‚¬ì´ì˜ ë§ˆì°°ë¡œ ë°œìƒí•œë‹¤. ì´ ë¶€ì‚°ë¬¼ì€ ì°¨ëŸ‰ì„ ì œì–´í•˜ëŠ” ì¸ê°„ì˜ ë°œì§“ìœ¼ë¡œ, í‰ë²”í•œ ì¼ìƒ ì†ì˜ ë°œìêµ­ì²˜ëŸ¼ ìƒê²¨ë‚œë‹¤. footprintëŠ” ì¼ìƒì— ì¡´ì¬í•˜ëŠ” ë¶„í•„ê³¼ ê°™ì€ ìµìˆ™í•œ ë¬¼ì§ˆì„ ì‚¬ìš©í•´ ë³´ì´ì§€ ì•ŠëŠ” ë¯¸ì„¸ë¨¼ì§€ë¥¼ ë…¸ê³¨ì ìœ¼ë¡œ ë“œëŸ¬ë‚¸ë‹¤. ë§ˆì°°ë¡œ ë§ˆëª¨ë˜ëŠ” ë¬¼ì§ˆì€ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€ë¥¼ ë°œìƒì‹œí‚¤ëŠ” í™˜ê²½ë³€ìˆ˜ ë°ì´í„°ì¸ ì§€ë©´ì˜¨ë„, ìŠµë„, ì°¨ëŸ‰ í†µí–‰ëŸ‰, ì°¨ëŸ‰ í†µí–‰ì†ë„ë¥¼ ë‚˜íƒ€ë‚´ë©°, ê·¸ ë°ì´í„° ê°’ì— ë”°ë¼ ìƒëŒ€ì ìœ¼ë¡œ ì‚¬ì´ì¦ˆê°€ ë‹¬ë¼ì§„ë‹¤. í’ì†ë°ì´í„°ì— ë”°ë¼ ì†ë„ê°€ ì œì–´ë˜ëŠ” ì‘í’ˆì˜ ì¿¨ë§íŒ¬ì€ í”¼ê·¸ë¨¼íŠ¸ì™€ ê·¸ë¼ìš´ë“œì˜ ë§ˆì°° ê·¸ë¦¬ê³  ë§ˆì°°ë¡œ ë°œìƒí•˜ëŠ” ë¯¸ì„¸ë¨¼ì§€ì˜ í™•ì‚°ì— ì˜í–¥ì„ ë¯¸ì¹œë‹¤. ì‘í’ˆì€ ì¼ìƒì—ì„œ ì¸ì§€í•˜ê¸° ì–´ë ¤ìš´ ê±°ì‹œì , ë¯¸ì‹œì ì¸ í˜„ìƒì„ ë°ì´í„°ì— ê¸°ë°˜í•´ ê´€ëŒê°ì´ ì´í•´í•˜ê³  ê°ê°í•´ë³´ê¸°ë¥¼ ìœ ë„í•œë‹¤.">
+                        footprintëŠ” ë°ì´í„°ë¡œ ì¼ìƒì˜ ë§¤ì²´ë¥¼ ë§ˆì°°ì‹œì¼œ ìë™ì°¨ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€(Non-exhaust PM)ë¥¼ ì‹œê°í™”í•œ ì‘í’ˆì´ë‹¤. ìë™ì°¨ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€ëŠ”
+                        íƒ€ì´ì–´-ì•„ìŠ¤íŒ”íŠ¸, ë¸Œë ˆì´í¬ íŒ¨ë“œ-ë””ìŠ¤í¬ ì‚¬ì´ì˜ ë§ˆì°°ë¡œ ë°œìƒí•œë‹¤. ì´ ë¶€ì‚°ë¬¼ì€ ì°¨ëŸ‰ì„ ì œì–´í•˜ëŠ” ì¸ê°„ì˜ ë°œì§“ìœ¼ë¡œ, í‰ë²”í•œ ì¼ìƒ ì†ì˜ ë°œìêµ­ì²˜ëŸ¼ ìƒê²¨ë‚œë‹¤. footprintëŠ”
+                        ì¼ìƒì— ì¡´ì¬í•˜ëŠ” ë¶„í•„ê³¼ ê°™ì€ ìµìˆ™í•œ ë¬¼ì§ˆì„ ì‚¬ìš©í•´ ë³´ì´ì§€ ì•ŠëŠ” ë¯¸ì„¸ë¨¼ì§€ë¥¼ ë…¸ê³¨ì ìœ¼ë¡œ ë“œëŸ¬ë‚¸ë‹¤. ë§ˆì°°ë¡œ ë§ˆëª¨ë˜ëŠ” ë¬¼ì§ˆì€ ë¹„(é)ë°°ê¸° ë¯¸ì„¸ë¨¼ì§€ë¥¼ ë°œìƒì‹œí‚¤ëŠ” í™˜ê²½ë³€ìˆ˜ ë°ì´í„°ì¸
+                        ì§€ë©´ì˜¨ë„, ìŠµë„, ì°¨ëŸ‰ í†µí–‰ëŸ‰, ì°¨ëŸ‰ í†µí–‰ì†ë„ë¥¼ ë‚˜íƒ€ë‚´ë©°, ê·¸ ë°ì´í„° ê°’ì— ë”°ë¼ ìƒëŒ€ì ìœ¼ë¡œ ì‚¬ì´ì¦ˆê°€ ë‹¬ë¼ì§„ë‹¤. í’ì†ë°ì´í„°ì— ë”°ë¼ ì†ë„ê°€ ì œì–´ë˜ëŠ” ì‘í’ˆì˜ ì¿¨ë§íŒ¬ì€ í”¼ê·¸ë¨¼íŠ¸ì™€
+                        ê·¸ë¼ìš´ë“œì˜ ë§ˆì°° ê·¸ë¦¬ê³  ë§ˆì°°ë¡œ ë°œìƒí•˜ëŠ” ë¯¸ì„¸ë¨¼ì§€ì˜ í™•ì‚°ì— ì˜í–¥ì„ ë¯¸ì¹œë‹¤. ì‘í’ˆì€ ì¼ìƒì—ì„œ ì¸ì§€í•˜ê¸° ì–´ë ¤ìš´ ê±°ì‹œì , ë¯¸ì‹œì ì¸ í˜„ìƒì„ ë°ì´í„°ì— ê¸°ë°˜í•´ ê´€ëŒê°ì´ ì´í•´í•˜ê³ 
+                        ê°ê°í•´ë³´ê¸°ë¥¼ ìœ ë„í•œë‹¤.</p>
+                </div>
+            </div>
+
+            <div class="work-item fade-in">
+                <div class="work-content">
+                    <h3 class="work-title" data-en="The Musical Score of City" data-ko="ë„ì‹œì˜ ì•…ë³´ë“¤">ë„ì‹œì˜ ì•…ë³´ë“¤</h3>
+                    <p class="work-year" data-en="2017" data-ko="2017">2017</p>
+                    <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing,
+                        Max/MSP</p>
+                    <div class="video-container">
+                        <iframe id="work4-video-iframe" src="" title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="work-description">
+                        <p data-en="This work started from the questions, 'What is a city? How does the city approach me?'.<br>It visualizes and sonifies 30 years of building data from 25 districts in Seoul."
+                            data-ko="â€˜ë„ì‹œëŠ” ë¬´ì—‡ì¸ê°€? ë„ì‹œëŠ” ë‚˜ì—ê²Œ ì–´ë–»ê²Œ ë‹¤ê°€ì˜¤ëŠ”ê°€?â€™ë¼ëŠ” ë¬¼ìŒì—ì„œ ì¶œë°œí•œ ì‘ì—….<br>ì„œìš¸ 25ê°œ êµ¬ì˜ 30ë…„ê°„ ê±´ë¬¼ë°ì´í„°ë¥¼ ë¶„ì„í•˜ì—¬ ì‹œê°í™”-ì²­ê°í™”í•œ ì‘ì—…ì´ë‹¤.">
+                            â€˜ë„ì‹œëŠ” ë¬´ì—‡ì¸ê°€? ë„ì‹œëŠ” ë‚˜ì—ê²Œ ì–´ë–»ê²Œ ë‹¤ê°€ì˜¤ëŠ”ê°€?â€™ë¼ëŠ” ë¬¼ìŒì—ì„œ ì¶œë°œí•œ ì‘ì—….<br>ì„œìš¸ 25ê°œ êµ¬ì˜ 30ë…„ê°„ ê±´ë¬¼ë°ì´í„°ë¥¼ ë¶„ì„í•˜ì—¬ ì‹œê°í™”-ì²­ê°í™”í•œ ì‘ì—…ì´ë‹¤.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="contact fade-in" id="contact">
+            <div class="section-title-wrapper">
+                <h2 class="section-title" data-en="Contact" data-ko="ì—°ë½ì²˜">ì—°ë½ì²˜</h2>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ueber_ueber/" target="_blank" class="social-icon"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/ueberueber/" target="_blank" class="social-icon"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.youtube.com/watch?v=qZpZjA_UhxA" target="_blank" class="social-icon"><i
+                        class="fab fa-youtube"></i></a>
+            </div>
+        </section>
+
+        <section class="cv-section fade-in" id="cv">
+            <div class="section-title-wrapper">
+                <h2 class="section-title" data-en="CV" data-ko="CV">CV</h2>
+            </div>
+            <div class="cv-content">
+                <h4><span data-en="Summary" data-ko="Summary">Summary</span></h4>
+                <p data-en="I have built data infrastructure and fostered a data-driven culture to create organizations where data flows seamlessly. Starting my career as a developer, I have gained experience as a Data Analyst/Engineer/Scientist, Data Team Lead, and CTO, handling large volumes of data across diverse domains. Currently, as the AI Creative Director at JYP Entertainment, I am leading AI-driven new business initiatives and R&D."
+                    data-ko="ë°ì´í„°ê°€ íë¥´ëŠ” ì¡°ì§ì„ ë§Œë“¤ê¸° ìœ„í•´ ë°ì´í„° ì¸í”„ë¼, ë°ì´í„°ë¡œ ì¼í•˜ëŠ” ë¬¸í™”ë¥¼ ë§Œë“¤ì–´ì™”ìŠµë‹ˆë‹¤. ê°œë°œìë¡œ ì»¤ë¦¬ì–´ë¥¼ ì‹œì‘í•´ ë°ì´í„° ë¶„ì„ê°€/ì—”ì§€ë‹ˆì–´/ì‚¬ì´ì–¸í‹°ìŠ¤íŠ¸, ë°ì´í„°íŒ€ ë¦¬ë“œì™€ CTOë¥¼ ê²½í—˜í•˜ë©° ë‹¤ì–‘í•œ ë„ë©”ì¸ì—ì„œ ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ ë‹¤ë¤„ì™”ìŠµë‹ˆë‹¤. í˜„ì¬ëŠ” JYPì˜ AI Creative Directorë¡œì„œ AIì‹ ì‚¬ì—…ê³¼ R&Dë¥¼ ë¦¬ë”©í•˜ê³  ìˆìŠµë‹ˆë‹¤.">
+                    ë°ì´í„°ê°€ íë¥´ëŠ” ì¡°ì§ì„ ë§Œë“¤ê¸° ìœ„í•´ ë°ì´í„° ì¸í”„ë¼, ë°ì´í„°ë¡œ ì¼í•˜ëŠ” ë¬¸í™”ë¥¼ ë§Œë“¤ì–´ì™”ìŠµë‹ˆë‹¤. ê°œë°œìë¡œ ì»¤ë¦¬ì–´ë¥¼ ì‹œì‘í•´ ë°ì´í„° ë¶„ì„ê°€/ì—”ì§€ë‹ˆì–´/ì‚¬ì´ì–¸í‹°ìŠ¤íŠ¸, ë°ì´í„°íŒ€ ë¦¬ë“œì™€ CTOë¥¼
+                    ê²½í—˜í•˜ë©° ë‹¤ì–‘í•œ ë„ë©”ì¸ì—ì„œ ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ ë‹¤ë¤„ì™”ìŠµë‹ˆë‹¤. í˜„ì¬ëŠ” JYPì˜ AI Creative Directorë¡œì„œ AIì‹ ì‚¬ì—…ê³¼ R&Dë¥¼ ë¦¬ë”©í•˜ê³  ìˆìŠµë‹ˆë‹¤.</p>
+
+                <h4><span data-en="Work Experience" data-ko="Work experience">Work experience</span></h4>
+                <div class="cv-work-item">
+                    <strong data-en="AI Creative Director, JYP Entertainment"
+                        data-ko="AI Creative Director, JYP Entertainment">AI Creative Director, JYP
+                        Entertainment</strong>
+                    <span data-en="2024-06 - Present" data-ko="2024-06 - í˜„ì¬">2024-06 - í˜„ì¬</span>
+                    <p data-en="[Planning AI-driven new businesses, prototyping, R&D, and technology validation]"
+                        data-ko="[AIí™œìš© ì‹ ì‚¬ì—… ê¸°íš, í”„ë¡œí† íƒ€ì´í•‘, R&D ë° ê¸°ìˆ ê²€ì¦]">Planning AI-driven new businesses, prototyping, R&D,
+                        and technology validation</p>
+                    <div class="cv-list-work">
+                        <p data-en="Ideated, prototyped, stealth-tested, data-validated, and reported over 50 AI-driven new business concepts to executives."
+                            data-ko="AIë¥¼ í™œìš©í•œ 50ì—¬ê°€ì§€ì˜ ì‹ ì‚¬ì—… ì•„ì´ë°ì´ì…˜/í”„ë¡œí† íƒ€ì´í•‘/ìŠ¤í…”ìŠ¤íƒœìŠ¤íŠ¸/ë°ì´í„° ê²€ì¦/ì„ì›ë³´ê³ ">Ideated, prototyped,
+                            stealth-tested, data-validated, and reported over 50 AI-driven new business concepts to
+                            executives.</p>
+                        <p data-en="Collected quantitative and qualitative data through stealth user testing of prototype services."
+                            data-ko="í”„ë¡œí† íƒ€ì´í•‘ ì„œë¹„ìŠ¤ì˜ ìŠ¤í…”ìŠ¤ ìœ ì €í…ŒìŠ¤íŠ¸ë¥¼ í†µí•´ ì •ëŸ‰/ì •ì„±ë°ì´í„° ìˆ˜ì§‘.">Collected quantitative and qualitative data
+                            through stealth user testing of prototype services.</p>
+                        <p data-en="Designed key metrics, implemented logging, and developed dashboards to analyze service performance and drive continuous improvement, informing go/no-go decisions for projects."
+                            data-ko="ì‚¬ì—…ì˜  go/stopì„  ê²°ì •í•  í•µì‹¬ì§€í‘œ ë””ìì¸/ë¡œê¹…/ëŒ€ì‹œë³´ë“œ ê°œë°œë¡œ ì„œë¹„ìŠ¤ ì„±ê³¼ë¶„ì„ ë° ì§€ì†ì  ê°œì„ ">Designed key metrics,
+                            implemented logging, and developed dashboards to analyze service performance and drive
+                            continuous improvement, informing go/no-go decisions for projects.</p>
+                        <p data-en="Led the refinement of business ideas through planning and operating AI R&D initiatives."
+                            data-ko="AI R&D ê¸°íš, ìš´ì˜ì„ í†µí•´ ì‚¬ì—… ì•„ì´ë””ì–´ êµ¬ì²´í™” ë¦¬ë“œ">Led the refinement of business ideas through
+                            planning and operating AI R&D initiatives.</p>
+                        <p data-en="Managed hiring processes aligned with business direction. Created competency models and interview question guides for informal chats (tea time) and formal interviews."
+                            data-ko="ì‚¬ì—… ë°©í–¥ì— ë”°ë¥¸ ì±„ìš© ì§„í–‰. í‹°íƒ€ì„ ë° ì¸í„°ë·°ì— í™œìš©í•  ì—­ëŸ‰ëª¨ë¸ê³¼ ì§ˆë¬¸ ê°€ì´ë“œ ì œì‘">Managed hiring processes aligned
+                            with business direction. Created competency models and interview question guides for
+                            informal chats (tea time) and formal interviews.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Data Team Lead, Data Engineer, Carpenstreet"
+                        data-ko="ë°ì´í„°íŒ€ ë¦¬ë“œ, Data Engineer, Carpenstreet">Data Team Lead, Data Engineer,
+                        Carpenstreet</strong>
+                    <span data-en="2022-11 - 2023-10" data-ko="2022-11 - 2023-10">2022-11 - 2023-10</span>
+                    <p data-en="[Establishing a metrics/data-driven work culture and systems, Leading AI New Business Task Force]"
+                        data-ko="[ì§€í‘œ-ë°ì´í„° ê¸°ë°˜ìœ¼ë¡œ ì¼í•˜ëŠ” ë¬¸í™”ì™€ ì‹œìŠ¤í…œ êµ¬ì¶•, AI ì‹ ì‚¬ì—… TF ë¦¬ë”©]">Establishing a metrics/data-driven work
+                        culture and systems, Leading AI New Business Task Force</p>
+                    <div class="cv-list-work">
+                        <p data-en="Designed company-wide, team-specific, and individual metrics in collaboration with business units and executives. Developed and disseminated dashboards for work monitoring and feedback."
+                            data-ko="ì „ì‚¬-íŒ€-ê°œì¸ì„ ìœ„í•œ ì§€í‘œë¥¼ ì‚¬ì—…ë¶€ì™€ ì„ì›ê³¼ í˜‘ì—…í•˜ì—¬ ì„¤ê³„. ì—…ë¬´ ëª¨ë‹ˆí„°ë§/í”¼ë“œë°±ì„ ìœ„í•œ ëŒ€ì‹œë³´ë“œ ê°œë°œ ë° ì „íŒŒ">Designed
+                            company-wide, team-specific, and individual metrics in collaboration with business units and
+                            executives. Developed and disseminated dashboards for work monitoring and feedback.</p>
+                        <p data-en="Established work pipelines, data platforms, and business processes for handling company-wide data requests."
+                            data-ko="ì „ì‚¬ ë°ì´í„° ìš”ì²­ì„ ì²˜ë¦¬í•˜ëŠ” ì—…ë¬´ íŒŒì´í”„ë¼ì¸, ë°ì´í„° í”Œë«í¼, ì—…ë¬´ í”„ë¡œì„¸ìŠ¤ ìˆ˜ë¦½">Established work pipelines, data
+                            platforms, and business processes for handling company-wide data requests.</p>
+                        <p data-en="Supported relevant departments (Development, Business, Marketing, IP Production, Operations) with various data analyses to resolve issues."
+                            data-ko="ê°ì¢… ë°ì´í„° ë¶„ì„ìœ¼ë¡œ ê°œë°œ, ì‚¬ì—…, ë§ˆì¼€íŒ…, ipì œì‘, ìš´ì˜íŒ€ ë“± ìœ ê´€ë¶€ì„œì˜ ë¬¸ì œ í•´ê²° ë°ì´í„° ì§€ì›.">Supported relevant
+                            departments (Development, Business, Marketing, IP Production, Operations) with various data
+                            analyses to resolve issues.</p>
+                        <p data-en="Enhanced data literacy among staff through weekly company-wide data sessions (covering work challenges, metric achievement mentoring, data tool training, etc.)."
+                            data-ko="ë§¤ì£¼ ì „ì‚¬ ë°ì´í„° ì„¸ì…˜ì„ ì—´ì–´ êµ¬ì„±ì›ì˜ ë°ì´í„° ë¦¬í„°ëŸ¬ì‹œ í–¥ìƒ (ì—…ë¬´ ê³ ë¯¼, ì§€í‘œ ë‹¬ì„± ë©˜í† ë§, ë°ì´í„° íˆ´ êµìœ¡ ë“±)">Enhanced data
+                            literacy among staff through weekly company-wide data sessions (covering work challenges,
+                            metric achievement mentoring, data tool training, etc.).</p>
+                        <p data-en="Led AI new business research and projects, including team formation, prototyping, metric design, data validation, and media advertising execution."
+                            data-ko="AI ì‹ ì‚¬ì—… ë¦¬ì„œì¹˜ ë° í”„ë¡œì íŠ¸ ë¦¬ë”©, íŒ€ êµ¬ì„±, í”„ë¡œí† íƒ€ì´í•‘, ì§€í‘œì„¤ê³„, ë°ì´í„° ê²€ì¦, ë§¤ì²´ê´‘ê³  ì§‘í–‰">Led AI new business
+                            research and projects, including team formation, prototyping, metric design, data
+                            validation, and media advertising execution.</p>
+                        <p data-en="Led UX research. Designed and educated on UX research methodologies for new service PMF (Product-Market Fit) validation and MVP design. Designed and conducted core user interviews."
+                            data-ko="UXë¦¬ì„œì¹˜ ë¦¬ë“œ. ì‹ ê·œ ì„œë¹„ìŠ¤ì˜ PMFê²€ì¦, MVPì„¤ê³„í•˜ê¸° ìœ„í•œ UXë¦¬ì„œì¹˜ ë°©ë²•ë¡ ì„ ì„¤ê³„í•˜ê³  êµìœ¡. ì½”ì–´ ìœ ì € ì¸í„°ë·° ì„¤ê³„ ë° ì§„í–‰">Led UX
+                            research. Designed and educated on UX research methodologies for new service PMF
+                            (Product-Market Fit) validation and MVP design. Designed and conducted core user interviews.
+                        </p>
+                        <p data-en="Developed competency models for hiring, created Job Descriptions (JDs), defined hiring processes, wrote interview guides, and provided training."
+                            data-ko="ì±„ìš©ì„ ìœ„í•œ ì—­ëŸ‰ëª¨ë¸ ê°œë°œ, JD, ì±„ìš© í”„ë¡œì„¸ìŠ¤, ì¸í„°ë·° ê°€ì´ë“œ ì‘ì„±ê³¼ êµìœ¡.">Developed competency models for
+                            hiring, created Job Descriptions (JDs), defined hiring processes, wrote interview guides,
+                            and provided training.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Data Scientist, Photo Widget" data-ko="Data Scientist, Photo Widget">Data
+                        Scientist, Photo Widget</strong>
+                    <span data-en="2022-05 - 2022-08" data-ko="2022-05 - 2022-08">2022-05 - 2022-08</span>
+                    <p data-en="[Building data infrastructure supporting a service with 2.5 million MAU]"
+                        data-ko="[MAU 250ë§Œ ì„œë¹„ìŠ¤ë¥¼ ì§€íƒ±í•˜ëŠ” ë°ì´í„° ì¸í”„ë¼ êµ¬ì¶•]">Building data infrastructure supporting a service with
+                        2.5 million MAU</p>
+                    <div class="cv-list-work">
+                        <p data-en="Supported decision-making for Business, Operations, Design, and Development teams by designing metrics, logs, and data structures for a global app with 270k DAU."
+                            data-ko="DAU 27ë§Œì˜ ê¸€ë¡œë²Œ ì•± ì§€í‘œ ì„¤ê³„, ë¡œê·¸ ì„¤ê³„, ë°ì´í„° êµ¬ì¡° ì„¤ê³„ë¡œ ì‚¬ì—…, ìš´ì˜, ë””ìì¸, ê°œë°œíŒ€ì˜ ì˜ì‚¬ê²°ì • ì§€ì›">Supported
+                            decision-making for Business, Operations, Design, and Development teams by designing
+                            metrics, logs, and data structures for a global app with 270k DAU.</p>
+                        <p data-en="Designed and developed a Lambda Architecture for handling real-time/batch data. Developed processes using AWS to collect, refine, and visualize service logs in real-time and batch modes."
+                            data-ko="ì‹¤ì‹œê°„/ë°°ì¹˜ ë°ì´í„°ë¥¼ í•¸ë“¤ë§í•˜ëŠ” Lambda Architecture ì„¤ê³„ ë° ê°œë°œ. AWSë¥¼ í™œìš©í•´ ì„œë¹„ìŠ¤ ë¡œê·¸ë¥¼ ì‹¤ì‹œê°„/ë°°ì¹˜ë¡œ ìˆ˜ì§‘í•˜ê³  ì •ì œí•˜ê³  ì‹œê°í™”í•˜ëŠ” í”„ë¡œì„¸ìŠ¤ ê°œë°œ.">
+                            Designed and developed a Lambda Architecture for handling real-time/batch data. Developed
+                            processes using AWS to collect, refine, and visualize service logs in real-time and batch
+                            modes.</p>
+                        <p data-en="Enabled real-time monitoring of statistical and business metrics through dashboard development. Installed internal dashboards."
+                            data-ko="ëŒ€ì‹œë³´ë“œ ê°œë°œë¡œ í†µê³„ ë° ë¹„ì¦ˆë‹ˆìŠ¤ ì§€í‘œë¥¼ ì‹¤ì‹œê°„ í™•ì¸ê°€ëŠ¥í•˜ê²Œ ì§€ì›. ì‚¬ë‚´ ëŒ€ì‹œë³´ë“œ ì„¤ì¹˜">Enabled real-time monitoring of
+                            statistical and business metrics through dashboard development. Installed internal
+                            dashboards.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="CTO, Data Scientist, HomoMimicus" data-ko="CTO, Data Scientist, HomoMimicus">CTO,
+                        Data Scientist, HomoMimicus</strong>
+                    <span data-en="2017-07 - 2022-04" data-ko="2017-07 - 2022-04">2017-07 - 2022-04</span>
+                    <p data-en="[Led the development of machine learning search services and data infrastructure utilizing large datasets on AWS/GCP]"
+                        data-ko="[AWS/GCPë¥¼ í™œìš©í•´ ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ í™œìš©í•˜ëŠ” ë¨¸ì‹ ëŸ¬ë‹ ê²€ìƒ‰ì„œë¹„ìŠ¤ì™€ ë°ì´í„° ì¸í”„ë¼ êµ¬ì¶• ë¦¬ë“œ]">Led the development of machine
+                        learning search services and data infrastructure utilizing large datasets on AWS/GCP</p>
+                    <div class="cv-list-work">
+                        <p data-en="Led the end-to-end (A-Z) development of a service recommending biomimicry ideas by collecting and analyzing tens of millions of NLP-related papers and patents. Designed, developed, and operated the global ML search service."
+                            data-ko="ê¸€ë¡œë²Œ ë¨¸ì‹ ëŸ¬ë‹ ê²€ìƒ‰ì„œë¹„ìŠ¤ ì„¤ê³„/ê°œë°œ/ìš´ì˜. ìì—°ì— ê´€ë ¨ëœ ìˆ˜ì²œë§Œê±´ì˜ ë…¼ë¬¸, íŠ¹í—ˆ ë°ì´í„°ë¥¼ ìˆ˜ì§‘í•˜ê³  ë¶„ì„í•˜ì—¬ ìì—°ëª¨ë°© ì•„ì´ë””ì–´ë¥¼ ì¶”ì²œí•´ì£¼ëŠ” ì„œë¹„ìŠ¤ A-Z ë¦¬ë”©">
+                            Led the end-to-end (A-Z) development of a service recommending biomimicry ideas by
+                            collecting and analyzing tens of millions of NLP-related papers and patents. Designed,
+                            developed, and operated the global ML search service.</p>
+                        <p data-en="Developed BERT-based search/recommendation services. Designed and operated the entire system architecture on AWS. Built and operated CPU-based ML model serving infrastructure, achieving 200x cost reduction compared to GPU."
+                            data-ko="ë¨¸ì‹ ëŸ¬ë‹(BERT)ê¸°ë°˜ì˜ ê²€ìƒ‰/ì¶”ì²œ ì„œë¹„ìŠ¤ ê°œë°œ. AWSì—ì„œ ì „ì²´ ì‹œìŠ¤í…œ ì•„í‚¤í…ì³ ì„¤ê³„ ë° ìš´ì˜. CPU ë¨¸ì‹ ëŸ¬ë‹ ëª¨ë¸ ì„œë¹™ì„œë²„ êµ¬ì¶• ë° ìš´ì˜ìœ¼ë¡œ GPUëŒ€ë¹„ 200ë°° ë¹„ìš© ì ˆê°">
+                            Developed BERT-based search/recommendation services. Designed and operated the entire system
+                            architecture on AWS. Built and operated CPU-based ML model serving infrastructure, achieving
+                            200x cost reduction compared to GPU.</p>
+                        <p data-en="Conducted various projects and provided technical consulting for domestic and international military organizations, research institutes, universities, government agencies, and corporations."
+                            data-ko="êµ­ë‚´ì™¸ êµ°, ì—°êµ¬ì†Œ, í•™êµ, ê¸°ê´€, ê¸°ì—…ê³¼ ê°ì¢… í”„ë¡œì íŠ¸ ë° ê¸°ìˆ ì»¨ì„¤íŒ… ì§„í–‰.">Conducted various projects and
+                            provided technical consulting for domestic and international military organizations,
+                            research institutes, universities, government agencies, and corporations.</p>
+                        <p data-en="Designed service user action logs, developed data pipelines, built dashboards, and monitored user responses to new features for service improvement."
+                            data-ko="ì„œë¹„ìŠ¤ ìœ ì € ì•¡ì…˜ ë¡œê·¸ ì„¤ê³„, ë°ì´í„° íŒŒì´í”„ë¼ì¸ ê°œë°œ, ëŒ€ì‹œë³´ë“œ ê°œë°œ. ì„œë¹„ìŠ¤ì˜ ì‹ ê·œ í”¼ì³ ì¶”ê°€ì— ë”°ë¥¸ ìœ ì € ë°˜ì‘ ëª¨ë‹ˆí„°ë§ ë° ì„œë¹„ìŠ¤ ê°œì„  ì§„í–‰">
+                            Designed service user action logs, developed data pipelines, built dashboards, and monitored
+                            user responses to new features for service improvement.</p>
+                        <p data-en="Collaborated with frontend/backend developers, UX researchers, designers, and consultants to design and lead the service roadmap and development prioritization."
+                            data-ko="í”„ë¡ íŠ¸, ë°±ì—”ë“œ, UXë¦¬ì„œì³, ë””ìì´ë„ˆ, ì»¨ì„¤í„´íŠ¸ ë“±ê³¼ í˜‘ì—…í•˜ë©° ì„œë¹„ìŠ¤ ë¡œë“œë§µ ë° ê°œë°œ ìš°ì„ ìˆœìœ„ ì„¤ê³„/ë¦¬ë“œ">Collaborated with
+                            frontend/backend developers, UX researchers, designers, and consultants to design and lead
+                            the service roadmap and development prioritization.</p>
+                        <p data-en="Designed custom UI/UX to facilitate interdisciplinary idea searching within the service; filed related patents."
+                            data-ko="ì„œë¹„ìŠ¤ ë‚´ì˜ ë‹¤í•™ì œ ì•„ì´ë””ì–´ ê²€ìƒ‰ì„ ë„ì™€ì£¼ëŠ” ë§ì¶¤í˜• UI/UX ë””ìì¸ ë° íŠ¹í—ˆì¶œì›">Designed custom UI/UX to facilitate
+                            interdisciplinary idea searching within the service; filed related patents.</p>
+                        <p data-en="Improved service features using qualitative data obtained through UX research. Established internal UX research methodology guides (usability testing, focus groups, surveys, card sorting, etc.)."
+                            data-ko="UX ë¦¬ì„œì¹˜ë¥¼ í†µí•´ ì •ì„±ë°ì´í„°ë¥¼ í™œìš©í•œ ì„œë¹„ìŠ¤ í”¼ì³ ê°œì„  ì§„í–‰. ì‚¬ë‚´ UX ë¦¬ì„œì¹˜ ë°©ë²•ë¡ (ì‚¬ìš©ì„±í…ŒìŠ¤íŠ¸, í¬ì»¤ìŠ¤ ê·¸ë£¹ í…ŒìŠ¤íŠ¸, ì„¤ë¬¸, ì¹´ë“œì†ŒíŒ… ë“±) ê°€ì´ë“œ ìˆ˜ë¦½">
+                            Improved service features using qualitative data obtained through UX research. Established
+                            internal UX research methodology guides (usability testing, focus groups, surveys, card
+                            sorting, etc.).</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Developer, Google News Lab Fellowship (3-month project)"
+                        data-ko="ê°œë°œì, Google NewsLab Fellowship (3ê°œì›” í”„ë¡œì íŠ¸)">Developer, Google News Lab Fellowship
+                        (3-month project)</strong>
+                    <span data-en="2017-12 - 2018-03" data-ko="2017-12 - 2018-03">2017-12 - 2018-03</span>
+                    <p data-en="[Analyzing diverse societal data to create content for various media outlets]"
+                        data-ko="[ì‚¬íšŒì˜ ë‹¤ì–‘í•œ ë°ì´í„°ë¥¼ ë¶„ì„í•˜ì—¬ ë‹¤ì–‘í•œ ë§¤ì²´ì˜ ì½˜í…ì¸ ë¡œ ì œì‘]">Analyzing diverse societal data to create content
+                        for various media outlets</p>
+                    <div class="cv-list-work">
+                        <p data-en="Collaborated on projects with domestic media companies as part of a team comprising journalists, designers, video producers, and developers."
+                            data-ko="ê¸°ì, ë””ìì´ë„ˆ, ì˜ìƒì œì‘ì, ê°œë°œìê°€ í•œ íŒ€ì„ ì´ë£¨ì–´ êµ­ë‚´ ì–¸ë¡ ì‚¬ì™€ í˜‘ì—… í”„ë¡œì íŠ¸ ì§„í–‰">Collaborated on projects with
+                            domestic media companies as part of a team comprising journalists, designers, video
+                            producers, and developers.</p>
+                        <p data-en="Developed data journalism content by collecting quantitative and qualitative data from target audiences."
+                            data-ko="ì •ëŸ‰/ì •ì„±ë°ì´í„°ë¥¼ íƒ€ê²Ÿê³ ê°ìœ¼ë¡œ ë¶€í„° ìˆ˜ì§‘í•˜ì—¬ ë°ì´í„° ì €ë„ë¦¬ì¦˜ ì½˜í…ì¸  ê°œë°œ">Developed data journalism content by
+                            collecting quantitative and qualitative data from target audiences.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Data Scientist, Art Center Nabi (6-month project)"
+                        data-ko="Data Scientist, Art Center Nabi (6ê°œì›” í”„ë¡œì íŠ¸)">Data Scientist, Art Center Nabi (6-month
+                        project)</strong>
+                    <span data-en="2017-06 - 2017-12" data-ko="2017-06 - 2017-12">2017-06 - 2017-12</span>
+                    <p data-en="[Conducted interdisciplinary (Technology, Art, Medicine, Biology, Urban Engineering) data projects]"
+                        data-ko="[ë‹¤í•™ì œ(ê¸°ìˆ , ì˜ˆìˆ , ì˜í•™, ìƒë¬¼í•™, ë„ì‹œê³µí•™)ë°ì´í„° í”„ë¡œì íŠ¸ ìˆ˜í–‰]">Conducted interdisciplinary (Technology, Art,
+                        Medicine, Biology, Urban Engineering) data projects</p>
+                    <div class="cv-list-work">
+                        <p data-en="Conducted research on cities and cancer in collaboration with Seoul National University Hospital, Art Center Nabi, and Seoul Women's University B-MADE Center."
+                            data-ko="ì„œìš¸ëŒ€ë³‘ì›, ë¯¸ìˆ ê´€ ì•„íŠ¸ì„¼í„° ë‚˜ë¹„, ì„œìš¸ì—¬ëŒ€ B-MADEì„¼í„°ì™€ í˜‘ì—…í•˜ì—¬ ë„ì‹œì™€ ì•”ì— ëŒ€í•œ ì—°êµ¬ ì§„í–‰.">Conducted research on
+                            cities and cancer in collaboration with Seoul National University Hospital, Art Center Nabi,
+                            and Seoul Women's University B-MADE Center.</p>
+                        <p data-en="Responsible for collecting and analyzing data and papers on cities and cancer, and transforming them into visual and auditory representations (visualization and sonification)."
+                            data-ko="ë„ì‹œì™€ ì•”ì— ëŒ€í•œ ë°ì´í„°ì™€ ë…¼ë¬¸ì„ ìˆ˜ì§‘í•˜ê³  ë¶„ì„í•˜ì—¬ ì‹œê°, ì²­ê°í™” ë‹´ë‹¹">Responsible for collecting and analyzing
+                            data and papers on cities and cancer, and transforming them into visual and auditory
+                            representations (visualization and sonification).</p>
+                        <p data-en="Participated in global hackathons based on the research content."
+                            data-ko="ì—°êµ¬ ë‚´ìš©ìœ¼ë¡œ ê¸€ë¡œë²Œ í•´ì»¤í†¤ ì°¸ì—¬">Participated in global hackathons based on the research
+                            content.</p>
+                        <p data-en="Exhibited the work <NeoPlasia : city and cancer> at the exhibition <neotopia data and humanity> held at Art Center Nabi's Tajakmadang."
+                            data-ko="ì•„íŠ¸ì„¼í„° ë‚˜ë¹„ íƒ€ì‘ë§ˆë‹¹ì—ì„œ ì—´ë¦° <neotopia data and humanity>ë¼ëŠ” ì „ì‹œì— <NeoPlasia : city and cancer>ë¼ëŠ” ì‘í’ˆ ì „ì‹œ">
+                            Exhibited the work <NeoPlasia : city and cancer> at the exhibition <neotopia data and
+                                    humanity> held at Art Center Nabi's Tajakmadang.</p>
+                        <p data-en="Created and presented a Data Visualization/Sonification work analyzing 30 years of building data for Seoul's 25 districts."
+                            data-ko="ì„œìš¸ì˜ 25ê°œ êµ¬ì˜ 30ë…„ê°„ ê±´ë¬¼ ë°ì´í„°ë¥¼ ë¶„ì„í•œ Data Visualization/Sonification ì‘ì—… ì œì‘/ë°œí‘œ">Created and
+                            presented a Data Visualization/Sonification work analyzing 30 years of building data for
+                            Seoul's 25 districts.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Mobile Data Analyst, NCSoft" data-ko="ëª¨ë°”ì¼ ë°ì´í„° ë¶„ì„ê°€, ì—”ì”¨ì†Œí”„íŠ¸">Mobile Data Analyst,
+                        NCSoft</strong>
+                    <span data-en="2017-01 - 2017-05" data-ko="2017-01 - 2017-05">2017-01 - 2017-05</span>
+                    <p data-en="[Analyzed mobile game data, collaborating with domestic and international offices. Supported executive decision-making]"
+                        data-ko="[ëª¨ë°”ì¼ ê²Œì„ ë°ì´í„°ë¥¼ ë¶„ì„í•˜ì—¬ êµ­ë‚´ì™¸ ì˜¤í”¼ìŠ¤ì™€ í˜‘ì—…. ì„ì› ì˜ì‚¬ê²°ì • ì§€ì›]">Analyzed mobile game data, collaborating
+                        with domestic and international offices. Supported executive decision-making</p>
+                    <div class="cv-list-work">
+                        <p data-en="Supported decision-making for domestic and international business units by extracting and analyzing data for â€˜Lineage Red Knightsâ€™, â€˜Final Bladeâ€™, and â€˜H2â€™."
+                            data-ko="'ë¦¬ë‹ˆì§€ ë ˆë“œë‚˜ì´ì¸ ', 'íŒŒì´ë„ ë¸”ë ˆì´ë“œ', 'H2' ë°ì´í„° ì¶”ì¶œ ë° ë¶„ì„ìœ¼ë¡œ êµ­ë‚´ì™¸ ì‚¬ì—…ë¶€ ì˜ì‚¬ê²°ì • ì§€ì›">Supported
+                            decision-making for domestic and international business units by extracting and analyzing
+                            data for â€˜Lineage Red Knightsâ€™, â€˜Final Bladeâ€™, and â€˜H2â€™.</p>
+                        <p data-en="Collected user feedback on service updates by crawling user community data; reported findings weekly to leads via data reports."
+                            data-ko="ìœ ì € ì»¤ë®¤ë‹ˆí‹° ë°ì´í„° í¬ë¡¤ë§ìœ¼ë¡œ ì„œë¹„ìŠ¤ ì—…ë°ì´íŠ¸ì— ëŒ€í•œ ìœ ì € ë°˜ì‘ ìˆ˜ì§‘. ë°ì´í„° ë¦¬í¬íŠ¸ë¡œ ì£¼ê°„ ë¦¬ë”ë³´ê³ ">Collected user feedback
+                            on service updates by crawling user community data; reported findings weekly to leads via
+                            data reports.</p>
+                        <p data-en="Developed and internally exhibited visualization models for analyzing user content consumption processes."
+                            data-ko="ìœ ì € ì»¨í…ì¸  ì†Œë¹„ í”„ë¡œì„¸ìŠ¤ ë¶„ì„ì„ ìœ„í•œ ì‹œê°í™”ëª¨ë¸ì„ ê°œë°œí•˜ì—¬ ì‚¬ë‚´ ì „ì‹œ">Developed and internally exhibited
+                            visualization models for analyzing user content consumption processes.</p>
+                    </div>
+                </div>
+                <div class="cv-work-item">
+                    <strong data-en="Developer, AfreecaTV" data-ko="ê°œë°œì, ì•„í”„ë¦¬ì¹´í‹°ë¹„">Developer, AfreecaTV</strong>
+                    <span data-en="2015-06 - 2016-08" data-ko="2015-06 - 2016-08">2015-06 - 2016-08</span>
+                    <p data-en="[Solving business and service problems through development and data]"
+                        data-ko="[ê°œë°œ ë° ë°ì´í„°ë¡œ ë¹„ì¦ˆë‹ˆìŠ¤ì™€ ì„œë¹„ìŠ¤ì˜ ë¬¸ì œí•´ê²°]">Solving business and service problems through development
+                        and data</p>
+                    <div class="cv-list-work">
+                        <p data-en="Improved development efficiency by collecting, analyzing, and labeling chat data for AI BJ (Broadcasting Jockey) development, including developing and operating a management page."
+                            data-ko="AI BJê°œë°œì„ ìœ„í•œ ì±„íŒ… ë°ì´í„° ìˆ˜ì§‘, ë¶„ì„, ë¼ë²¨ë§ ê´€ë¦¬í˜ì´ì§€ ê°œë°œ ë° ìš´ì˜ìœ¼ë¡œ ê°œë°œ íš¨ìœ¨ í–¥ìƒ">Improved development
+                            efficiency by collecting, analyzing, and labeling chat data for AI BJ (Broadcasting Jockey)
+                            development, including developing and operating a management page.</p>
+                        <p data-en="Supported business decision-making for relevant departments and executives through analysis of large-scale real-time and batch data (Hadoop, Elasticsearch)."
+                            data-ko="ëŒ€ëŸ‰ì˜ ì‹¤ì‹œê°„, ë°°ì¹˜ ë°ì´í„° ë¶„ì„(Hadoop, ElasticSearch)ìœ¼ë¡œ ìœ ê´€ë¶€ì„œ ë° ì„ì›ì˜ ì‚¬ì—… ì˜ì‚¬ê²°ì • ì§€ì›">Supported
+                            business decision-making for relevant departments and executives through analysis of
+                            large-scale real-time and batch data (Hadoop, Elasticsearch).</p>
+                        <p data-en="Increased efficiency of user trend and service monitoring by designing and developing various service metrics."
+                            data-ko="ê°ì¢… ì„œë¹„ìŠ¤ ì§€í‘œë¥¼ ì„¤ê³„í•˜ê³  ê°œë°œí•˜ì—¬ ìœ ì € ë™í–¥ê³¼ ì„œë¹„ìŠ¤ ëª¨ë‹ˆí„°ë§ íš¨ìœ¨ ì¦ëŒ€">Increased efficiency of user trend and
+                            service monitoring by designing and developing various service metrics.</p>
+                        <p data-en="Achieved clean chat goals by developing profanity and advertisement detection modules for the monitoring team's moderation efforts, and developing a monitoring page."
+                            data-ko="ëª¨ë‹ˆí„°ë§ íŒ€ì˜ ë¶ˆëŸ‰ì±„íŒ… ì œì¬ë¥¼ ìœ„í•œ ìš•ì„¤ ë° ê´‘ê³  ëª¨ë“ˆ ê°œë°œ, ëª¨ë‹ˆí„°ë§ í˜ì´ì§€ ê°œë°œë¡œ í´ë¦°ì±„íŒ… ëª©í‘œ ë‹¬ì„±">Achieved clean chat
+                            goals by developing profanity and advertisement detection modules for the monitoring team's
+                            moderation efforts, and developing a monitoring page.</p>
+                        <p data-en="Improved internal work efficiency by developing various data visualization pages."
+                            data-ko="ê°ì¢… ë°ì´í„° ì‹œê°í™” í˜ì´ì§€ ê°œë°œë¡œ ì‚¬ë‚´ ì—…ë¬´ íš¨ìœ¨ í–¥ìƒ">Improved internal work efficiency by developing
+                            various data visualization pages.</p>
+                    </div>
+                </div>
+
+
+                <h4><span data-en="Skills" data-ko="Skills">Skills</span></h4>
+                <div class="cv-skills">
+                    <p data-en="<strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift, Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose"
+                        data-ko="AWS(EMR, S3, Lambda, Api gateway, RDS, DynamoDB, Opensearch, Aurora, Redshift, Athena, Ec2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose)">
+                        <strong>AWS:</strong> EMR, S3, Lambda, API Gateway, RDS, DynamoDB, OpenSearch, Aurora, Redshift,
+                        Athena, EC2, VPC, Route53, Lightsail, SageMaker, Kinesis, Firehose
+                    </p>
+                    <p data-en="<strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream"
+                        data-ko="GCP(Bigquery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub, Datastream)">
+                        <strong>GCP:</strong> BigQuery, Vertex AI, Compute Engine, Cloud Storage, Dataflow, Pub/Sub,
+                        Datastream
+                    </p>
+                    <p data-en="<strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards"
+                        data-ko="ì‹œê°í™” ì„œë¹„ìŠ¤(Tableau, Power BI, Data Studio, Looker, Quicksight, Superset, Metabase, Redash, Grafana, Kibana, Opensashboard)">
+                        <strong>Visualization Services:</strong> Tableau, Power BI, Data Studio, Looker, Quicksight,
+                        Superset, Metabase, Redash, Grafana, Kibana, OpenSearch Dashboards
+                    </p>
+                    <p data-en="<strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize"
+                        data-ko="ê¸°íƒ€ (Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive, Elasticsearch, Google Analytics, Mixpanel, hotjar, hackle, Google Optimize)">
+                        <strong>Others:</strong> Spark, Zeppelin, Jupyter notebook, Python, Fluentd, Hive,
+                        Elasticsearch, Google Analytics, Mixpanel, Hotjar, Hackle, Google Optimize
+                    </p>
+                </div>
+
+                <h4><span data-en="Artistic Practice & Recognition" data-ko="Artistic Practice & Recognition">Artistic
+                        Practice & Recognition</span></h4>
+                <h5><span data-en="Residencies" data-ko="ë ˆì§€ë˜ì‹œ">ë ˆì§€ë˜ì‹œ</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2021-2022, Daejeon Artience" data-ko="2021~2022, ëŒ€ì „ì•„í‹°ì–¸ìŠ¤">2021~2022, ëŒ€ì „ì•„í‹°ì–¸ìŠ¤</p>
+                    <p data-en="2019, Incheon Art Platform 10th Cohort" data-ko="2019, ì¸ì²œì•„íŠ¸í”Œë«í¼ 10ê¸°">2019, ì¸ì²œì•„íŠ¸í”Œë«í¼ 10ê¸°
+                    </p>
+                    <p data-en="2019, Asia Culture Center (ACC) First Half" data-ko="2019, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹(ACC) ìƒë°˜ê¸°">2019,
+                        êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹(ACC) ìƒë°˜ê¸°</p>
+                    <p data-en="2018, Art Center Nabi - Creative Mentoring Program for Young Professionals"
+                        data-ko="2018, Art Center Nabi - Creative Mentoring Program for Young Professionals">2018, Art
+                        Center Nabi - Creative Mentoring Program for Young Professionals</p>
+                </div>
+                <h5><span data-en="Exhibitions" data-ko="ì „ì‹œ">ì „ì‹œ</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2024, <Shining City, Dark Ecstasy>, Seoul Museum of Art (SeMA), Seoul"
+                        data-ko="2024, <ë¹›ë‚˜ëŠ” ë„ì‹œ, ì–´ë‘ìš´ í™©í™€ê²½>, ì„œìš¸ì‹œë¦½ë¯¸ìˆ ê´€, ì„œìš¸">2024, <ë¹›ë‚˜ëŠ” ë„ì‹œ, ì–´ë‘ìš´ í™©í™€ê²½>, ì„œìš¸ì‹œë¦½ë¯¸ìˆ ê´€, ì„œìš¸</p>
+                    <p data-en="2024, <FuturaCanvas>, Cave House, Seoul" data-ko="2024, <FuturaCanvas>, ì¼€ì´ë¸Œí•˜ìš°ìŠ¤, ì„œìš¸">
+                        2024, <FuturaCanvas>, ì¼€ì´ë¸Œí•˜ìš°ìŠ¤, ì„œìš¸</p>
+                    <p data-en="2023, <Clean Slate>, Mullae Art Space, Seoul" data-ko="2023, <ê¹¨ë—í•œ ì„íŒ>, ë¬¸ë˜ì˜ˆìˆ ê³µì¥, ì„œìš¸">2023,
+                        <ê¹¨ë—í•œ ì„íŒ>, ë¬¸ë˜ì˜ˆìˆ ê³µì¥, ì„œìš¸
+                    </p>
+                    <p data-en="2022, <Artience Daejeon>, Daejeon Artist House, Daejeon"
+                        data-ko="2022, <ì•„í‹°ì–¸ìŠ¤ ëŒ€ì „>, ëŒ€ì „ì˜ˆìˆ ê°€ì˜ì§‘, ëŒ€ì „">2022, <ì•„í‹°ì–¸ìŠ¤ ëŒ€ì „>, ëŒ€ì „ì˜ˆìˆ ê°€ì˜ì§‘, ëŒ€ì „</p>
+                    <p data-en="2022, <Urban Resonance>, National Museum of Modern and Contemporary Art (MMCA), Cheongju"
+                        data-ko="2022, <ë„ì‹œê³µëª…>, êµ­ë¦½í˜„ëŒ€ë¯¸ìˆ ê´€, ì²­ì£¼">2022, <ë„ì‹œê³µëª…>, êµ­ë¦½í˜„ëŒ€ë¯¸ìˆ ê´€, ì²­ì£¼</p>
+                    <p data-en="2022, <Noise Walk>, Seoul City Hall Sound Gallery, Seoul"
+                        data-ko="2022, <ì†ŒìŒì‚°ì±…>, ì„œìš¸ì‹œì²­ ì†Œë¦¬ê°¤ëŸ¬ë¦¬, ì„œìš¸">2022, <ì†ŒìŒì‚°ì±…>, ì„œìš¸ì‹œì²­ ì†Œë¦¬ê°¤ëŸ¬ë¦¬, ì„œìš¸</p>
+                    <p data-en="2021, <Museum Evolves>, Yangpyeong Art Museum, Gyeonggi-do"
+                        data-ko="2021, <ë¯¸ìˆ ê´€ì€ ì§„í™”í•œë‹¤>, ì–‘í‰êµ°ë¦½ë¯¸ìˆ ê´€, ê²½ê¸°ë„">2021, <ë¯¸ìˆ ê´€ì€ ì§„í™”í•œë‹¤>, ì–‘í‰êµ°ë¦½ë¯¸ìˆ ê´€, ê²½ê¸°ë„</p>
+                    <p data-en="2021, <Refrigerator Illusion>, Asia Culture Center (ACC), Gwangju"
+                        data-ko="2021, <ëƒ‰ì¥ê³  í™˜ìƒ>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼">2021, <ëƒ‰ì¥ê³  í™˜ìƒ>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼</p>
+                    <p data-en="2021, <Urban Regeneration Device #2: Radiophonic Orchestration>, Space TYPE, Seoul"
+                        data-ko="2021, <ë„ì‹œì¬ìƒì¥ì¹˜#2 : Radiophonic Orchestration>, ê³µê°„TYPE, ì„œìš¸">2021, <ë„ì‹œì¬ìƒì¥ì¹˜#2 : Radiophonic
+                            Orchestration>, ê³µê°„TYPE, ì„œìš¸</p>
+                    <p data-en="2020, <ASEAN Street Food: Hororok Chapchap Omulomul>, ASEAN Culture House, Busan"
+                        data-ko="2020, <ì•„ì„¸ì•ˆ ë§Œë¦¬ìŒì‹ : í˜¸ë¡œë¡ ì±±ì±± ì˜¤ë¬¼ì˜¤ë¬¼>, ì•„ì„¸ì•ˆë¬¸í™”ì›, ë¶€ì‚°">2020, <ì•„ì„¸ì•ˆ ë§Œë¦¬ìŒì‹ : í˜¸ë¡œë¡ ì±±ì±± ì˜¤ë¬¼ì˜¤ë¬¼>, ì•„ì„¸ì•ˆë¬¸í™”ì›, ë¶€ì‚°
+                    </p>
+                    <p data-en="2020, <Follow, Flow, Feed>, Arko Art Center, Seoul"
+                        data-ko="2020, <ë‚´ê°€ ì‚¬ëŠ” í”¼ë“œ>, ì•„ë¥´ì½”ë¯¸ìˆ ê´€, ì„œìš¸">2020, <ë‚´ê°€ ì‚¬ëŠ” í”¼ë“œ>, ì•„ë¥´ì½”ë¯¸ìˆ ê´€, ì„œìš¸</p>
+                    <p data-en="2019, <#HackingFood>, Asia Culture Center (ACC), Gwangju"
+                        data-ko="2019, <#í•´í‚¹í‘¸ë“œ>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼">2019, <#í•´í‚¹í‘¸ë“œ>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼</p>
+                    <p data-en="2019, <ACT festival Food Hack>, Asia Culture Center (ACC), Gwangju"
+                        data-ko="2019, <ACT festival Food Hack>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼">2019, <ACT festival Food Hack>,
+                            êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼</p>
+                    <p data-en="2019, <web-retro> Seoul Museum of Art Buk-Seoul Museum of Art, Seoul, Participated as a web art restoration programmer"
+                        data-ko="2019, <web-retro> ì„œìš¸ì‹œë¦½ ë¶ì„œìš¸ë¯¸ìˆ ê´€, ì„œìš¸, ì›¹ì•„íŠ¸ ë³µì› í”„ë¡œê·¸ë˜ë¨¸ë¡œ ì°¸ì—¬">2019, <web-retro> ì„œìš¸ì‹œë¦½ ë¶ì„œìš¸ë¯¸ìˆ ê´€, ì„œìš¸,
+                            ì›¹ì•„íŠ¸ ë³µì› í”„ë¡œê·¸ë˜ë¨¸ë¡œ ì°¸ì—¬</p>
+                    <p data-en="2018, <Gwangju Media Art Festival: Algorithm Society>, Asia Culture Center (ACC), Gwangju"
+                        data-ko="2018, <ê´‘ì£¼ ë¯¸ë””ì–´ì•„íŠ¸ í˜ìŠ¤í‹°ë²Œ : ì•Œê³ ë¦¬ì¦˜ ì†Œì‚¬ì´ì–´í‹°>, êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼">2018, <ê´‘ì£¼ ë¯¸ë””ì–´ì•„íŠ¸ í˜ìŠ¤í‹°ë²Œ : ì•Œê³ ë¦¬ì¦˜ ì†Œì‚¬ì´ì–´í‹°>,
+                            êµ­ë¦½ì•„ì‹œì•„ë¬¸í™”ì „ë‹¹, ê´‘ì£¼</p>
+                    <p data-en="2018, <A.I.MAGINE>, Urban Data Science Lab, Seoul"
+                        data-ko="2018, <A.I.MAGINE>, ë„ì‹œë°ì´í„°ì‚¬ì´ì–¸ìŠ¤ì—°êµ¬ì†Œ, ì„œìš¸">2018, <A.I.MAGINE>, ë„ì‹œë°ì´í„°ì‚¬ì´ì–¸ìŠ¤ì—°êµ¬ì†Œ, ì„œìš¸</p>
+                    <p data-en="2018, <Play, This Creative Imagine, Play>, Korea Creative Content Agency, Seoul"
+                        data-ko="2018, <ë†€ì´, ì´í† ë¡ ì°½ì˜ë¡œìš´ Imagine, Play>, ì½˜í…ì¸ ì§„í¥ì›, ì„œìš¸">2018, <ë†€ì´, ì´í† ë¡ ì°½ì˜ë¡œìš´ Imagine, Play>,
+                            ì½˜í…ì¸ ì§„í¥ì›, ì„œìš¸</p>
+                    <p data-en="2017, <Neotopia: Data and Humanity>, Art Center Nabi Tajakmadang, Seoul"
+                        data-ko="2017, <Neotopia: Data and Humanity>, ì•„íŠ¸ì„¼í„° ë‚˜ë¹„ íƒ€ì‘ë§ˆë‹¹, ì„œìš¸">2017, <Neotopia: Data and
+                            Humanity>, ì•„íŠ¸ì„¼í„° ë‚˜ë¹„ íƒ€ì‘ë§ˆë‹¹, ì„œìš¸</p>
+                    <p data-en="2017, <Things to Hear Before Sound>, NCGallery, Gyeonggi-do"
+                        data-ko="2017, <ì†Œë¦¬ê°€ ë‚˜ê¸° ì „ì— ë“¤ì„ ê²ƒ>, NCGallery, ê²½ê¸°ë„">2017, <ì†Œë¦¬ê°€ ë‚˜ê¸° ì „ì— ë“¤ì„ ê²ƒ>, NCGallery, ê²½ê¸°ë„</p>
+                    <p data-en="2015, <AfreecaTV Broadcasting Data Visualization>, COEX, Seoul"
+                        data-ko="2015, <AfreecaTV Broadcasting Data Visualization>, COEX, ì„œìš¸">2015, <AfreecaTV
+                            Broadcasting Data Visualization>, COEX, ì„œìš¸</p>
+                </div>
+                <h5><span data-en="Performances" data-ko="ê³µì—°">ê³µì—°</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2022, <Radio Shower>, Windmill, Seoul" data-ko="2022, <Radio Shower>, ìœˆë“œë°€, ì„œìš¸">2022,
+                        <Radio Shower>, ìœˆë“œë°€, ì„œìš¸
+                    </p>
+                    <p data-en="2020, <Site-Specific Performance Project>, Incheon Art Platform, Incheon"
+                        data-ko="2020, <ì¥ì†ŒíŠ¹ì •í˜• ê³µì—° í”„ë¡œì íŠ¸>, ì¸ì²œì•„íŠ¸í”Œë«í¼, ì¸ì²œ">2020, <ì¥ì†ŒíŠ¹ì •í˜• ê³µì—° í”„ë¡œì íŠ¸>, ì¸ì²œì•„íŠ¸í”Œë«í¼, ì¸ì²œ</p>
+                    <p data-en="2020, <Open Media Art Festival>, Oil Tank Culture Park, Seoul"
+                        data-ko="2020, <Open Media Art Festival>, ë¬¸í™”ë¹„ì¶•ê¸°ì§€, ì„œìš¸">2020, <Open Media Art Festival>, ë¬¸í™”ë¹„ì¶•ê¸°ì§€,
+                            ì„œìš¸</p>
+                    <p data-en="2020, <United Movement: Our Sound, Our Era's Movement>, Kim Swoo Geun Foundation Underground Theater, Seoul"
+                        data-ko="2020, <ì—°í•©ìš´ë™ è¯åˆé‹å‹•: ìš°ë¦¬ ì†Œë¦¬, ìš°ë¦¬ ì‹œëŒ€ì˜ ëª¸ì§“>, ê¹€ìˆ˜ê·¼ ë¬¸í™”ì¬ë‹¨ ì§€í•˜ê·¹ì¥, ì„œìš¸">2020, <ì—°í•©ìš´ë™ è¯åˆé‹å‹•: ìš°ë¦¬ ì†Œë¦¬, ìš°ë¦¬ ì‹œëŒ€ì˜
+                            ëª¸ì§“>, ê¹€ìˆ˜ê·¼ ë¬¸í™”ì¬ë‹¨ ì§€í•˜ê·¹ì¥, ì„œìš¸</p>
+                    <p data-en="2020, <B39 PRECTX SHOWCASE>, Bucheon Art Bunker B39, Gyeonggi-do"
+                        data-ko="2020, <B39 PRECTX SHOWCASE>, ë¶€ì²œì•„íŠ¸ë²™ì»¤, ê²½ê¸°ë„">2020, <B39 PRECTX SHOWCASE>, ë¶€ì²œì•„íŠ¸ë²™ì»¤, ê²½ê¸°ë„</p>
+                    <p data-en="2020, <Real Time Art>, Post Territory Ujeongguk, Seoul"
+                        data-ko="2020, <Real Time Art>, íƒˆì˜ì—­ìš°ì •êµ­, ì„œìš¸">2020, <Real Time Art>, íƒˆì˜ì—­ìš°ì •êµ­, ì„œìš¸</p>
+                    <p data-en="2019, <Data Pulse : Incheon>, Incheon Art Platform, Incheon"
+                        data-ko="2019, <Data Pulse : Incheon>, ì¸ì²œì•„íŠ¸í”Œë«í¼, ì¸ì²œ">2019, <Data Pulse : Incheon>, ì¸ì²œì•„íŠ¸í”Œë«í¼, ì¸ì²œ
+                    </p>
+                    <p data-en="2018, <A.I.MAGINE>, Urban Data Science Lab, Seoul"
+                        data-ko="2018, <A.I.MAGINE>, ë„ì‹œë°ì´í„°ì‚¬ì´ì–¸ìŠ¤ì—°êµ¬ì†Œ, ì„œìš¸">2018, <A.I.MAGINE>, ë„ì‹œë°ì´í„°ì‚¬ì´ì–¸ìŠ¤ì—°êµ¬ì†Œ, ì„œìš¸</p>
+                    <p data-en="2018, <zer01ne day creator camp>, zer01ne, Seoul"
+                        data-ko="2018, <zer01ne day creator camp>, zer01ne, ì„œìš¸">2018, <zer01ne day creator camp>,
+                            zer01ne, ì„œìš¸</p>
+                    <p data-en="2018, <Seoul International Digital Festival>, DDP, Seoul"
+                        data-ko="2018, <Seoul International Digital Festival>, DDP, ì„œìš¸">2018, <Seoul International
+                            Digital Festival>, DDP, ì„œìš¸</p>
+                    <p data-en="2017, <DigiLog 2016 4Q chosun>, Alley Sound, Seoul"
+                        data-ko="2017, <DigiLog 2016 4Q chosun>, Alley Sound, ì„œìš¸">2017, <DigiLog 2016 4Q chosun>, Alley
+                            Sound, ì„œìš¸</p>
+                </div>
+                <h5><span data-en="Awards" data-ko="ìˆ˜ìƒ">ìˆ˜ìƒ</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2024, Hyundai Motor Chung Mong-Koo Foundation ONSO MEDIA CONTEST, Honorable Mention"
+                        data-ko="2024, í˜„ëŒ€ì°¨ ì •ëª½êµ¬ ì¬ë‹¨ ONSO MEDIA CONTEST, ì…ì„ ">2024, í˜„ëŒ€ì°¨ ì •ëª½êµ¬ ì¬ë‹¨ ONSO MEDIA CONTEST, ì…ì„ </p>
+                    <p data-en="2024, Seoul City Hall Soul Lounge Media Art Competition, Winner (Solo Exhibition Award)"
+                        data-ko="2024, ì„œìš¸ì‹œì²­ ì†Œìš¸ë¼ìš´ì§€ ë¯¸ë””ì–´ì•„íŠ¸ ê³µëª¨ì „, ìˆ˜ìƒ, ê°œì¸ì „">2024, ì„œìš¸ì‹œì²­ ì†Œìš¸ë¼ìš´ì§€ ë¯¸ë””ì–´ì•„íŠ¸ ê³µëª¨ì „, ìˆ˜ìƒ, ê°œì¸ì „</p>
+                </div>
+                <h5><span data-en="Collections" data-ko="ì†Œì¥">ì†Œì¥</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2020, Seoul Youth Arts Center (SAPY) Collection" data-ko="2020, ì²­ë…„ì˜ˆìˆ ì²­(SAPY) ì‘í’ˆ ì†Œì¥">2020,
+                        ì²­ë…„ì˜ˆìˆ ì²­(SAPY) ì‘í’ˆ ì†Œì¥</p>
+                </div>
+                <h5><span data-en="Composition" data-ko="ì‘ê³¡">ì‘ê³¡</span></h5>
+                <div class="cv-list-art">
+                    <p data-en="2018, Seo Hyun-suk <Lost Voyage> documentary insert music - <The Musical Score of City : Jongno>"
+                        data-ko="2018, ì„œí˜„ì„ <ìƒì–´ë²„ë¦° í•­í•´> ë‹¤íë©˜í„°ë¦¬ ì‚½ì… ìŒì•… ì¤‘ <The Musical Score of City : Jongno>">2018, ì„œí˜„ì„ <ìƒì–´ë²„ë¦°
+                            í•­í•´> ë‹¤íë©˜í„°ë¦¬ ì‚½ì… ìŒì•… ì¤‘ <The Musical Score of City : Jongno>
+                    </p>
+                    <p data-en="2017, Seo Hyun-suk <Fantasy City> documentary insert music - <neoplasia>"
+                        data-ko="2017, ì„œí˜„ì„ <í™˜ìƒë„ì‹œ> ë‹¤íë©˜í„°ë¦¬ ì‚½ì… ìŒì•… ì¤‘ <neoplasia>">2017, ì„œí˜„ì„ <í™˜ìƒë„ì‹œ> ë‹¤íë©˜í„°ë¦¬ ì‚½ì… ìŒì•… ì¤‘ <neoplasia>
+                    </p>
+                </div>
+
+
+                <h4><span data-en="Education" data-ko="Education">Education</span></h4>
+                <p data-en="Soongsil University, BS in Computer Science, 2008 - 2015"
+                    data-ko="ìˆ­ì‹¤ëŒ€í•™êµ, ì»´í“¨í„°í•™ë¶€ í•™ì‚¬, 2008 - 2015">Soongsil University, BS in Computer Science, 2008 - 2015</p>
+
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Â© 2025 Minje Jeon. All rights reserved.</p>
+        </footer>
+
+        <script>
+            // DOM ìš”ì†Œ ê°€ì ¸ì˜¤ê¸° (Get DOM elements)
+            const navbar = document.getElementById('navbar');
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const langToggle = document.getElementById('langToggle');
+            // Get the iframe for the fourth work
+            const work4VideoIframe = document.getElementById('work4-video-iframe');
+            // Get the footer paragraph
+            const footerText = document.querySelector('.footer p');
+
+            // Default language set to Korean
+            let currentLang = 'ko';
+
+            // Video URLs for the fourth work
+            const videoUrls = {
+                ko: "https://www.youtube.com/embed/88DeL0bQRpM?si=QaaJBQSS9Mrpecwh",
+                en: "https://www.youtube.com/embed/zWeqboH2ncM?si=jPwiDt2uFxHcESH8"
+            };
+
+            // Function to update content based on language
+            function updateContent(lang) {
+                // data-en ë˜ëŠ” data-ko ì†ì„±ì„ ê°€ì§„ ëª¨ë“  ìš”ì†Œ ì„ íƒ (Select all elements with data-en or data-ko attributes)
+                const elementsToTranslate = document.querySelectorAll('[data-en], [data-ko]');
+
+                elementsToTranslate.forEach(el => {
+                    // Skip footer text translation
+                    if (el === footerText) return;
+
+                    const text = el.getAttribute(`data-${lang}`);
+                    if (text !== null) { // Check if attribute exists and has value
+                        // Use innerHTML instead of textContent to render <br> tags
+                        el.innerHTML = text;
+                    }
+                });
+
+                // ë„¤ë¹„ê²Œì´ì…˜ ë§í¬ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸ (Update navigation link text)
+                // Use querySelector for safer selection
+                const statementLink = document.querySelector('.nav-links a[href="#statement"]');
+                if (statementLink) statementLink.textContent = lang === 'en' ? 'Statement' : 'ì‘ê°€ë…¸íŠ¸';
+
+                const worksLink = document.querySelector('.nav-links a[href="#works"]');
+                if (worksLink) worksLink.textContent = lang === 'en' ? 'Works' : 'ì‘í’ˆ';
+
+                const contactLink = document.querySelector('.nav-links a[href="#contact"]');
+                if (contactLink) contactLink.textContent = lang === 'en' ? 'Contact' : 'ì—°ë½ì²˜';
+
+                // Update CV link text (always uppercase)
+                const cvLink = document.querySelector('.nav-links a[href="#cv"]');
+                if (cvLink) cvLink.textContent = 'CV'; // Always uppercase
+
+                // ì–¸ì–´ í† ê¸€ ë²„íŠ¼ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸ (Update language toggle button text)
+                // Button shows the language to switch TO
+                langToggle.textContent = lang === 'en' ? 'KOR' : 'ENG';
+
+                // HTML lang ì†ì„± ì—…ë°ì´íŠ¸ (Update HTML lang attribute)
+                document.documentElement.lang = lang;
+
+                // Update the video source for the fourth work
+                if (work4VideoIframe) {
+                    work4VideoIframe.src = videoUrls[lang];
+                }
+            }
+
+
+            // Language toggle click event
+            langToggle.addEventListener('click', (event) => {
+                event.preventDefault(); // ê¸°ë³¸ ë™ì‘ ë°©ì§€ (Prevent default action)
+                currentLang = currentLang === 'en' ? 'ko' : 'en'; // ì–¸ì–´ ì „í™˜ (Switch language)
+                updateContent(currentLang); // ì½˜í…ì¸  ì—…ë°ì´íŠ¸ í•¨ìˆ˜ í˜¸ì¶œ (Call update content function)
+
+                // ëª¨ë°”ì¼ ë©”ë‰´ê°€ ì—´ë ¤ìˆìœ¼ë©´ ë‹«ê¸° (Close mobile menu if open)
                 if (navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
-                     // ¾ÆÀÌÄÜ ¿ø·¡´ë·Î º¯°æ (Change icon back)
+                    // ì•„ì´ì½˜ ì›ë˜ëŒ€ë¡œ ë³€ê²½ (Change icon back)
                     const icon = menuToggle.querySelector('i');
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                 }
-
-                // ºÎµå·¯¿î ½ºÅ©·Ñ (Smooth scroll)
-                const targetId = link.getAttribute('href'); // href ¼Ó¼º°ª °¡Á®¿À±â (#id) (Get href attribute value)
-                // ¿ÜºÎ ¸µÅ©³ª ´Ü¼ø # ¸µÅ©°¡ ¾Æ´Ñ °æ¿ì¿¡¸¸ ½ºÅ©·Ñ ½ÇÇà (Only scroll if it's an internal anchor link)
-                if (targetId && targetId.startsWith('#') && targetId.length > 1) {
-                    const targetElement = document.querySelector(targetId); // ÇØ´ç ID ¿ä¼Ò Ã£±â (Find the target element)
-
-                    if (targetElement) {
-                        event.preventDefault(); // ±âº» ¾ŞÄ¿ µ¿ÀÛ ¹æÁö (Prevent default anchor behavior)
-                        // Calculate offset considering the navbar height
-                        const navbarHeight = navbar.offsetHeight || 70; // Get navbar height or use a default
-                        const offsetTop = targetElement.offsetTop - navbarHeight;
-
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth' // ºÎµå·¯¿î ½ºÅ©·Ñ È¿°ú (Smooth scroll effect)
-                        });
-                    }
-                }
             });
-        });
-
-        // ÆäÀÌÁö ·Îµå ½Ã - Çì´õ ¿ä¼Ò ÆäÀÌµå ÀÎ ¹× ÃÊ±â ¿ä¼Ò Ç¥½Ã, ±âº» ¾ğ¾î ¼³Á¤ (On page load - fade in header, show initial elements, set default language)
-        window.addEventListener('load', () => {
-            // Çì´õ ÄÜÅÙÃ÷ Áï½Ã º¸ÀÌ°Ô (Make header content visible immediately)
-            const headerContent = document.querySelector('.header .fade-in');
-            if (headerContent) {
-                // ¾à°£ÀÇ µô·¹ÀÌ ÈÄ visible Å¬·¡½º Ãß°¡ÇÏ¿© ¾Ö´Ï¸ŞÀÌ¼Ç È¿°ú º¸Àå (Add visible class after a short delay to ensure animation)
-                setTimeout(() => {
-                    headerContent.classList.add('visible');
-                }, 100); // 0.1ÃÊ µô·¹ÀÌ (0.1 second delay)
-            }
 
 
-            // ÆäÀÌÁö ·Îµå ½Ã ÀÌ¹Ì È­¸é¿¡ º¸ÀÌ´Â ¿ä¼Òµé Áï½Ã 'visible' Ã³¸® (Make elements already in view visible immediately)
-            fadeElements.forEach(element => {
-                 // Çì´õ ÄÜÅÙÃ÷´Â À§¿¡¼­ Ã³¸®ÇßÀ¸¹Ç·Î Á¦¿Ü (Exclude header content as it's handled above)
-                 if (!element.closest('.header')) {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
+            // ìŠ¤í¬ë¡¤ ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆ (Scroll event listener)
+            window.addEventListener('scroll', () => {
+                // ë‚´ë¹„ê²Œì´ì…˜ ìŠ¤íƒ€ì¼ ë³€ê²½ (ìŠ¤í¬ë¡¤ ìœ„ì¹˜ì— ë”°ë¼) (Change navigation style based on scroll position)
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
 
-                    // Adjust offset as needed
-                    if (elementTop < windowHeight - 100) {
+                // í˜ì´ë“œ ì¸ ì• ë‹ˆë©”ì´ì…˜ ì ìš© (Apply fade-in animation)
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top; // ìš”ì†Œì˜ ë·°í¬íŠ¸ ìƒë‹¨ê¹Œì§€ì˜ ê±°ë¦¬ (Distance from element top to viewport top)
+                    const elementBottom = element.getBoundingClientRect().bottom; // ìš”ì†Œì˜ ë·°í¬íŠ¸ í•˜ë‹¨ê¹Œì§€ì˜ ê±°ë¦¬ (Distance from element bottom to viewport top)
+                    const windowHeight = window.innerHeight; // ë·°í¬íŠ¸ ë†’ì´ (Viewport height)
+
+                    // ìš”ì†Œê°€ í™”ë©´ì— ì¼ì • ë¶€ë¶„ ë³´ì¼ ë•Œ 'visible' í´ë˜ìŠ¤ ì¶”ê°€ (Add 'visible' class when element is partially visible)
+                    // Adjust the offset (100) as needed
+                    if (elementTop < windowHeight - 100 && elementBottom > 0) {
                         element.classList.add('visible');
                     }
+                    // Optional: Remove 'visible' class if element scrolls out of view (to re-trigger animation)
+                    /* else {
+                       element.classList.remove('visible');
+                    } */
+                });
+            });
+
+            // ëª¨ë°”ì¼ ë©”ë‰´ í† ê¸€ ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸ (Mobile menu toggle button click event)
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active'); // 'active' í´ë˜ìŠ¤ í† ê¸€ (ë©”ë‰´ ì—´ê³  ë‹«ê¸°) (Toggle 'active' class to open/close menu)
+                // ì•„ì´ì½˜ ë³€ê²½ (ì„ íƒ ì‚¬í•­) (Change icon (optional))
+                const icon = menuToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times'); // ë‹«ê¸° ì•„ì´ì½˜ìœ¼ë¡œ ë³€ê²½ (Change to close icon)
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars'); // ë©”ë‰´ ì•„ì´ì½˜ìœ¼ë¡œ ë³€ê²½ (Change to menu icon)
                 }
             });
 
-            // ÃÊ±â ¾ğ¾î ¼³Á¤ Àû¿ë (Apply initial language setting)
-            updateContent(currentLang);
+            // ë‚´ë¹„ê²Œì´ì…˜ ë§í¬ í´ë¦­ ì‹œ - ëª¨ë°”ì¼ ë©”ë‰´ ë‹«ê¸° ë° ë¶€ë“œëŸ¬ìš´ ìŠ¤í¬ë¡¤ (Navigation link click - close mobile menu and smooth scroll)
+            document.querySelectorAll('#nav-links a').forEach(link => { // Select only anchor links for scrolling
+                link.addEventListener('click', (event) => {
+                    // ëª¨ë°”ì¼ ë©”ë‰´ ë‹«ê¸° (Close mobile menu)
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        // ì•„ì´ì½˜ ì›ë˜ëŒ€ë¡œ ë³€ê²½ (Change icon back)
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
 
-            // Ensure footer text is English initially
-            if (footerText) {
-                footerText.textContent = "? 2025 Minje Jeon. All rights reserved.";
-            }
-        });
-    </script>
-</body>
+                    // ë¶€ë“œëŸ¬ìš´ ìŠ¤í¬ë¡¤ (Smooth scroll)
+                    const targetId = link.getAttribute('href'); // href ì†ì„±ê°’ ê°€ì ¸ì˜¤ê¸° (#id) (Get href attribute value)
+                    // ì™¸ë¶€ ë§í¬ë‚˜ ë‹¨ìˆœ # ë§í¬ê°€ ì•„ë‹Œ ê²½ìš°ì—ë§Œ ìŠ¤í¬ë¡¤ ì‹¤í–‰ (Only scroll if it's an internal anchor link)
+                    if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+                        const targetElement = document.querySelector(targetId); // í•´ë‹¹ ID ìš”ì†Œ ì°¾ê¸° (Find the target element)
+
+                        if (targetElement) {
+                            event.preventDefault(); // ê¸°ë³¸ ì•µì»¤ ë™ì‘ ë°©ì§€ (Prevent default anchor behavior)
+                            // Calculate offset considering the navbar height
+                            const navbarHeight = navbar.offsetHeight || 70; // Get navbar height or use a default
+                            const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth' // ë¶€ë“œëŸ¬ìš´ ìŠ¤í¬ë¡¤ íš¨ê³¼ (Smooth scroll effect)
+                            });
+                        }
+                    }
+                });
+            });
+
+            // í˜ì´ì§€ ë¡œë“œ ì‹œ - í—¤ë” ìš”ì†Œ í˜ì´ë“œ ì¸ ë° ì´ˆê¸° ìš”ì†Œ í‘œì‹œ, ê¸°ë³¸ ì–¸ì–´ ì„¤ì • (On page load - fade in header, show initial elements, set default language)
+            window.addEventListener('load', () => {
+                // í—¤ë” ì½˜í…ì¸  ì¦‰ì‹œ ë³´ì´ê²Œ (Make header content visible immediately)
+                const headerContent = document.querySelector('.header .fade-in');
+                if (headerContent) {
+                    // ì•½ê°„ì˜ ë”œë ˆì´ í›„ visible í´ë˜ìŠ¤ ì¶”ê°€í•˜ì—¬ ì• ë‹ˆë©”ì´ì…˜ íš¨ê³¼ ë³´ì¥ (Add visible class after a short delay to ensure animation)
+                    setTimeout(() => {
+                        headerContent.classList.add('visible');
+                    }, 100); // 0.1ì´ˆ ë”œë ˆì´ (0.1 second delay)
+                }
+
+
+                // í˜ì´ì§€ ë¡œë“œ ì‹œ ì´ë¯¸ í™”ë©´ì— ë³´ì´ëŠ” ìš”ì†Œë“¤ ì¦‰ì‹œ 'visible' ì²˜ë¦¬ (Make elements already in view visible immediately)
+                fadeElements.forEach(element => {
+                    // í—¤ë” ì½˜í…ì¸ ëŠ” ìœ„ì—ì„œ ì²˜ë¦¬í–ˆìœ¼ë¯€ë¡œ ì œì™¸ (Exclude header content as it's handled above)
+                    if (!element.closest('.header')) {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const windowHeight = window.innerHeight;
+
+                        // Adjust offset as needed
+                        if (elementTop < windowHeight - 100) {
+                            element.classList.add('visible');
+                        }
+                    }
+                });
+
+                // ì´ˆê¸° ì–¸ì–´ ì„¤ì • ì ìš© (Apply initial language setting)
+                updateContent(currentLang);
+
+                // Ensure footer text is English initially
+                if (footerText) {
+                    footerText.textContent = "Â© 2025 Minje Jeon. All rights reserved.";
+                }
+            });
+        </script>
+    </body>
+
 </html>
