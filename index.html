@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- JavaScript에 의해 동적으로 변경됨, 기본값을 en으로 변경 -->
+<html lang="ko"> <!-- 본문 기본 언어는 한국어. ENG 버튼을 누르면 JavaScript가 en으로 바꿈 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +9,85 @@
     <meta name="description" content="Minje Jeon (전민제) is a media artist, AI creative director, and creative technologist based in Seoul, exploring data, society, and technology through art. | 전민제는 서울을 기반으로 활동하는 미디어 아티스트, AI 크리에이티브 디렉터, 크리에이티브 테크놀로지스트입니다. 데이터, 사회, 기술을 예술을 통해 탐구합니다.">
     <meta name="keywords" content="Minje Jeon, media artist, contemporary art, data art, AI art, creative technologist, exhibition, artist, Seoul, 전민제, 미디어 아티스트, 현대 미술, 데이터 아트, AI 아트, 크리에이티브 테크놀로지스트, 전시, 작가, 서울">
     <meta name="author" content="Minje Jeon (전민제)">
+    <link rel="canonical" href="https://minjejeon.com/"> <!-- 대표 주소 (www 없음) -->
 
     <!-- Open Graph Meta Tags (for social media sharing) -->
     <meta property="og:title" content="Minje Jeon | Media Artist | 전민제 | 미디어 아티스트">
     <meta property="og:description" content="Portfolio of Minje Jeon, a media artist exploring data, society, and technology. | 데이터, 사회, 기술을 탐구하는 미디어 아티스트 전민제의 포트폴리오.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="YOUR_WEBSITE_URL"> <!-- 실제 웹사이트 URL로 변경하세요 -->
-    <meta property="og:image" content="YOUR_PREVIEW_IMAGE_URL"> <!-- 소셜 공유 시 보일 이미지 URL로 변경하세요 -->
-    <meta property="og:locale" content="en_US"> <!-- 기본 로케일을 영어로 변경 -->
-    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:url" content="https://minjejeon.com/">
+    <meta property="og:image" content="https://minjejeon.com/og-image.jpg"> <!-- 1200x630, 작품 POINT 영상 장면 -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="POINT (2017) by Minje Jeon">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:locale:alternate" content="en_US">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image"> <!-- 또는 'summary' -->
     <meta name="twitter:title" content="Minje Jeon | Media Artist | 전민제 | 미디어 아티스트">
     <meta name="twitter:description" content="Portfolio of Minje Jeon, a media artist exploring data, society, and technology. | 데이터, 사회, 기술을 탐구하는 미디어 아티스트 전민제의 포트폴리오.">
-    <meta name="twitter:image" content="YOUR_PREVIEW_IMAGE_URL"> <!-- 트위터 공유 시 보일 이미지 URL로 변경하세요 -->
+    <meta name="twitter:image" content="https://minjejeon.com/og-image.jpg">
     <!-- <meta name="twitter:site" content="@yourtwitterhandle"> --> <!-- 트위터 핸들이 있다면 추가 -->
+
+    <!-- 구조화 데이터: 검색엔진·AI가 읽는 작가 정보 (화면에는 보이지 않음). 페이지 본문과 같은 사실만 적는다 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://minjejeon.com/#person",
+        "name": "Minje Jeon",
+        "alternateName": "전민제",
+        "url": "https://minjejeon.com/",
+        "image": "https://minjejeon.com/og-image.jpg",
+        "email": "mailto:aliceonueber@gmail.com",
+        "jobTitle": ["Media Artist", "AI Creative Director", "Creative Technologist"],
+        "description": "Seoul-based media artist who collects and analyzes data to reveal overlooked sides of everyday life and society, working across video, installation, sound and new media.",
+        "homeLocation": { "@type": "Place", "name": "Seoul, South Korea" },
+        "knowsAbout": ["Media art", "Data art", "Data visualization", "Data sonification", "Installation art", "Sound art", "Creative technology"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Soongsil University" },
+        "award": [
+            "2024 Hyundai Motor Chung Mong-Koo Foundation ONSO MEDIA CONTEST, Honorable Mention",
+            "2024 Seoul City Hall Soul Lounge Media Art Competition, Winner (Solo Exhibition Award)"
+        ],
+        "sameAs": [
+            "https://www.instagram.com/ueber_ueber/",
+            "https://www.youtube.com/@ueberueberueber",
+            "https://www.linkedin.com/in/ueberueber/"
+        ],
+        "workExample": [
+            {
+                "@type": "CreativeWork",
+                "name": "POINT",
+                "dateCreated": "2017",
+                "description": "Began with the single sentence, 'Diversity has created history.' Made with Processing and Max/MSP.",
+                "video": "https://www.youtube.com/watch?v=qZpZjA_UhxA"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "The Musical Score of City",
+                "alternateName": "도시의 악보들",
+                "dateCreated": "2017",
+                "description": "Visualizes and sonifies 30 years of building data from Seoul's 25 districts.",
+                "video": "https://www.youtube.com/watch?v=88DeL0bQRpM"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "#shapeofgreed",
+                "dateCreated": "2019",
+                "description": "Collects, dismantles and reconstructs Instagram images tagged with food hashtags into visual and sound elements, asking what form human greed takes.",
+                "video": "https://www.youtube.com/watch?v=8OsySLFpTMk"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "footprint",
+                "dateCreated": "2022",
+                "description": "Installation that visualizes non-exhaust particulate matter from cars, driving chalk-like materials with 2021 Daejeon traffic and weather data.",
+                "video": "https://www.youtube.com/watch?v=XUIinWVIiyc"
+            }
+        ]
+    }
+    </script>
 
     <style>
         /* Base Style Reset */
@@ -140,6 +203,11 @@
             padding: 2rem; /* 안쪽 여백 */
             width: 90%; /* 너비 90% */
             text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        .header-content h2 { /* 한국어 부제가 화면 밖으로 넘치지 않게 줄바꿈 허용 (단어 단위) */
+            white-space: normal;
+            word-break: keep-all;
         }
 
         /* Navigation */
@@ -865,7 +933,7 @@
                 <p class="work-medium" data-en="Processing, Max/MSP" data-ko="Processing, Max/MSP">Processing, Max/MSP</p>
                 <div class="video-container">
                     <!-- 수정: referrerpolicy 제거 -->
-                    <iframe id="work4-video-iframe" src="" title="YouTube video player - The Musical Score of City / 도시의 악보들" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe id="work4-video-iframe" src="https://www.youtube.com/embed/88DeL0bQRpM?si=QaaJBQSS9Mrpecwh" title="YouTube video player - The Musical Score of City / 도시의 악보들" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div class="work-description">
                     <p data-en="This work started from the questions, 'What is a city? How does the city approach me?'.<br>It visualizes and sonifies 30 years of building data from 25 districts in Seoul." data-ko="‘도시는 무엇인가? 도시는 나에게 어떻게 다가오는가?’라는 물음에서 출발한 작업.<br>서울 25개 구의 30년간 건물데이터를 분석하여 시각화-청각화한 작업이다.">‘도시는 무엇인가? 도시는 나에게 어떻게 다가오는가?’라는 물음에서 출발한 작업.<br>서울 25개 구의 30년간 건물데이터를 분석하여 시각화-청각화한 작업이다.</p>
@@ -1073,8 +1141,8 @@
         // Get the footer paragraph
         const footerText = document.querySelector('.footer p');
 
-        // Default language set to English (수정: 기본 언어를 영어로 설정)
-        let currentLang = 'en';
+        // 기본 언어: HTML 본문과 같은 한국어 (Default language matches the Korean HTML body)
+        let currentLang = 'ko';
 
         // Video URLs for the fourth work (수정: ?si=... 매개변수 복원)
         const videoUrls = {
