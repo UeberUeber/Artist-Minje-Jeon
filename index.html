@@ -530,6 +530,49 @@
         /* .cv-work-item div[class^="cv-list-"] p styles are handled above */
 
 
+        .contact-lead { /* 연락 안내 문구 */
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-email { /* 이메일 주소 + 복사 버튼 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .email-link { /* 이메일 주소 텍스트 링크 */
+            color: #fff;
+            font-size: 1.4rem;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .email-link:hover {
+            color: #ff4081;
+            border-color: #ff4081;
+        }
+
+        .copy-email { /* 이메일 복사 버튼 (언어 버튼과 같은 스타일) */
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid #ff4081;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .copy-email:hover {
+            background-color: #ff4081;
+        }
+
         .social-links { /* 소셜 미디어 링크 */
             display: flex; /* Flexbox 레이아웃 */
             justify-content: center; /* 가운데 정렬 */
@@ -1001,11 +1044,16 @@
          <div class="section-title-wrapper">
              <h2 class="section-title" data-en="Contact" data-ko="연락처">연락처</h2>
         </div>
+        <p class="contact-lead" data-en="For exhibitions, commissions, talks and collaborations" data-ko="전시 · 작업 의뢰 · 강연 · 협업 문의">전시 · 작업 의뢰 · 강연 · 협업 문의</p>
+        <div class="contact-email">
+            <a href="mailto:aliceonueber@gmail.com" class="email-link">aliceonueber@gmail.com</a>
+            <button type="button" class="copy-email" data-email="aliceonueber@gmail.com" data-en="Copy" data-ko="복사">복사</button>
+        </div>
+        <!-- 순서: 작업을 보여주는 채널 먼저 (인스타그램 → 유튜브 → 링크드인) -->
         <div class="social-links">
             <a href="https://www.instagram.com/ueber_ueber/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/ueberueber/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <!-- 수정: 원본 코드의 YouTube 링크로 변경 -->
             <a href="https://www.youtube.com/@ueberueberueber" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.linkedin.com/in/ueberueber/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </section>
 
@@ -1123,6 +1171,31 @@
                 }
             });
         });
+
+        // 이메일 복사 버튼 (Copy email button)
+        // http 환경에서는 navigator.clipboard가 없으므로 textarea + execCommand로 대체 (Fallback for non-secure contexts)
+        const copyEmailButton = document.querySelector('.copy-email');
+        if (copyEmailButton) {
+            copyEmailButton.addEventListener('click', async () => {
+                const email = copyEmailButton.dataset.email;
+                try {
+                    await navigator.clipboard.writeText(email);
+                } catch (error) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = email;
+                    textarea.style.position = 'absolute';
+                    textarea.style.left = '-9999px';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    textarea.remove();
+                }
+                copyEmailButton.textContent = currentLang === 'en' ? 'Copied' : '복사됨';
+                setTimeout(() => {
+                    copyEmailButton.textContent = copyEmailButton.getAttribute(`data-${currentLang}`);
+                }, 2000);
+            });
+        }
 
         // 모바일 메뉴 토글 버튼 클릭 이벤트 (Mobile menu toggle button click event)
         menuToggle.addEventListener('click', () => {
